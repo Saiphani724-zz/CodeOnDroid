@@ -1,2 +1,2 @@
 # CodeOnDroid
-A user friendly IDE for competitive programming using mobile.
+A user friendly IDE for competitive programming in mobile.

@@ -12,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="25dp"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="25dip"
         android:gravity="center"
         android:layout_alignParentTop="true">
 
@@ -25,7 +25,7 @@
             android:fontFamily="cursive"
             android:textColor="#FFF"
             android:id="@+id/openAbout"
-            android:textSize="60dp"
+            android:textSize="60sp"
             android:layout_marginBottom="350dp"
             />
 
@@ -93,5 +93,7 @@
 
 
     </LinearLayout>
+
+
 
 </RelativeLayout>

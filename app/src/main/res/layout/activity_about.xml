@@ -48,7 +48,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:textColor="#FF0"
-        android:ems="17"
+        android:ems="18"
         />
 
     <Button

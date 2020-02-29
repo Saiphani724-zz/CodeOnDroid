@@ -18,10 +18,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.codeondroid.LoginActivity;
+
 import java.sql.SQLData;
 
-public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener
-{
+public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
     private static final String TAG = "";
     Button submitB;

@@ -10,6 +10,7 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        TextView apname=(TextView)findViewById(R.id.openAbout);
+
+        apname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),About.class);
+                startActivity(i);
+            }
+        });
+
 
     }
     public void verify(View v ){
@@ -44,9 +55,9 @@ public class LoginActivity extends AppCompatActivity {
 //        if(uname.getText().toString().equals("admin") && pword.getText().toString().equals("1234"))
         if(c.getCount() == 1)
         {
-//            Intent i = new Intent(this, Navigationclass.class);
-//            startActivity(i);
-            Toast.makeText(LoginActivity.this,"Login Successfull",Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(this, Navigationclass.class);
+            startActivity(i);
+//            Toast.makeText(LoginActivity.this,"Login Successfull",Toast.LENGTH_SHORT).show();
         }
         else
         {

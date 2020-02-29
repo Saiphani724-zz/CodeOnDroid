@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/LightBlue"
+    android:layout_height="match_parent"
+
+    tools:context=".Navigationclass">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/app_name"
+        android:fontFamily="cursive"
+        android:textColor="@color/DarkBlue"
+        android:id="@+id/openAbout"
+        android:textSize="40dp"
+        />
+
+    <ImageView
+        android:layout_width="154dp"
+        android:layout_height="123dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/images"
+        android:onClick="openEditor"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal">
+
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Code Chef"
+            android:id="@+id/btnCC"
+            android:background="@color/DungGreen"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="HackRank"
+            android:background="@color/FadeYellow"
+            android:id="@+id/btnHR"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Codeforces"
+            android:id="@+id/btnCF"
+            android:background="@color/FadeRed"
+            />
+
+    </LinearLayout>
+
+
+    <!--    <Button-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="200dp"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:text="Previous Codes"-->
+    <!--        android:background="#FFFFFF"-->
+    <!--        android:onClick="getFiles"-->
+    <!--        />-->
+
+
+</LinearLayout>
+

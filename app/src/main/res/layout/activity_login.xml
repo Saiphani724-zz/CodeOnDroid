@@ -7,6 +7,7 @@
     >
 
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,13 +20,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="300dp"
-            android:fontFamily="sans-serif"
-            android:text="SIGN IN"
-            android:textColor="#3F0"
-            android:textSize="20sp"
-            android:textFontWeight="10"
+            android:layout_gravity="center"
+            android:text="@string/app_name"
+            android:fontFamily="cursive"
+            android:textColor="#FFF"
+            android:id="@+id/openAbout"
+            android:textSize="60dp"
+            android:layout_marginBottom="350dp"
             />
+
+
     </LinearLayout>
     <LinearLayout
         android:id="@+id/input_group"
@@ -45,6 +49,7 @@
             android:hint="Username"
             android:inputType="textPersonName"
             android:id="@+id/uname"
+            android:background="@drawable/transparent_button"
             android:textColorHint="#FF0"
             android:textColor="#FF0"
             android:padding="15dp" />
@@ -53,7 +58,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
+            android:background="@drawable/transparent_button"
             android:textColorHint="#FF0"
+            android:layout_marginTop="10dp"
             android:textColor="#FF0"
             android:id="@+id/pword"
             android:inputType="textPassword"

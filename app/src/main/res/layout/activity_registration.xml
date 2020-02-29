@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Username"
-
+            android:background="@drawable/button"
             android:inputType="textPersonName"
             android:id="@+id/username"
             android:padding="15dp" />
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
-
+            android:background="@drawable/button"
             android:inputType="textEmailAddress"
             android:padding="15dp" />
 
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:hint="Password"
             android:inputType="textPassword"
-
+            android:background="@drawable/button"
             android:padding="15dp"/>
 
         <Spinner
@@ -82,6 +82,7 @@
             android:text="SIGN UP"
             android:textAllCaps="false"
             android:textColor="#FE5295"
+            android:background="@drawable/button1"
 
             android:textSize="17sp"/>
 
@@ -95,6 +96,7 @@
             android:text="Already have an account? \nLog In"
             android:textAllCaps="false"
             android:textColor="#B31A89"
+            android:background="@drawable/button1"
             android:onClick="goBack"
             android:textSize="17sp"/>
 

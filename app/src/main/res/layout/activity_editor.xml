@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/LightBlue"
+    android:layout_height="match_parent"
+    tools:context=".EditorActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/header">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/app_name"
+            android:fontFamily="cursive"
+            android:textColor="@color/DarkBlue"
+            android:textSize="55dp"/>
+
+
+
+
+        ></LinearLayout>
+
+
+    <EditText
+        android:id="@+id/codebox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|left"
+        android:hint="Type Your code"
+        android:background="@drawable/button"
+        android:inputType="text|textMultiLine"
+        android:foregroundGravity="top|left"
+        android:layout_marginTop="40dp"
+        android:lines="12" />
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <EditText
+            android:gravity="top|left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:hint="Input"
+            android:foregroundGravity="top|left"
+            android:inputType="text|textMultiLine"
+            android:ems="8"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button"
+            android:lines="3" />
+
+        <EditText
+            android:gravity="top|left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:hint="Output"
+            android:inputType="text|textMultiLine"
+            android:ems="8"
+            android:background="@drawable/button"
+            android:layout_marginTop="-68dp"
+            android:lines="3" />
+
+        ></LinearLayout>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="#DEFDEF"
+        android:ems="8"
+        android:onClick="openweb"
+        android:layout_gravity="center"
+        android:text="Compile Code" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="#DEFDEF"
+        android:layout_marginHorizontal="80dp"
+        android:ems="8"
+        android:layout_gravity="center"
+        android:onClick="access_clip"
+        android:text=" Clip board" />
+
+
+
+</LinearLayout>

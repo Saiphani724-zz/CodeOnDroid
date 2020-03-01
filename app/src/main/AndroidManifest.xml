@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditorActivity"></activity>
+        <activity android:name=".EditorActivity" android:windowSoftInputMode="adjustResize">
+        </activity>
         <activity android:name=".About" />
         <activity android:name=".webview" />
         <activity android:name=".Navigationclass" />

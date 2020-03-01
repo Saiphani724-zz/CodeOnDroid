@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyWidth="20%p"
+    android:verticalGap="0px"
+    android:horizontalGap="0px"
+    android:keyHeight="50dp">
+    <!--
+        android:horizontalGap="0.50%p"
+        android:verticalGap="0.50%p"
+        NOTE When we add a horizontalGap in pixels, this interferes with keyWidth in percentages adding up to 100%
+        NOTE When we have a horizontalGap (on Keyboard level) of 0, this make the horizontalGap (on Key level) to move from after the key to before the key... (I consider this a bug)
+     -->
+
+
+    <Row>
+
+        <Key android:keyEdgeFlags="left"
+            android:codes="401"/>
+
+        <Key android:codes="402"/>
+        <Key android:codes="403"/>
+
+        <Key android:codes="404"/>
+
+        <Key android:codes="404"  />
+        <Key android:codes="405"  android:keyEdgeFlags="right" />
+
+    </Row>
+
+    <Row>
+
+
+        <Key android:keyEdgeFlags="left"
+            android:codes="406"/>
+
+        <Key android:codes="407"/>
+        <Key android:codes="408"/>
+
+        <Key android:codes="409"/>
+        <Key android:codes="-5"/>
+        <Key android:codes="410" android:keyEdgeFlags="right"/>
+
+
+    </Row>
+    <Row >
+        <Key android:keyEdgeFlags="left"
+            android:codes="411"/>
+        <Key android:codes="412"/>
+        <Key android:codes="413"/>
+        <Key android:codes="414"/>
+        <Key android:codes="415"/>
+        <Key android:keyEdgeFlags="right"
+            android:codes="416"/>
+    </Row>
+
+
+</Keyboard>

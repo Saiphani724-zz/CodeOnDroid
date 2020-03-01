@@ -17,6 +17,11 @@ import android.widget.Toolbar;
 
 import com.example.codeondroid.webview;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class EditorActivity extends AppCompatActivity {
     CustomKeyboard mCustomKeyboard;
     float x1,x2;
@@ -32,6 +37,8 @@ public class EditorActivity extends AppCompatActivity {
         Intent batteryStatus = getApplicationContext().registerReceiver(null, ifilter);
         mCustomKeyboard = new CustomKeyboard(this, R.id.keyboardview, R.xml.keyboard);
         mCustomKeyboard.registerEditText(R.id.codebox);
+        mCustomKeyboard.registerEditText(R.id.outputbox);
+        mCustomKeyboard.registerEditText(R.id.inputbox);
         int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
         int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
 
@@ -73,6 +80,50 @@ public class EditorActivity extends AppCompatActivity {
         startActivity(i);
 
     }
+
+    public void compileCode(View view) {
+
+//        try {
+//            String URL = "";
+//            JSONObject jsonBody = new JSONObject();
+//
+//            jsonBody.put("email", "abc@abc.com");
+//            jsonBody.put("password", "");
+//            jsonBody.put("user_type", "");
+//            jsonBody.put("company_id", "");
+//            jsonBody.put("status", "");
+//
+//            JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, URL, jsonBody, new Response.Listener<JSONObject>() {
+//                @Override
+//                public void onResponse(JSONObject response) {
+//
+//                    Toast.makeText(getApplicationContext(), "Response:  " + response.toString(), Toast.LENGTH_SHORT).show();
+//                }
+//            }, new Response.ErrorListener() {
+//                @Override
+//                public void onErrorResponse(VolleyError error) {
+//
+//                    onBackPressed();
+//
+//                }
+//            }) {
+//                @Override
+//                public Map<String, String> getHeaders() throws AuthFailureError {
+//                    final Map<String, String> headers = new HashMap<>();
+//                    headers.put("Authorization", "Basic " + "c2FnYXJAa2FydHBheS5jb206cnMwM2UxQUp5RnQzNkQ5NDBxbjNmUDgzNVE3STAyNzI=");//put your token here
+//                    return headers;
+//                }
+//            };
+//            VolleyApplication.getInstance().addToRequestQueue(jsonOblect);
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        // Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_LONG).show();
+//
+//    }
+}
+
     @Override public void onBackPressed() {
         // NOTE Trap the back key: when the CustomKeyboard is still visible hide it, only when it is invisible, finish activity
         if( mCustomKeyboard.isCustomKeyboardVisible() ) mCustomKeyboard.hideCustomKeyboard(); else this.finish();
@@ -121,7 +172,7 @@ public class EditorActivity extends AppCompatActivity {
         EditText codebox = findViewById(R.id.codebox);
         ViewGroup.LayoutParams lp = codebox.getLayoutParams();
         if(lp.height > 100){
-            Toast.makeText(getApplicationContext(), "lp j = " + lp.height, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "lp h = " + lp.height, Toast.LENGTH_SHORT).show();
             codebox.setLayoutParams(lp);
         }
 

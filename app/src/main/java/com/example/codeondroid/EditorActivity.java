@@ -121,7 +121,7 @@ public class EditorActivity extends AppCompatActivity {
         EditText codebox = findViewById(R.id.codebox);
         ViewGroup.LayoutParams lp = codebox.getLayoutParams();
         if(lp.height > 100){
-            Toast.makeText(getApplicationContext(), "" + lp.height, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "lp j = " + lp.height, Toast.LENGTH_SHORT).show();
             codebox.setLayoutParams(lp);
         }
 

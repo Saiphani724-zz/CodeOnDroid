@@ -25,7 +25,7 @@
     <EditText
         android:id="@+id/codebox"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="150pt"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="32dp"
@@ -43,8 +43,8 @@
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70pt"
+        android:layout_height="30pt"
         android:layout_gravity="left"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
@@ -60,8 +60,8 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70pt"
+        android:layout_height="30pt"
         android:layout_gravity="right"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"

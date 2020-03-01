@@ -17,7 +17,7 @@
         android:fontFamily="cursive"
         android:text="@string/app_name"
         android:textColor="@color/DarkBlue"
-        android:textSize="55dp"
+        android:textSize="37dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,16 +25,16 @@
     <EditText
         android:id="@+id/codebox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:background="@drawable/button"
         android:foregroundGravity="top|left"
         android:gravity="top|left"
         android:hint="Type Your code"
-        android:background="@drawable/button"
         android:inputType="text|textMultiLine"
         android:lines="12"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,45 +48,45 @@
         android:layout_gravity="left"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button"
         android:ems="8"
         android:foregroundGravity="top|left"
         android:gravity="top|left"
         android:hint="Input"
-        android:background="@drawable/button"
         android:inputType="text|textMultiLine"
         android:lines="3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/codebox" />
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:layout_marginTop="64dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-        android:ems="8"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/button"
+        android:ems="8"
         android:gravity="top|left"
         android:hint="Output"
         android:inputType="text|textMultiLine"
         android:lines="3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/codebox" />
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:background="#DEFDEF"
         android:ems="8"
         android:onClick="openweb"
         android:text="Compile Code"
+        app:layout_constraintBottom_toTopOf="@+id/keyboardview"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:layout_width="80dp"

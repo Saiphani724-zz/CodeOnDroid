@@ -10,8 +10,10 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.codeondroid.webview;
 
@@ -116,6 +118,14 @@ public class EditorActivity extends AppCompatActivity {
                 break;
             }
         }
+        EditText codebox = findViewById(R.id.codebox);
+        ViewGroup.LayoutParams lp = codebox.getLayoutParams();
+        if(lp.height > 100){
+            Toast.makeText(getApplicationContext(), "" + lp.height, Toast.LENGTH_SHORT).show();
+            codebox.setLayoutParams(lp);
+        }
+
+
         return false;
     }
 

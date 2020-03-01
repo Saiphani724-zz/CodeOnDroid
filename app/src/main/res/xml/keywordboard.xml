@@ -68,8 +68,8 @@
      </Row>
     <Row>
 
-        <Key android:codes="-3"    android:keyIcon="@drawable/sym_keyboard_done" android:keyWidth="25%p" android:horizontalGap="12.50%p" />
-        <Key android:codes="55000" android:keyLabel="home" android:horizontalGap="6.25%p" />
+        <Key android:codes="-3"    android:keyIcon="@drawable/sym_keyboard_done" android:keyWidth="25%p"/>
+        <Key android:codes="55000" android:keyLabel="home"/>
         <Key android:codes="55005" android:keyLabel="end" />
         <Key android:keyLabel="SPACE" android:keyWidth="40%p" android:isRepeatable="true" android:codes="32"/>
         <Key android:keyLabel="DEL" android:keyWidth="20%p" android:isRepeatable="true" android:codes="-5"/>

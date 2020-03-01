@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,15 +7,10 @@
     android:background="@color/LightBlue"
     android:layout_height="match_parent"
     tools:context=".EditorActivity">
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/header">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,10 +21,6 @@
             android:textColor="@color/DarkBlue"
             android:textSize="55dp"/>
 
-
-
-
-        ></LinearLayout>
 
 
     <EditText
@@ -47,11 +38,6 @@
 
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
         <EditText
             android:gravity="top|left"
             android:layout_width="wrap_content"
@@ -75,19 +61,23 @@
             android:ems="8"
             android:background="@drawable/button"
             android:layout_marginTop="-68dp"
-            android:lines="3" />
+            android:lines="3" /><![CDATA[
 
-        ></LinearLayout>
+        >
 
+
+
+
+    ]]>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:background="#DEFDEF"
         android:ems="8"
         android:onClick="openweb"
-        android:layout_gravity="center"
         android:text="Compile Code" />
 
     <Button
@@ -100,6 +90,8 @@
         android:layout_gravity="center"
         android:onClick="access_clip"
         android:text=" Clip board" />
+</LinearLayout>
+
     <android.inputmethodservice.KeyboardView
         android:id="@+id/keyboardview"
         android:layout_width="fill_parent"
@@ -113,4 +105,5 @@
 
 
 
-</LinearLayout>
+
+</RelativeLayout>

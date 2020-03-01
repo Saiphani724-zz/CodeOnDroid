@@ -19,7 +19,7 @@ public class CustomKeyboard {
     private Activity mHostActivity;
     public int keylayouts[]={R.xml.keyboard,R.xml.keywordboard,R.xml.variablekeys};
     int kbcount,curr_layout;
-    HashMap keydict ,varkeys;
+    HashMap keydict,varkeys,wtype;
     private KeyboardView.OnKeyboardActionListener mOnKeyboardActionListener = new KeyboardView.OnKeyboardActionListener() {
 
         public final static int CodeDelete   = -5; // Keyboard.KEYCODE_DELETE
@@ -125,7 +125,9 @@ public class CustomKeyboard {
         curr_layout=0;
         keydict = new HashMap();
         varkeys = new HashMap();
+        wtype = new HashMap();
         load_dict();
+        load_wtype();
         mKeyboardView= (KeyboardView)mHostActivity.findViewById(viewid);
         mKeyboardView.setKeyboard(new Keyboard(mHostActivity, layoutid));
         mKeyboardView.setPreviewEnabled(false); // NOTE Do not show the preview balloons
@@ -177,7 +179,7 @@ public class CustomKeyboard {
                 edittext.onTouchEvent(event);               // Call native handler
                 edittext.setInputType(inType);              // Restore input type
 
-                return true; // Consume touch event
+                return false; // Consume touch event
             }
         });
         // Disable spell check (hex strings look like words to Android)
@@ -193,11 +195,17 @@ public class CustomKeyboard {
             View focusCurrent = mHostActivity.getWindow().getCurrentFocus();
             EditText edittext = (EditText) focusCurrent;
             String[] varslist =  edittext.getText().toString().split(" ");
+            int count=0;
             for(int i=0;i<varslist.length;i++)
             {
-                varkeys.put(401+i,varslist[i]);
-                keylist.get(i).label=varslist[i];
-                if(i==keylist.toArray().length)
+                if(wtype.containsKey(varslist[i]))
+                {
+                    continue;
+                }
+                varkeys.put(401+count,varslist[i]);
+                count++;
+                keylist.get(count).label=varslist[i];
+                if(count==keylist.toArray().length)
                 {
                     break;
                 }
@@ -220,6 +228,20 @@ public class CustomKeyboard {
         keydict.put(312,"# ");
         keydict.put(313,"{\n}");
         keydict.put(314,"\" \" ");
+    }
+    public void load_wtype()
+    {
+        String keywords[] = {"for","if","while","else","int","float","char","include","do","cout","cin","struct","class","void","public",
+        "private","protected","global","static","final","using"};
+        String symbols[] = {"+","-","=",";","{","}","\\","/","[","]","!","#","%","&","*","(",")",":","?","<",">","\n","\"","\'",".","_","|","\t"};
+        insert_dict(keywords,"keyword");
+        insert_dict(symbols,"symbol");
+    }
+    public void insert_dict(String[] arr,String type)
+    {
+        for (String s:arr) {
+            wtype.put(s,type);
+        }
     }
 
 }

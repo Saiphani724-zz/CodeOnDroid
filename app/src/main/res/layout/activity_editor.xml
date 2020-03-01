@@ -26,7 +26,7 @@
     <EditText
         android:id="@+id/codebox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80pt"
         android:gravity="top|left"
         android:hint="Type Your code"
         android:background="@drawable/button"
@@ -98,7 +98,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:focusable="true"
         android:focusableInTouchMode="true"
         android:visibility="invisible"
         />

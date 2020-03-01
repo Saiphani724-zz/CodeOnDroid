@@ -47,7 +47,7 @@ public class CustomKeyboard {
                 hideCustomKeyboard();
             }
             else if( primaryCode==CodeEnter ) {
-                if (editable != null && start > 0) editable.insert(start, "\n");
+                if (editable != null && start >= 0) editable.insert(start, "\n");
             }
             else if( primaryCode==CodeDelete ) {
                 if( editable!=null && start>0 ) editable.delete(start - 1, start);
@@ -62,7 +62,7 @@ public class CustomKeyboard {
                 if(start>=1)
                 edittext.setSelection(start-1);
             } else if( primaryCode==CodeAllRight ) {
-                edittext.setSelection(edittext.length());
+                edittext.setSelection(start+1);
             } else if( primaryCode==CodePrev ) {
                  //View focusNew= edittext.focusSearch(View.FOCUS_BACKWARD);
                  //if( focusNew!=null ) focusNew.requestFocus();
@@ -133,6 +133,7 @@ public class CustomKeyboard {
         mKeyboardView.setPreviewEnabled(false); // NOTE Do not show the preview balloons
         mKeyboardView.setOnKeyboardActionListener(mOnKeyboardActionListener);
         // Hide the standard keyboard initially
+        hideCustomKeyboard();
         mHostActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
     }

@@ -169,12 +169,12 @@ public class EditorActivity extends AppCompatActivity {
                 break;
             }
         }
-        EditText codebox = findViewById(R.id.codebox);
-        ViewGroup.LayoutParams lp = codebox.getLayoutParams();
-        if(lp.height > 100){
-            Toast.makeText(getApplicationContext(), "lp h = " + lp.height, Toast.LENGTH_SHORT).show();
-            codebox.setLayoutParams(lp);
-        }
+//        EditText codebox = findViewById(R.id.codebox);
+//        ViewGroup.LayoutParams lp = codebox.getLayoutParams();
+//        if(lp.height > 100){
+//            Toast.makeText(getApplicationContext(), "lp h = " + lp.height, Toast.LENGTH_SHORT).show();
+//            codebox.setLayoutParams(lp);
+//        }
 
 
         return false;

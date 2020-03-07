@@ -20,6 +20,7 @@ public class EditorActivity extends AppCompatActivity {
     float x1,x2;
     float y1, y2;
     final int MYREQUEST = 11;
+    static final int MIN_DISTANCE = 150;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +93,7 @@ public class EditorActivity extends AppCompatActivity {
                 x2 = touchevent.getX();
                 y2 = touchevent.getY();
                 View focusCurrent = getWindow().getCurrentFocus();
-                if (x1 < x2)
+                if (x2-x1>=MIN_DISTANCE)
                 {
                     //Toast.makeText(this, "Left to Right Swap Performed", Toast.LENGTH_LONG).show();
                     if (mCustomKeyboard.curr_layout>0)
@@ -103,7 +104,7 @@ public class EditorActivity extends AppCompatActivity {
                 }
 
                 // if right to left sweep event on screen
-                if (x1 > x2)
+                if (x1-x2>=MIN_DISTANCE)
                 {
                     //Toast.makeText(this, "Right to Left Swap Performed", Toast.LENGTH_LONG).show();
                     if (mCustomKeyboard.curr_layout< mCustomKeyboard.kbcount-1)

@@ -158,12 +158,12 @@ public class CustomKeyboard {
         // Find the EditText 'resid'
         EditText edittext= (EditText)mHostActivity.findViewById(resid);
         // Make the custom keyboard appear
-        edittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        /*edittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             // NOTE By setting the on focus listener, we can show the custom keyboard when the edit box gets focus, but also hide it when the edit box loses focus
             @Override public void onFocusChange(View v, boolean hasFocus) {
                 if( hasFocus ) showCustomKeyboard(v); else hideCustomKeyboard();
             }
-        });
+        });*/
         edittext.setOnClickListener(new View.OnClickListener() {
             // NOTE By setting the on click listener, we can show the custom keyboard again, by tapping on an edit box that already had focus (but that had the keyboard hidden).
             @Override public void onClick(View v) {
@@ -195,7 +195,7 @@ public class CustomKeyboard {
             //Log.d("varkey", "" + keylist.toArray().length);
             View focusCurrent = mHostActivity.getWindow().getCurrentFocus();
             EditText edittext = (EditText) focusCurrent;
-            String[] varslist =  edittext.getText().toString().split(" ");
+            String[] varslist =  edittext.getText().toString().split(" |\n|;|\\(|\\)");
             int count=0;
             for(int i=0;i<varslist.length;i++)
             {

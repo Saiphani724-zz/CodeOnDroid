@@ -1,124 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/LightBlue"
+    android:layout_height="match_parent"
     tools:context=".EditorActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/app_name"
+            android:fontFamily="cursive"
+            android:textColor="@color/DarkBlue"
+            android:textSize="55dp"/>
 
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="cursive"
-        android:text="@string/app_name"
-        android:textColor="@color/DarkBlue"
-        android:textSize="37dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/codebox"
         android:layout_width="match_parent"
-        android:layout_height="100pt"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/button"
-        android:foregroundGravity="top|left"
+        android:layout_height="80pt"
         android:gravity="top|left"
         android:hint="Type Your code"
-        android:inputType="text|textMultiLine"
-        android:lines="12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <EditText
-        android:id="@+id/inputbox"
-        android:layout_width="70pt"
-        android:layout_height="30pt"
-        android:layout_gravity="left"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
         android:background="@drawable/button"
-        android:ems="8"
+        android:inputType="text|textMultiLine"
         android:foregroundGravity="top|left"
-        android:gravity="top|left"
-        android:hint="Input"
-        android:inputType="text|textMultiLine"
-        android:lines="3"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/codebox" />
+        android:layout_marginTop="40dp"
+        android:lines="12" />
 
-    <EditText
-        android:id="@+id/outputbox"
-        android:layout_width="70pt"
-        android:layout_height="30pt"
-        android:layout_gravity="right"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="24dp"
-        android:background="@drawable/button"
-        android:ems="8"
-        android:gravity="top|left"
-        android:hint="Output"
-        android:inputType="text|textMultiLine"
-        android:lines="3"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/codebox" />
+
+
+
+        <EditText
+            android:gravity="top|left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:hint="Input"
+            android:foregroundGravity="top|left"
+            android:inputType="text|textMultiLine"
+            android:ems="8"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button"
+            android:lines="3" />
+
+        <EditText
+            android:gravity="top|left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:hint="Output"
+            android:inputType="text|textMultiLine"
+            android:ems="8"
+            android:background="@drawable/button"
+            android:layout_marginTop="-68dp"
+            android:lines="3" /><![CDATA[
+
+        >
+
+
+
+
+    ]]>
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
         android:background="#DEFDEF"
         android:ems="8"
-        android:onClick="compileCode"
-        android:text="Compile Code"
-        app:layout_constraintBottom_toTopOf="@+id/keyboardview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:onClick="openweb"
+        android:text="Compile Code" />
 
     <Button
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:background="#DEFDEF"
+        android:layout_marginHorizontal="80dp"
         android:ems="8"
-        android:text=" Clip board"
-        app:layout_constraintBottom_toTopOf="@+id/keyboardview"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_gravity="center"
+        android:onClick="access_clip"
+        android:text=" Clip board" />
+</LinearLayout>
 
     <android.inputmethodservice.KeyboardView
         android:id="@+id/keyboardview"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintHeight_percent="0.3"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:focusable="true"
         android:focusableInTouchMode="true"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</RelativeLayout>

@@ -292,7 +292,7 @@ public class CustomKeyboard {
             //Log.d("varkey", "" + keylist.toArray().length);
             View focusCurrent = mHostActivity.getWindow().getCurrentFocus();
             EditText edittext = (EditText) focusCurrent;
-            String[] varslist =  edittext.getText().toString().split(" |\n|;|\\(|\\)");
+            String[] varslist =  edittext.getText().toString().split(" |\n|;|\\(|\\)|\\{|}|\\[|\\+|-|\\*|=|/|]");
             int count=0;
             for(int i=0;i<varslist.length;i++)
             {

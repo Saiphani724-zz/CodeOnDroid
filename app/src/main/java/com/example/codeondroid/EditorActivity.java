@@ -64,6 +64,35 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
 
+        try{
+            File file = new File(EditorActivity.this.getFilesDir(), "java_default_template.java");
+            FileWriter writer = new FileWriter(file);
+            writer.append("import java.util.*;\n" +
+                    "class Hello{\n" +
+                    "public static void main(String args[]){\n" +
+                    "Scanner sc = new Scanner(System.in);\n" +
+                    "int a = sc.nextInt();\n" +
+                    "System.out.println(a*a%3);}\n" +
+                    "}");
+            writer.flush();
+            writer.close();
+        } catch (Exception e) {
+
+        }
+        try{
+            File file = new File(EditorActivity.this.getFilesDir(), "cpp_default_template.cpp");
+            FileWriter writer = new FileWriter(file);
+            writer.append("#include <iostream>\n" +
+                    "    using namespace std;\n" +
+                    "    int main() {\n\n\n\n" +
+                    "        return 0;\n" +
+                    "    }");
+            writer.flush();
+            writer.close();
+        } catch (Exception e) {
+
+        }
+
 
 //        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 //        Intent batteryStatus = getApplicationContext().registerReceiver(null, ifilter);
@@ -132,18 +161,18 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                 filename.setText(openfilename);
                 codebox.setText(sb.toString());
 
-
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-
         }
         else{
-            Log.d("TAG", "onCreate: " + "Emptyyyyyyyyyyyyyyyyyyyyyyyy");
+            Log.d("TAG", "onCreate: " + "Empty");
         }
 
-    }
 
+
+
+    }
 
 
     @Override
@@ -179,7 +208,6 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
 
                 queue.getCache().clear();
             }
@@ -265,7 +293,9 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Log.d("TAG", "onItemSelected: " + position + " " + id);
         langPos = position;
-        SharedPreferences sf=getSharedPreferences("myfile", Context.MODE_PRIVATE);
+        mCustomKeyboard.change_keyboard(R.xml.keyboard);
+        mCustomKeyboard.curr_layout=1;
+        SharedPreferences sf=getSharedPreferences("myfile2", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit=sf.edit();
         edit.clear(); // remove existing entries
         edit.putString("selLang",langs[langPos]);
@@ -280,8 +310,6 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     public void saveCode(View view) {
-
-
         try {
             File file = new File(EditorActivity.this.getFilesDir(), "" + filename.getText().toString());
             FileWriter writer = new FileWriter(file);
@@ -292,7 +320,5 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         } catch (Exception e) {
 
         }
-
-
     }
 }

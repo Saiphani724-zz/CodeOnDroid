@@ -316,7 +316,7 @@ public class CustomKeyboard {
     {
         if(layid==R.xml.keywordboard)
         {
-            SharedPreferences sf= mHostActivity.getSharedPreferences("myfile", Context.MODE_PRIVATE);
+            SharedPreferences sf= mHostActivity.getSharedPreferences("myfile2", Context.MODE_PRIVATE);
             String lang = sf.getString("selLang","NA");
             if(lang=="Java")
             {
@@ -409,7 +409,7 @@ public class CustomKeyboard {
     public void load_wtype()
     {
         String keywords[] = {"for","if","while","else","int","float","char","include","do","cout","cin","struct","class","void","public",
-                "private","protected","global","static","final","using"};
+                "private","protected","global","static","final","using","print","input"};
         String symbols[] = {"+","-","=",";","{","}","\\","/","[","]","!","#","%","&","*","(",")",":","?","<",">","\n","\"","\'",".","_","|","\t"," ",":"};
         insert_dict(keywords,"keyword");
         insert_dict(symbols,"symbol");

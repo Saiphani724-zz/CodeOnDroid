@@ -188,6 +188,11 @@ public class Navigationclass extends AppCompatActivity implements AdapterView.On
 
     public void openEditor(View v)
     {
+        SharedPreferences sf=getSharedPreferences("myfile1", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit=sf.edit();
+        edit.clear(); // remove existing entries
+        edit.putString("filename","NA");
+        edit.commit();
         startActivity(new Intent(Navigationclass.this,EditorActivity.class));
     }
 

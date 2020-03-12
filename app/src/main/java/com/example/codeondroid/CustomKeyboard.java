@@ -28,7 +28,7 @@ public class CustomKeyboard {
     public int keylayouts[]={R.xml.specialnumbers,R.xml.keyboard,R.xml.keywordboard,R.xml.variablekeys};
     int kbcount,curr_layout;
     int flag;
-    HashMap keydict,varkeys,wtype;
+    HashMap keydict,varkeys,wtype,revvar;
     private KeyboardView.OnKeyboardActionListener mOnKeyboardActionListener = new KeyboardView.OnKeyboardActionListener() {
 
         public final static int CodeDelete   = -5; // Keyboard.KEYCODE_DELETE
@@ -41,6 +41,7 @@ public class CustomKeyboard {
         public final static int CodeAllRight = 55004;
         public final static int CodeNext     = 55005;
         public final static int CodeClear    = 55006;
+
         @Override public void onKey(int primaryCode, int[] keyCodes) {
             // NOTE We can say '<Key android:codes="49,50" ... >' in the xml file; all codes come in keyCodes, the first in this list in primaryCode
             // Get the EditText and its Editable
@@ -111,6 +112,43 @@ public class CustomKeyboard {
                 mKeyboardView.invalidateAllKeys();
                 return;
             }
+            else if(primaryCode>=600)
+            {
+                editable.insert(start, keydict.get(primaryCode).toString());
+                if(primaryCode==603)
+                {
+                    edittext.setSelection(start+5);
+                }
+                if(primaryCode==604)
+                {
+                    edittext.setSelection(start+6);
+                }
+                if(primaryCode==606)
+                {
+                    edittext.setSelection(start+7);
+                }
+                if(primaryCode==607)
+                {
+                    edittext.setSelection(start+4);
+                }
+                if(primaryCode==611)
+                {
+                    edittext.setSelection(start+7);
+                }
+                if(primaryCode==612)
+                {
+                    edittext.setSelection(start+5);
+                }
+                if(primaryCode==613)
+                {
+                    edittext.setSelection(start+7);
+                }
+                if(primaryCode==615)
+                {
+                    edittext.setSelection(start+7);
+                }
+
+            }
             else if(primaryCode>=500)
             {
                 editable.insert(start, keydict.get(primaryCode).toString());
@@ -122,7 +160,8 @@ public class CustomKeyboard {
             }
             else if(primaryCode>=400)
             {
-                editable.insert(start, varkeys.get(primaryCode).toString()+" ");
+                if(varkeys.get(primaryCode)!=null && varkeys.get(primaryCode)!="")
+                editable.insert(start, varkeys.get(primaryCode).toString());
             }
             else if( primaryCode>=300 ) {
                 editable.insert(start, keydict.get(primaryCode).toString());
@@ -203,6 +242,7 @@ public class CustomKeyboard {
         keydict = new HashMap();
         varkeys = new HashMap();
         wtype = new HashMap();
+        revvar = new HashMap();
         load_dict();
         load_wtype();
         mKeyboardView= (KeyboardView)mHostActivity.findViewById(viewid);
@@ -284,23 +324,35 @@ public class CustomKeyboard {
                 mKeyboardView.setKeyboard(new Keyboard(mHostActivity,R.xml.javakeyboard));
                 return;
             }
+            if(lang=="Python3"){
+                mKeyboardView.setKeyboard(new Keyboard(mHostActivity,R.xml.pythonkeyboard));
+                return;
+            }
         }
         mKeyboardView.setKeyboard(new Keyboard(mHostActivity, layid));
         if(layid==R.xml.variablekeys) {
+            varkeys = new HashMap();
+            revvar = new HashMap();
             List<Keyboard.Key> keylist = mKeyboardView.getKeyboard().getKeys();
             //keylist.get(0).label = "Num1";
             //Log.d("varkey", "" + keylist.toArray().length);
             View focusCurrent = mHostActivity.getWindow().getCurrentFocus();
             EditText edittext = (EditText) focusCurrent;
-            String[] varslist =  edittext.getText().toString().split(" |\n|;|\\(|\\)|\\{|}|\\[|\\+|-|\\*|=|/|]");
+            String[] varslist =  edittext.getText().toString().split(" |\n|;|\\(|\\)|\\{|\\}|\\[|\\+|-|\\*|=|/|,|]");
             int count=0;
             for(int i=0;i<varslist.length;i++)
             {
-                if(wtype.containsKey(varslist[i]))
+                if(wtype.containsKey(varslist[i])||revvar.containsKey(varslist[i]))
                 {
                     continue;
                 }
+                if(varkeys.containsKey(varslist[i])||varslist[i]=="")
+                {
+                    continue;
+                }
+
                 varkeys.put(401+count,varslist[i]);
+                revvar.put(varslist[i],401+count);
                 keylist.get(count).label=varslist[i];
                 count++;
                 if(count==keylist.toArray().length)
@@ -313,7 +365,7 @@ public class CustomKeyboard {
     public void load_dict()
     {
         keydict.put(301,"for(  ;  ;  )\n{\n    \n}");
-        keydict.put(302,"while(  )\n{\n    \n}");
+        keydict.put(302,"while( )\n{\n    \n}");
         keydict.put(303,"if()\n{\n    \n}");
         keydict.put(304,"else\n{\n    \n}");
         keydict.put(305,"int ");
@@ -331,19 +383,34 @@ public class CustomKeyboard {
         keydict.put(353,"++");
         keydict.put(354,"--");
         keydict.put(501 ,"Scanner sc =  new Scanner(System.in);\n");
-        keydict.put(502,"import");
+        keydict.put(502,"import ");
         keydict.put(503 ,"System");
         keydict.put(504,"public static void main(String args[])\n{\n    \n}");
         keydict.put(505,"class Myclass \n{\n    \n}");
         keydict.put(506,"new ");
         keydict.put(507,"sc.next()");
         keydict.put(508,"System.out.println();");
+        keydict.put(601 ,"from ");
+        keydict.put(602,"import ");
+        keydict.put(603 ,"map(  )");
+        keydict.put(604,"list(  )");
+        keydict.put(605,"def ");
+        keydict.put(606,"range(  )");
+        keydict.put(607,"for  in :");
+        keydict.put(608,"while");
+        keydict.put(609,"if");
+        keydict.put(610,"else:");
+        keydict.put(611,"split(  )");
+        keydict.put(612,"str(  )");
+        keydict.put(613,"input(  )");
+        keydict.put(614,"[]");
+        keydict.put(615,"print(  )");
     }
     public void load_wtype()
     {
         String keywords[] = {"for","if","while","else","int","float","char","include","do","cout","cin","struct","class","void","public",
                 "private","protected","global","static","final","using"};
-        String symbols[] = {"+","-","=",";","{","}","\\","/","[","]","!","#","%","&","*","(",")",":","?","<",">","\n","\"","\'",".","_","|","\t"};
+        String symbols[] = {"+","-","=",";","{","}","\\","/","[","]","!","#","%","&","*","(",")",":","?","<",">","\n","\"","\'",".","_","|","\t"," ",":"};
         insert_dict(keywords,"keyword");
         insert_dict(symbols,"symbol");
     }

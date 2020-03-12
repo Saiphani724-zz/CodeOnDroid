@@ -17,7 +17,7 @@ import java.util.List;
 public class CustomKeyboard {
     private KeyboardView mKeyboardView;
     private Activity mHostActivity;
-    public int keylayouts[]={R.xml.keyboard,R.xml.keywordboard,R.xml.variablekeys};
+    public int keylayouts[]={R.xml.specialnumbers,R.xml.keyboard,R.xml.keywordboard,R.xml.variablekeys};
     int kbcount,curr_layout;
     HashMap keydict,varkeys,wtype;
     private KeyboardView.OnKeyboardActionListener mOnKeyboardActionListener = new KeyboardView.OnKeyboardActionListener() {
@@ -62,6 +62,7 @@ public class CustomKeyboard {
                 if(start>=1)
                 edittext.setSelection(start-1);
             } else if( primaryCode==CodeAllRight ) {
+                if(start<edittext.length())
                 edittext.setSelection(start+1);
             } else if( primaryCode==CodePrev ) {
                  //View focusNew= edittext.focusSearch(View.FOCUS_BACKWARD);
@@ -76,6 +77,10 @@ public class CustomKeyboard {
             }
             else if( primaryCode>=300 ) {
                 editable.insert(start, keydict.get(primaryCode).toString());
+                if(primaryCode==301)
+                {
+                    edittext.setSelection(start+4);
+                }
                 if(primaryCode==309||primaryCode==314||primaryCode==313)
                 {
                     edittext.setSelection(start+1);
@@ -122,7 +127,7 @@ public class CustomKeyboard {
     public CustomKeyboard(Activity host, int viewid, int layoutid) {
         mHostActivity= host;
         kbcount = keylayouts.length;
-        curr_layout=0;
+        curr_layout=1;
         keydict = new HashMap();
         varkeys = new HashMap();
         wtype = new HashMap();
@@ -215,10 +220,10 @@ public class CustomKeyboard {
     }
     public void load_dict()
     {
-        keydict.put(301,"for ");
-        keydict.put(302,"while ");
-        keydict.put(303,"if ");
-        keydict.put(304,"else ");
+        keydict.put(301,"for(  ;  ;  )\n{\n\t\n}");
+        keydict.put(302,"while(  )\n{\n\t\n}");
+        keydict.put(303,"if()\n{\n\t\n}");
+        keydict.put(304,"else\n{\n\t\n}");
         keydict.put(305,"int ");
         keydict.put(306,"float ");
         keydict.put(307,"char ");
@@ -229,6 +234,10 @@ public class CustomKeyboard {
         keydict.put(312,"# ");
         keydict.put(313,"{\n}");
         keydict.put(314,"\" \" ");
+        keydict.put(351,"==");
+        keydict.put(352,"!=");
+        keydict.put(353,"++");
+        keydict.put(354,"--");
     }
     public void load_wtype()
     {

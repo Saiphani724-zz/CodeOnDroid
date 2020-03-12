@@ -72,7 +72,7 @@
         <Key android:codes="55000" android:keyLabel="home"/>
         <Key android:codes="55005" android:keyLabel="end" />
         <Key android:keyLabel="SPACE" android:keyWidth="40%p" android:isRepeatable="true" android:codes="32"/>
-        <Key android:keyLabel="DEL" android:keyWidth="20%p" android:isRepeatable="true" android:codes="-5"/>
+        <Key android:keyLabel="tab" android:keyWidth="20%p" android:isRepeatable="true" android:codes="9"/>
         <Key android:keyLabel="ENTR" android:keyWidth="20%p" android:keyEdgeFlags="right" android:codes="-4"/>
 
     </Row>

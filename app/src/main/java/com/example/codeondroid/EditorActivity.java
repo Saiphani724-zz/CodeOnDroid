@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,8 +29,17 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+
 
 
 public class EditorActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -163,8 +173,6 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
             }
         };
         queue.add(sr);
-
-
     }
 
     @Override public void onBackPressed() {
@@ -226,5 +234,55 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
 //        Toast.makeText(getApplicationContext(),langPos + "", Toast.LENGTH_LONG).show();
         Log.d("TAG", "onNothingSelected: ");
+    }
+
+    public void saveCode(View view) {
+        if (!codebox.getText().toString().isEmpty()) {
+
+            try {
+                File file = new File(EditorActivity.this.getFilesDir(), "sample.txt");
+                FileWriter writer = new FileWriter(file);
+                writer.append(codebox.getText().toString());
+                writer.flush();
+                writer.close();
+                Toast.makeText(EditorActivity.this, Environment.getExternalStorageState()  + "Saved your text", Toast.LENGTH_LONG).show();
+            } catch (Exception e) { }
+        }
+
+//        FileInputStream fis = null;
+        String yourFilePath = getApplicationContext().getFilesDir() + "/" + "sample.txt";
+        File yourFile = new File( yourFilePath );
+        Log.d("TAG", "saveCode: " + EditorActivity.this.getFilesDir() + "/" + "sample.txt");
+
+        File f = new File("" + getApplicationContext().getFilesDir());
+
+        String[] files = f.list();
+
+        for (int i = 0; i < files.length; i++) {
+            Log.d("TAG", "Files List: " + files[i]);
+        }
+
+        try {
+            FileInputStream fin=new FileInputStream(yourFilePath);
+            InputStreamReader isr = new InputStreamReader(fin);
+            BufferedReader bufferedReader = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while (true) {
+                try {
+                    if (!((line = bufferedReader.readLine()) != null)) break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                sb.append(line + "\n");
+            }
+            Log.d("TAG", "saveCode: " + sb.toString());
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 }

@@ -9,7 +9,6 @@
     </string-array>
 
     <string-array name="Lang">
-        <item>Select Language to Run</item>
         <item>Cpp14</item>
         <item>C</item>
         <item>Java</item>

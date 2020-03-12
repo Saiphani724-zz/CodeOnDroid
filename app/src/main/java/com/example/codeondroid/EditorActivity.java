@@ -56,6 +56,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     String langs[] = {"Cpp14", "C", "Java", "Python3"};
     int langPos = 1;
     int MIN_DISTANCE = 150;
+    EditText filename;
 
 
     @Override
@@ -64,13 +65,14 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         setContentView(R.layout.activity_editor);
 
 
-        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-        Intent batteryStatus = getApplicationContext().registerReceiver(null, ifilter);
+//        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+//        Intent batteryStatus = getApplicationContext().registerReceiver(null, ifilter);
         mCustomKeyboard = new CustomKeyboard(this, R.id.keyboardview, R.xml.keyboard);
         mCustomKeyboard.registerEditText(R.id.codebox);
 //        mCustomKeyboard.registerEditText(R.id.outputbox);
         mCustomKeyboard.registerEditText(R.id.inputbox);
 
+        filename = findViewById(R.id.filename);
         codebox = findViewById(R.id.codebox);
         inputbox = findViewById(R.id.inputbox);
         outputbox = findViewById(R.id.outputbox);
@@ -104,6 +106,42 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 //        if(batteryPct < 25){
 //            Toast.makeText(getApplicationContext(), "BAttery's dying!!\nSave Your Code\n", Toast.LENGTH_LONG).show();
 //        }
+
+        SharedPreferences sf1=getSharedPreferences("myfile1", Context.MODE_PRIVATE);
+        String openfilename = sf1.getString("filename","NA");
+        if(!openfilename.equals("NA")){
+            Log.d("TAG", "onCreate: " + openfilename);
+
+
+            try {
+                String yourFilePath = getApplicationContext().getFilesDir() + "/" + openfilename;
+                FileInputStream fin=new FileInputStream(yourFilePath);
+                InputStreamReader isr = new InputStreamReader(fin);
+                BufferedReader bufferedReader = new BufferedReader(isr);
+                StringBuilder sb = new StringBuilder();
+                String line = "";
+                while (true) {
+                    try {
+                        if (!((line = bufferedReader.readLine()) != null)) break;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    sb.append(line + "\n");
+                }
+                Log.d("TAG", "onCreate: " + sb.toString()  + "\n") ;
+                filename.setText(openfilename);
+                codebox.setText(sb.toString());
+
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }
+        else{
+            Log.d("TAG", "onCreate: " + "Emptyyyyyyyyyyyyyyyyyyyyyyyy");
+        }
+
     }
 
 
@@ -237,51 +275,18 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     public void saveCode(View view) {
-        if (!codebox.getText().toString().isEmpty()) {
 
-            try {
-                File file = new File(EditorActivity.this.getFilesDir(), "sample.txt");
-                FileWriter writer = new FileWriter(file);
-                writer.append(codebox.getText().toString());
-                writer.flush();
-                writer.close();
-                Toast.makeText(EditorActivity.this, Environment.getExternalStorageState()  + "Saved your text", Toast.LENGTH_LONG).show();
-            } catch (Exception e) { }
-        }
-
-//        FileInputStream fis = null;
-        String yourFilePath = getApplicationContext().getFilesDir() + "/" + "sample.txt";
-        File yourFile = new File( yourFilePath );
-        Log.d("TAG", "saveCode: " + EditorActivity.this.getFilesDir() + "/" + "sample.txt");
-
-        File f = new File("" + getApplicationContext().getFilesDir());
-
-        String[] files = f.list();
-
-        for (int i = 0; i < files.length; i++) {
-            Log.d("TAG", "Files List: " + files[i]);
-        }
 
         try {
-            FileInputStream fin=new FileInputStream(yourFilePath);
-            InputStreamReader isr = new InputStreamReader(fin);
-            BufferedReader bufferedReader = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String line = "";
-            while (true) {
-                try {
-                    if (!((line = bufferedReader.readLine()) != null)) break;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                sb.append(line + "\n");
-            }
-            Log.d("TAG", "saveCode: " + sb.toString());
+            File file = new File(EditorActivity.this.getFilesDir(), "" + filename.getText().toString());
+            FileWriter writer = new FileWriter(file);
+            writer.append(codebox.getText().toString());
+            writer.flush();
+            writer.close();
+            Toast.makeText(getApplicationContext(),"Save your code as " + filename.getText().toString(), Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
-
 
 
     }

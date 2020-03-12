@@ -30,11 +30,22 @@
         android:onClick="openEditor"
         />
 
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="150dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:id="@+id/myfiles">
+
+        </ListView>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="-100dp"
         android:orientation="horizontal">
 
 
@@ -66,6 +77,13 @@
 
     </LinearLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:layout_marginTop="30dp"
+        android:id="@+id/ScrollView">
+
+    </ScrollView>
 
     <!--    <Button-->
     <!--        android:layout_width="wrap_content"-->

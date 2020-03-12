@@ -16,18 +16,25 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 
-public class Navigationclass extends AppCompatActivity {
+public class Navigationclass extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     TextView apname;
     LinearLayout l1;
     Button btnCC,btnCF,btnHR;
+
+    ListView myfiles;
+    String[] files;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +45,26 @@ public class Navigationclass extends AppCompatActivity {
         btnCF=(Button)findViewById(R.id.btnCF);
         btnHR=(Button)findViewById(R.id.btnHR);
         l1 = (LinearLayout)findViewById(R.id.ll);
+
+        myfiles = findViewById(R.id.myfiles);
+
+        File f = new File("" + getApplicationContext().getFilesDir());
+        files = f.list();
+
+        for (int i = 0; i < files.length; i++) {
+            Log.d("TAG", "Files List: " + files[i]);
+        }
+
+
+        ArrayAdapter<String> ada=new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1,
+                files);
+        myfiles.setAdapter(ada);
+        myfiles.setOnItemClickListener(this);
+
+
+
+
 
         registerForContextMenu(l1);
 
@@ -162,9 +189,37 @@ public class Navigationclass extends AppCompatActivity {
     public void openEditor(View v)
     {
         startActivity(new Intent(Navigationclass.this,EditorActivity.class));
-        Toast.makeText(getApplicationContext(),"Hello",Toast.LENGTH_LONG).show();
     }
 
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.d("TAG", "onItemClick: " + files[position]);
+
+        SharedPreferences sf=getSharedPreferences("myfile1", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit=sf.edit();
+        edit.clear(); // remove existing entries
+        edit.putString("filename",files[position]);
+        edit.commit();
+
+        startActivity(new Intent(Navigationclass.this,EditorActivity.class));
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+
+        File f = new File("" + getApplicationContext().getFilesDir());
+        files = f.list();
+
+        ArrayAdapter<String> ada=new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1,
+                files);
+        myfiles.setAdapter(ada);
+        myfiles.setOnItemClickListener(this);
+
+    }
 
 }

@@ -12,12 +12,13 @@
     android:orientation="vertical"
     android:layout_height="wrap_content">
 
-        <TextView
+        <EditText
+            android:id="@+id/filename"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/app_name"
-            android:fontFamily="cursive"
+            android:ems="7"
+            android:hint="Enter file name"
             android:textColor="@color/DarkBlue"
             android:layout_marginTop="10dp"
             android:textSize="25dp"/>

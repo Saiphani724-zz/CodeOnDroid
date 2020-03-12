@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/about"
+        android:title="@string/about_app"/>
+
+    <item
+        android:id="@+id/profile"
+        android:title="My Profile"
+        app:showAsAction="always"
+        android:icon="@drawable/profile_icon"/>
+
+    <item
+        android:id="@+id/bug_report"
+        android:title="Report a Bug"
+        app:showAsAction="always"
+        android:icon="@drawable/report_bug"/>
+
+
+</menu>

@@ -1,6 +1,7 @@
 
 package com.example.codeondroid;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -10,8 +11,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +26,7 @@ import java.io.File;
 public class Navigationclass extends AppCompatActivity {
 
     TextView apname;
-
+    LinearLayout l1;
     Button btnCC,btnCF,btnHR;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +37,10 @@ public class Navigationclass extends AppCompatActivity {
         btnCC=(Button)findViewById(R.id.btnCC);
         btnCF=(Button)findViewById(R.id.btnCF);
         btnHR=(Button)findViewById(R.id.btnHR);
+        l1 = (LinearLayout)findViewById(R.id.ll);
+
+        registerForContextMenu(l1);
+
 
         apname.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,28 +104,67 @@ public class Navigationclass extends AppCompatActivity {
 
     }
 
+    //Creating a context menu to provide the user with a walkthrough of the app upon pressing anywhere on the home screen
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.context_menu,menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.walkthrough:
+                Intent i=new Intent(getApplicationContext(),Walkthrough.class);
+                startActivity(i);
+                return true;
+            default:
+                return false;
+        }
+    }
+
+
+    //Creating an options menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.top_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId())
+        {
+            case R.id.about:
+                Intent i = new Intent(Navigationclass.this,About.class);
+                startActivity(i);
+                return true;
+            case R.id.profile:
+                Intent j = new Intent(Navigationclass.this,ProfilePage.class);
+                startActivity(j);
+                return true;
+            case R.id.bug_report:
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", "prashanth.s.edu@gmail.com", null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "ReportBug");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, "ReportBug");
+                startActivity(emailIntent);
+                return true;
+            default:
+                return false;
+
+        }
+    }
+
     public void openEditor(View v)
     {
         startActivity(new Intent(Navigationclass.this,EditorActivity.class));
+        Toast.makeText(getApplicationContext(),"Hello",Toast.LENGTH_LONG).show();
     }
 
-//    public void getFiles(View v)
-//    {
-//        String path = Environment.getExternalStorageDirectory().toString() + "/Codes";
-//
-//        Toast.makeText(getApplicationContext(), path, Toast.LENGTH_LONG).show();
-//        File directory = new File(path);
-//        File[] files = directory.listFiles();
-//        Log.d("Files", "Size: "+ files + " " +directory);
-//
-////        for (int i = 0; i < files.length; i++)
-////        {
-////            Log.d("Files", "FileName:" + files[i].getName());
-//////            Toast.makeText(getApplicationContext(),"FileName:" + files[i].getName(),Toast.LENGTH_LONG).show();
-////        }
-////        Toast.makeText(getApplicationContext(),path,Toast.LENGTH_LONG).show();
-//
-//    }
 
 
 }

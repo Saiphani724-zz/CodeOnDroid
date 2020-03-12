@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="LightBlue">#89CFF0</color>
+    <color name="DarkBlue">#1AB88B</color>
+    <color name="DungGreen">#C7C87D</color>
+    <color name="FadeYellow">#F3F2DD</color>
+    <color name="FadeRed">#AC5A58</color>
+    <color name="colorBackground">#01364E</color>
+    <color name="colorBackground2">#7BC8EC</color>
+    <color name="EditTextBox">#5C5A5E</color>
+</resources>

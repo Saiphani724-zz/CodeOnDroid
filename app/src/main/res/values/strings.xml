@@ -2,11 +2,20 @@
     <string name="app_name">CodeOnDroid</string>
     <string-array name="Favourite_Lang">
         <item>Choose Your Favourite Language</item>
-        <item>C++</item>
+        <item>Cpp14</item>
         <item>C</item>
         <item>Java</item>
         <item>Python3</item>
     </string-array>
+
+    <string-array name="Lang">
+        <item>Select Language to Run</item>
+        <item>Cpp14</item>
+        <item>C</item>
+        <item>Java</item>
+        <item>Python3</item>
+    </string-array>
+
     <string name="clipcontent">
             https://www.google.com/search?q=different+broadcast+receivers+androidoq=different+broadcast+receivers+androidaqs=chrome..69i57.13458j0j7sourceid=chromeie=UTF-8
     </string>

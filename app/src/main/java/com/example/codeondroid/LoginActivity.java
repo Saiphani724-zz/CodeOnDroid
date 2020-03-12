@@ -2,8 +2,10 @@ package com.example.codeondroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.BatteryManager;
@@ -52,9 +54,20 @@ public class LoginActivity extends AppCompatActivity {
 
 
         Cursor c = db.rawQuery(String.format("SELECT * FROM users WHERE username = '%s' and password='%s' ",uname.getText(),pword.getText()),null);
-//        if(uname.getText().toString().equals("admin") && pword.getText().toString().equals("1234"))
+
+
         if(c.getCount() == 1)
         {
+            StringBuffer buffer = new StringBuffer();
+            while (c.moveToNext())
+            {
+                String favLang = c.getString(3);
+                SharedPreferences sf=getSharedPreferences("myfile", Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit=sf.edit();
+                edit.clear(); // remove existing entries
+                edit.putString("favLang",favLang);
+                edit.commit();
+            }
             Intent i = new Intent(this, Navigationclass.class);
             startActivity(i);
 //            Toast.makeText(LoginActivity.this,"Login Successfull",Toast.LENGTH_SHORT).show();

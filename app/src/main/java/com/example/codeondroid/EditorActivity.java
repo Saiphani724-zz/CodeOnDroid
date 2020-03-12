@@ -6,27 +6,47 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.os.BatteryManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
-import com.example.codeondroid.webview;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditorActivity extends AppCompatActivity {
+
+public class EditorActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     CustomKeyboard mCustomKeyboard;
     float x1,x2;
     float y1, y2;
     final int MYREQUEST = 11;
+
+    EditText codebox, inputbox;
+    String code;
+    TextView outputbox;
+    Spinner Lang;
+
+    String langs[] = {"Cpp14", "C", "Java", "Python3"};
+    int langPos = 4;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,16 +57,42 @@ public class EditorActivity extends AppCompatActivity {
         Intent batteryStatus = getApplicationContext().registerReceiver(null, ifilter);
         mCustomKeyboard = new CustomKeyboard(this, R.id.keyboardview, R.xml.keyboard);
         mCustomKeyboard.registerEditText(R.id.codebox);
-        mCustomKeyboard.registerEditText(R.id.outputbox);
+//        mCustomKeyboard.registerEditText(R.id.outputbox);
         mCustomKeyboard.registerEditText(R.id.inputbox);
-        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-        int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
 
-        float batteryPct = level * 100 / (float)scale;
+        codebox = findViewById(R.id.codebox);
+        inputbox = findViewById(R.id.inputbox);
+        outputbox = findViewById(R.id.outputbox);
 
-        if(batteryPct < 25){
-            Toast.makeText(getApplicationContext(), "BAttery's dying!!\nSave Your Code\n", Toast.LENGTH_LONG).show();
+        Lang = findViewById(R.id.Lang);
+        ArrayAdapter<String> adap1 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, langs);
+
+        Lang.setAdapter(adap1);
+        Lang.setOnItemSelectedListener(this);
+
+        SharedPreferences sf=getSharedPreferences("myfile", Context.MODE_PRIVATE);
+        String lang = sf.getString("favLang","NA");
+        for(int i = 0;i < langs.length; i++)
+        {
+            if(langs[i].equals((lang)))
+            {
+                langPos = i;
+            }
         }
+
+        int spinnerPosition = adap1.getPosition(lang);
+        Lang.setSelection(spinnerPosition);
+        Toast.makeText(getApplicationContext(),langPos + "\t" + lang, Toast.LENGTH_LONG).show();
+//
+//        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+//        int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+//
+//        float batteryPct = level * 100 / (float)scale;
+//
+//        if(batteryPct < 25){
+//            Toast.makeText(getApplicationContext(), "BAttery's dying!!\nSave Your Code\n", Toast.LENGTH_LONG).show();
+//        }
     }
 
 
@@ -69,60 +115,56 @@ public class EditorActivity extends AppCompatActivity {
 
     }
 
-    public void openweb(View view) {
-        SharedPreferences sf=getSharedPreferences("myfile", Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit=sf.edit();
-        edit.clear(); // remove existing entries
-        edit.putString("url","https://sphere-engine.com/demo/1-online-compiler");
-
-        edit.commit();
-        Intent i=new Intent(this, webview.class);
-        startActivity(i);
-
-    }
-
     public void compileCode(View view) {
 
-//        try {
-//            String URL = "";
-//            JSONObject jsonBody = new JSONObject();
-//
-//            jsonBody.put("email", "abc@abc.com");
-//            jsonBody.put("password", "");
-//            jsonBody.put("user_type", "");
-//            jsonBody.put("company_id", "");
-//            jsonBody.put("status", "");
-//
-//            JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, URL, jsonBody, new Response.Listener<JSONObject>() {
-//                @Override
-//                public void onResponse(JSONObject response) {
-//
-//                    Toast.makeText(getApplicationContext(), "Response:  " + response.toString(), Toast.LENGTH_SHORT).show();
-//                }
-//            }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//
-//                    onBackPressed();
-//
-//                }
-//            }) {
-//                @Override
-//                public Map<String, String> getHeaders() throws AuthFailureError {
-//                    final Map<String, String> headers = new HashMap<>();
-//                    headers.put("Authorization", "Basic " + "c2FnYXJAa2FydHBheS5jb206cnMwM2UxQUp5RnQzNkQ5NDBxbjNmUDgzNVE3STAyNzI=");//put your token here
-//                    return headers;
-//                }
-//            };
-//            VolleyApplication.getInstance().addToRequestQueue(jsonOblect);
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        // Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_LONG).show();
-//
-//    }
-}
+        final RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+        StringRequest sr = new StringRequest(Request.Method.POST,"https://ide.geeksforgeeks.org/main.php/", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("Volley", "onResponse: " + response);
+                try {
+                    JSONObject res = new JSONObject(response);
+                    String output = res.getString("output");
+                    outputbox.setText(output);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                queue.getCache().clear();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Volley", "onErrorResponse: " + error);
+            }
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+
+                Log.d("code", "getParams: " + code);
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("lang" , langs[langPos]);
+                params.put("code" , codebox.getText().toString());
+                params.put("input" , inputbox.getText().toString());
+                params.put("save" , "false");
+//                Toast.makeText(getApplicationContext(),langPos + "", Toast.LENGTH_LONG).show();
+
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type","application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        queue.add(sr);
+
+
+    }
 
     @Override public void onBackPressed() {
         // NOTE Trap the back key: when the CustomKeyboard is still visible hide it, only when it is invisible, finish activity
@@ -180,4 +222,19 @@ public class EditorActivity extends AppCompatActivity {
         return false;
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Log.d("TAG", "onItemSelected: " + position + " " + id);
+        langPos = position;
+        if(langPos == 0){
+            langPos = 4;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+//        Toast.makeText(getApplicationContext(),langPos + "", Toast.LENGTH_LONG).show();
+        Log.d("TAG", "onNothingSelected: ");
+    }
 }

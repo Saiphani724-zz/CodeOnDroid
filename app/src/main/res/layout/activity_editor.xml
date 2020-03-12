@@ -19,29 +19,32 @@
             android:text="@string/app_name"
             android:fontFamily="cursive"
             android:textColor="@color/DarkBlue"
-            android:textSize="55dp"/>
+            android:layout_marginTop="10dp"
+            android:textSize="25dp"/>
 
 
 
     <EditText
         android:id="@+id/codebox"
         android:layout_width="match_parent"
-        android:layout_height="80pt"
+        android:layout_height="140pt"
         android:gravity="top|left"
         android:hint="Type Your code"
         android:background="@drawable/button"
         android:inputType="text|textMultiLine"
         android:foregroundGravity="top|left"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:lines="12" />
 
 
 
 
         <EditText
+            android:id="@+id/inputbox"
             android:gravity="top|left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
             android:layout_gravity="left"
             android:hint="Input"
             android:foregroundGravity="top|left"
@@ -51,45 +54,51 @@
             android:background="@drawable/button"
             android:lines="3" />
 
-        <EditText
+        <TextView
+            android:id="@+id/outputbox"
             android:gravity="top|left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="10dp"
             android:layout_gravity="right"
             android:hint="Output"
             android:inputType="text|textMultiLine"
             android:ems="8"
             android:background="@drawable/button"
-            android:layout_marginTop="-68dp"
-            android:lines="3" /><![CDATA[
-
-        >
-
-
-
-
-    ]]>
+            android:layout_marginTop="-60dp"
+            android:lines="3" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="#DEFDEF"
         android:ems="8"
-        android:onClick="openweb"
+        android:onClick="compileCode"
         android:text="Compile Code" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:background="#DEFDEF"
-        android:layout_marginHorizontal="80dp"
+        android:layout_marginLeft="20dp"
         android:ems="8"
-        android:layout_gravity="center"
+
         android:onClick="access_clip"
         android:text=" Clip board" />
+
+    <Spinner
+        android:id="@+id/Lang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="-50dp"
+        android:padding="15dp"
+        android:entries="@array/Lang"/>
+
 </LinearLayout>
 
     <android.inputmethodservice.KeyboardView
@@ -101,6 +110,8 @@
         android:focusableInTouchMode="true"
         android:visibility="invisible"
         />
+
+
 
 
 

@@ -97,7 +97,6 @@ public class Navigationclass extends AppCompatActivity {
     public void openEditor(View v)
     {
         startActivity(new Intent(Navigationclass.this,EditorActivity.class));
-        Toast.makeText(getApplicationContext(),"Hello",Toast.LENGTH_LONG).show();
     }
 
 //    public void getFiles(View v)

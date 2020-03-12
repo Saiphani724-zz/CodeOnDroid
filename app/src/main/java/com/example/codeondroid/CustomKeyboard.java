@@ -78,9 +78,39 @@ public class CustomKeyboard {
             } else if( primaryCode==CodePrev ) {
                 //View focusNew= edittext.focusSearch(View.FOCUS_BACKWARD);
                 //if( focusNew!=null ) focusNew.requestFocus();
-                edittext.setSelection(0);
+                int len =0;
+                String text1 = editable.toString();
+                int flag = 0;
+                if(start==0)
+                    len=-1;
+                for(int i=start-1;i>-1;i--)
+                {
+                    if(i <= 0)
+                    {
+                        edittext.setSelection(0);
+                        flag =  1;
+                    }
+                    if(text1.charAt(i)=='\n')
+                    {
+                        len = i;
+                        break;
+                    }
+                }
+                if(flag == 0)
+                    edittext.setSelection(len+1);
+
             } else if( primaryCode==CodeNext ) {
-                edittext.setSelection(edittext.length());
+                int len =edittext.length();
+                String text1 = editable.toString();
+                for(int i=start;i<text1.length();i++)
+                {
+                    if(text1.charAt(i)=='\n')
+                    {
+                        len = i;
+                        break;
+                    }
+                }
+                edittext.setSelection(len);
             }
             else if(primaryCode==-1)
             {
@@ -334,6 +364,10 @@ public class CustomKeyboard {
             varkeys = new HashMap();
             revvar = new HashMap();
             List<Keyboard.Key> keylist = mKeyboardView.getKeyboard().getKeys();
+            for(Keyboard.Key ky: keylist)
+            {
+                ky.label="";
+            }
             //keylist.get(0).label = "Num1";
             //Log.d("varkey", "" + keylist.toArray().length);
             View focusCurrent = mHostActivity.getWindow().getCurrentFocus();

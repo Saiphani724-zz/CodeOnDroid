@@ -1,16 +1,21 @@
 package com.example.codeondroid;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.os.Build;
 import android.text.Editable;
 import android.text.InputType;
+import android.view.KeyboardShortcutGroup;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
@@ -22,6 +27,7 @@ public class CustomKeyboard {
     private Activity mHostActivity;
     public int keylayouts[]={R.xml.specialnumbers,R.xml.keyboard,R.xml.keywordboard,R.xml.variablekeys};
     int kbcount,curr_layout;
+    int flag;
     HashMap keydict,varkeys,wtype;
     private KeyboardView.OnKeyboardActionListener mOnKeyboardActionListener = new KeyboardView.OnKeyboardActionListener() {
 
@@ -44,6 +50,7 @@ public class CustomKeyboard {
             EditText edittext = (EditText) focusCurrent;
             Editable editable = edittext.getText();
             edittext.setHint("");
+
             int start = edittext.getSelectionStart();
             // Apply the key to the edittext
             if( primaryCode==CodeCancel ) {
@@ -74,6 +81,45 @@ public class CustomKeyboard {
             } else if( primaryCode==CodeNext ) {
                 edittext.setSelection(edittext.length());
             }
+            else if(primaryCode==-1)
+            {
+                if(flag==0)
+                {
+                    flag=1;
+                }
+                else
+                {
+                    flag=0;
+                }
+                mKeyboardView.setShifted((flag==1)||(flag==2));
+                change_caps(flag);
+                mKeyboardView.invalidateAllKeys();
+                return;
+            }
+            else if(primaryCode==-2)
+            {
+                if(flag==0)
+                {
+                    flag=2;
+                }
+                else
+                {
+                    flag=0;
+                }
+                mKeyboardView.setShifted((flag==1)||(flag==2));
+                change_caps(flag);
+                mKeyboardView.invalidateAllKeys();
+                return;
+            }
+            else if(primaryCode>=500)
+            {
+                editable.insert(start, keydict.get(primaryCode).toString());
+                if(primaryCode==507)
+                {
+                    edittext.setSelection(start+7);
+                }
+
+            }
             else if(primaryCode>=400)
             {
                 editable.insert(start, varkeys.get(primaryCode).toString()+" ");
@@ -92,8 +138,28 @@ public class CustomKeyboard {
             else { // insert character
                 if(primaryCode==9)
                     editable.insert(start,"    ");
-                else
+                else{
+                    if(flag==0)
                     editable.insert(start, Character.toString((char) primaryCode));
+                    else
+                    {
+                        if(primaryCode>=97&&primaryCode<=122)
+                        {
+                            editable.insert(start, Character.toString((char) (primaryCode-32)));
+                        }
+                        else
+                        {
+                            editable.insert(start, Character.toString((char) primaryCode));
+                        }
+                    }
+                }
+            }
+            if(flag==1)
+            {
+                flag=0;
+                mKeyboardView.setShifted(false);
+                change_caps(flag);
+                mKeyboardView.invalidateAllKeys();
             }
             //edittext.setText(editable.toString());
         }
@@ -164,6 +230,8 @@ public class CustomKeyboard {
     public void hideCustomKeyboard() {
         mKeyboardView.setVisibility(View.GONE);
         mKeyboardView.setEnabled(false);
+        flag=0;
+        curr_layout=1;
     }
     public void registerEditText(int resid) {
         // Find the EditText 'resid'
@@ -197,6 +265,7 @@ public class CustomKeyboard {
                 InputMethodManager imm = (InputMethodManager) mHostActivity.getApplicationContext().getSystemService(
                         android.content.Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
                 return true;
             }
         });
@@ -205,6 +274,17 @@ public class CustomKeyboard {
     }
     public void change_keyboard(int layid)
     {
+        if(layid==R.xml.keywordboard)
+        {
+            SharedPreferences sf= mHostActivity.getSharedPreferences("myfile", Context.MODE_PRIVATE);
+            String lang = sf.getString("selLang","NA");
+            if(lang=="Java")
+            {
+                mKeyboardView.setKeyboard(new Keyboard(mHostActivity,R.xml.keywordboard));
+                mKeyboardView.setKeyboard(new Keyboard(mHostActivity,R.xml.javakeyboard));
+                return;
+            }
+        }
         mKeyboardView.setKeyboard(new Keyboard(mHostActivity, layid));
         if(layid==R.xml.variablekeys) {
             List<Keyboard.Key> keylist = mKeyboardView.getKeyboard().getKeys();
@@ -221,8 +301,8 @@ public class CustomKeyboard {
                     continue;
                 }
                 varkeys.put(401+count,varslist[i]);
-                count++;
                 keylist.get(count).label=varslist[i];
+                count++;
                 if(count==keylist.toArray().length)
                 {
                     break;
@@ -250,6 +330,14 @@ public class CustomKeyboard {
         keydict.put(352,"!=");
         keydict.put(353,"++");
         keydict.put(354,"--");
+        keydict.put(501 ,"Scanner sc =  new Scanner(System.in);\n");
+        keydict.put(502,"import");
+        keydict.put(503 ,"System");
+        keydict.put(504,"public static void main(String args[])\n{\n    \n}");
+        keydict.put(505,"class Myclass \n{\n    \n}");
+        keydict.put(506,"new ");
+        keydict.put(507,"sc.next()");
+        keydict.put(508,"System.out.println();");
     }
     public void load_wtype()
     {
@@ -263,6 +351,22 @@ public class CustomKeyboard {
     {
         for (String s:arr) {
             wtype.put(s,type);
+        }
+    }
+    private void change_caps(int flag)
+    {
+        List<Keyboard.Key> keylist = mKeyboardView.getKeyboard().getKeys();
+        if(flag==0)
+        {
+            keylist.get(30).label="caps";
+        }
+        else if(flag==1)
+        {
+            keylist.get(30).label="Caps";
+        }
+        else
+        {
+            keylist.get(30).label="CAPS";
         }
     }
 

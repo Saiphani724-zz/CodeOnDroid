@@ -3,6 +3,7 @@ package com.example.codeondroid;
 import android.app.Activity;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
+import android.os.Build;
 import android.text.Editable;
 import android.text.InputType;
 import android.view.MotionEvent;
@@ -11,13 +12,15 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import androidx.annotation.RequiresApi;
+
 import java.util.HashMap;
 import java.util.List;
 
 public class CustomKeyboard {
     private KeyboardView mKeyboardView;
     private Activity mHostActivity;
-    public int keylayouts[]={R.xml.keyboard,R.xml.keywordboard,R.xml.variablekeys};
+    public int keylayouts[]={R.xml.specialnumbers,R.xml.keyboard,R.xml.keywordboard,R.xml.variablekeys};
     int kbcount,curr_layout;
     HashMap keydict,varkeys,wtype;
     private KeyboardView.OnKeyboardActionListener mOnKeyboardActionListener = new KeyboardView.OnKeyboardActionListener() {
@@ -37,7 +40,7 @@ public class CustomKeyboard {
             // Get the EditText and its Editable
             View focusCurrent = mHostActivity.getWindow().getCurrentFocus();
             if( focusCurrent==null  ) return;
-             //Toast.makeText(mHostActivity.getApplicationContext(),""+primaryCode,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mHostActivity.getApplicationContext(),""+primaryCode,Toast.LENGTH_SHORT).show();
             EditText edittext = (EditText) focusCurrent;
             Editable editable = edittext.getText();
             edittext.setHint("");
@@ -56,16 +59,17 @@ public class CustomKeyboard {
             } else if( primaryCode==CodeLeft ) {
                 if( start>0 ) edittext.setSelection(start - 1);
             } else if( primaryCode==CodeRight ) {
-                 //if (start < edittext.length()) edittext.setSelection(start + 1);
+                //if (start < edittext.length()) edittext.setSelection(start + 1);
                 edittext.setSelection(start+1);
             } else if( primaryCode==CodeAllLeft ) {
                 if(start>=1)
-                edittext.setSelection(start-1);
+                    edittext.setSelection(start-1);
             } else if( primaryCode==CodeAllRight ) {
-                edittext.setSelection(start+1);
+                if(start<edittext.length())
+                    edittext.setSelection(start+1);
             } else if( primaryCode==CodePrev ) {
-                 //View focusNew= edittext.focusSearch(View.FOCUS_BACKWARD);
-                 //if( focusNew!=null ) focusNew.requestFocus();
+                //View focusNew= edittext.focusSearch(View.FOCUS_BACKWARD);
+                //if( focusNew!=null ) focusNew.requestFocus();
                 edittext.setSelection(0);
             } else if( primaryCode==CodeNext ) {
                 edittext.setSelection(edittext.length());
@@ -76,13 +80,20 @@ public class CustomKeyboard {
             }
             else if( primaryCode>=300 ) {
                 editable.insert(start, keydict.get(primaryCode).toString());
+                if(primaryCode==301)
+                {
+                    edittext.setSelection(start+4);
+                }
                 if(primaryCode==309||primaryCode==314||primaryCode==313)
                 {
                     edittext.setSelection(start+1);
                 }
             }
             else { // insert character
-                editable.insert(start, Character.toString((char) primaryCode));
+                if(primaryCode==9)
+                    editable.insert(start,"    ");
+                else
+                    editable.insert(start, Character.toString((char) primaryCode));
             }
             //edittext.setText(editable.toString());
         }
@@ -122,7 +133,7 @@ public class CustomKeyboard {
     public CustomKeyboard(Activity host, int viewid, int layoutid) {
         mHostActivity= host;
         kbcount = keylayouts.length;
-        curr_layout=0;
+        curr_layout=1;
         keydict = new HashMap();
         varkeys = new HashMap();
         wtype = new HashMap();
@@ -158,12 +169,12 @@ public class CustomKeyboard {
         // Find the EditText 'resid'
         EditText edittext= (EditText)mHostActivity.findViewById(resid);
         // Make the custom keyboard appear
-        edittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        /*edittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             // NOTE By setting the on focus listener, we can show the custom keyboard when the edit box gets focus, but also hide it when the edit box loses focus
             @Override public void onFocusChange(View v, boolean hasFocus) {
                 if( hasFocus ) showCustomKeyboard(v); else hideCustomKeyboard();
             }
-        });
+        });*/
         edittext.setOnClickListener(new View.OnClickListener() {
             // NOTE By setting the on click listener, we can show the custom keyboard again, by tapping on an edit box that already had focus (but that had the keyboard hidden).
             @Override public void onClick(View v) {
@@ -173,14 +184,20 @@ public class CustomKeyboard {
         // Disable standard keyboard hard way
         // NOTE There is also an easy way: 'edittext.setInputType(InputType.TYPE_NULL)' (but you will not have a cursor, and no 'edittext.setCursorVisible(true)' doesn't work )
         edittext.setOnTouchListener(new View.OnTouchListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override public boolean onTouch(View v, MotionEvent event) {
                 EditText edittext = (EditText) v;
                 int inType = edittext.getInputType();       // Backup the input type
-//                edittext.setInputType(InputType.TYPE_NULL); // Disable standard keyboard
+                //edittext.setInputType(InputType.TYPE_NULL); // Disable standard keyboard
+                edittext.setShowSoftInputOnFocus(false);
                 edittext.onTouchEvent(event);               // Call native handler
                 edittext.setInputType(inType);              // Restore input type
 
-                return false; // Consume touch event
+                //return true; // Consume touch event
+                InputMethodManager imm = (InputMethodManager) mHostActivity.getApplicationContext().getSystemService(
+                        android.content.Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                return true;
             }
         });
         // Disable spell check (hex strings look like words to Android)
@@ -195,7 +212,7 @@ public class CustomKeyboard {
             //Log.d("varkey", "" + keylist.toArray().length);
             View focusCurrent = mHostActivity.getWindow().getCurrentFocus();
             EditText edittext = (EditText) focusCurrent;
-            String[] varslist =  edittext.getText().toString().split(" ");
+            String[] varslist =  edittext.getText().toString().split(" |\n|;|\\(|\\)");
             int count=0;
             for(int i=0;i<varslist.length;i++)
             {
@@ -215,25 +232,29 @@ public class CustomKeyboard {
     }
     public void load_dict()
     {
-        keydict.put(301,"for ");
-        keydict.put(302,"while ");
-        keydict.put(303,"if ");
-        keydict.put(304,"else ");
+        keydict.put(301,"for(  ;  ;  )\n{\n    \n}");
+        keydict.put(302,"while(  )\n{\n    \n}");
+        keydict.put(303,"if()\n{\n    \n}");
+        keydict.put(304,"else\n{\n    \n}");
         keydict.put(305,"int ");
         keydict.put(306,"float ");
         keydict.put(307,"char ");
         keydict.put(308,"cin>> ");
-        keydict.put(309,"( ) ");
+        keydict.put(309,"()");
         keydict.put(310,";");
         keydict.put(311,"cout<< ");
         keydict.put(312,"# ");
         keydict.put(313,"{\n}");
-        keydict.put(314,"\" \" ");
+        keydict.put(314,"\"\"");
+        keydict.put(351,"==");
+        keydict.put(352,"!=");
+        keydict.put(353,"++");
+        keydict.put(354,"--");
     }
     public void load_wtype()
     {
         String keywords[] = {"for","if","while","else","int","float","char","include","do","cout","cin","struct","class","void","public",
-        "private","protected","global","static","final","using"};
+                "private","protected","global","static","final","using"};
         String symbols[] = {"+","-","=",";","{","}","\\","/","[","]","!","#","%","&","*","(",")",":","?","<",">","\n","\"","\'",".","_","|","\t"};
         insert_dict(keywords,"keyword");
         insert_dict(symbols,"symbol");

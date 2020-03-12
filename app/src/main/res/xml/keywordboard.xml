@@ -34,45 +34,45 @@
     <Row>
 
 
-            <Key android:keyLabel="int"
-                android:keyEdgeFlags="left"
-                android:codes="305"/>
+        <Key android:keyLabel="int"
+            android:keyEdgeFlags="left"
+            android:codes="305"/>
 
-            <Key android:keyLabel="float"
-                android:codes="306"/>
-            <Key android:keyLabel="char"
-                android:codes="307"/>
+        <Key android:keyLabel="float"
+            android:codes="306"/>
+        <Key android:keyLabel="char"
+            android:codes="307"/>
 
-            <Key android:keyLabel="input"
-                android:codes="308"/>
+        <Key android:keyLabel="input"
+            android:codes="308"/>
         <Key android:codes="-5"    android:keyIcon="@drawable/sym_keyboard_delete" android:isRepeatable="true"  />
         <Key android:codes="55006" android:keyLabel="CLR" android:keyEdgeFlags="right"/>
 
 
     </Row>
-     <Row >
-         <Key android:keyLabel="("
-             android:keyEdgeFlags="left"
-             android:codes="309"/>
-         <Key android:keyLabel=";"
-             android:codes="310"/>
-         <Key android:keyLabel="print"
-             android:codes="311"/>
-         <Key android:keyLabel="#"
-             android:codes="312"/>
-         <Key android:keyLabel="{"
-             android:codes="313"/>
-         <Key android:keyLabel='"'
-             android:keyEdgeFlags="right"
-             android:codes="314"/>
-     </Row>
+    <Row >
+        <Key android:keyLabel="("
+            android:keyEdgeFlags="left"
+            android:codes="309"/>
+        <Key android:keyLabel=";"
+            android:codes="310"/>
+        <Key android:keyLabel="print"
+            android:codes="311"/>
+        <Key android:keyLabel="#"
+            android:codes="312"/>
+        <Key android:keyLabel="{"
+            android:codes="313"/>
+        <Key android:keyLabel='"'
+            android:keyEdgeFlags="right"
+            android:codes="314"/>
+    </Row>
     <Row>
 
         <Key android:codes="-3"    android:keyIcon="@drawable/sym_keyboard_done" android:keyWidth="25%p"/>
         <Key android:codes="55000" android:keyLabel="home"/>
         <Key android:codes="55005" android:keyLabel="end" />
         <Key android:keyLabel="SPACE" android:keyWidth="40%p" android:isRepeatable="true" android:codes="32"/>
-        <Key android:keyLabel="DEL" android:keyWidth="20%p" android:isRepeatable="true" android:codes="-5"/>
+        <Key android:keyLabel="tab" android:keyWidth="20%p" android:isRepeatable="true" android:codes="9"/>
         <Key android:keyLabel="ENTR" android:keyWidth="20%p" android:keyEdgeFlags="right" android:codes="-4"/>
 
     </Row>

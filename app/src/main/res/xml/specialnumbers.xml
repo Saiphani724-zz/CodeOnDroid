@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyWidth="10%p"
+    android:verticalGap="0px"
+    android:horizontalGap="0px"
+    android:keyHeight="50dp">
+    <!--
+        android:horizontalGap="0.50%p"
+        android:verticalGap="0.50%p"
+        NOTE When we add a horizontalGap in pixels, this interferes with keyWidth in percentages adding up to 100%
+        NOTE When we have a horizontalGap (on Keyboard level) of 0, this make the horizontalGap (on Key level) to move from after the key to before the key... (I consider this a bug)
+     -->
+
+
+    <Row>
+
+        <Key android:keyLabel="1"
+            android:keyEdgeFlags="left"
+            android:codes="49"/>
+
+        <Key android:keyLabel="2"
+            android:codes="50"/>
+
+        <Key android:keyLabel="3"
+            android:codes="51"/>
+
+        <Key android:keyLabel="4"
+            android:codes="52"/>
+
+        <Key android:keyLabel="5"
+            android:codes="53"/>
+
+        <Key android:keyLabel="6"
+            android:codes="54"/>
+
+        <Key android:keyLabel="7"
+            android:codes="55"/>
+
+        <Key android:keyLabel="8"
+            android:codes="56"/>
+
+        <Key android:keyLabel="9"
+            android:codes="57"/>
+
+        <Key android:keyLabel="0"
+            android:keyEdgeFlags="right"
+            android:codes="48"/>
+
+    </Row>
+
+    <Row>
+
+        <Key android:keyLabel="+"
+            android:keyEdgeFlags="left"
+            android:codes="43"/>
+
+        <Key android:keyLabel="-"
+            android:codes="45"/>
+
+        <Key android:keyLabel="*"
+            android:codes="42"/>
+
+        <Key android:keyLabel="/"
+            android:codes="47"/>
+
+        <Key android:keyLabel="="
+            android:codes="61"/>
+
+        <Key android:keyLabel="=="
+            android:codes="351"/>
+
+        <Key android:keyLabel="!="
+            android:codes="352"/>
+
+        <Key android:keyLabel="!"
+            android:codes="33"/>
+
+        <Key android:keyLabel="++"
+            android:codes="353"/>
+
+        <Key android:keyLabel="--"
+            android:keyEdgeFlags="right"
+            android:codes="354"/>
+
+    </Row>
+
+    <Row>
+
+        <Key android:keyLabel="'"
+            android:keyEdgeFlags="left"
+            android:codes="39"/>
+
+        <Key android:keyLabel='"'
+            android:codes="34"/>
+
+        <Key android:keyLabel="("
+            android:codes="40"/>
+
+        <Key android:keyLabel=")"
+            android:codes="41"/>
+
+        <Key android:keyLabel=";"
+            android:codes="59"/>
+
+        <Key android:keyLabel=":"
+            android:codes="58"/>
+
+        <Key android:keyLabel="\\"
+            android:codes="92"/>
+
+        <Key android:keyLabel="#"
+            android:codes="35"/>
+
+        <Key android:keyLabel="\@"
+            android:codes="64"/>
+
+        <Key android:keyLabel="%"
+            android:keyEdgeFlags="right"
+            android:codes="37"/>
+
+    </Row>
+
+    <Row>
+
+        <Key android:keyLabel="~"
+            android:keyEdgeFlags="left"
+            android:codes="126"/>
+
+        <Key android:keyLabel="`"
+            android:codes="96"/>
+
+        <Key android:keyLabel="&amp;"
+            android:codes="38"/>
+
+        <Key android:keyLabel="|"
+            android:codes="124"/>
+
+        <Key android:keyLabel="^"
+            android:codes="94"/>
+
+        <Key android:keyLabel="_"
+            android:codes="95"/>
+
+        <Key android:keyLabel="["
+            android:codes="91"/>
+
+        <Key android:keyLabel="]"
+            android:codes="93"/>
+
+        <Key android:keyLabel="{"
+            android:codes="123"/>
+
+        <Key android:keyLabel="}"
+            android:keyEdgeFlags="right"
+            android:codes="125"/>
+
+    </Row>
+
+
+    <Row android:rowEdgeFlags="bottom">
+
+        <Key android:keyLabel=","
+            android:keyWidth="10%p"
+            android:keyEdgeFlags="left"
+            android:codes="44"/>
+
+        <Key android:keyLabel="."
+            android:keyWidth="10%p"
+            android:codes="46"/>
+
+        <Key android:keyLabel="SPACE"
+            android:keyWidth="40%p"
+            android:isRepeatable="true"
+            android:codes="32"/>
+
+        <Key android:keyLabel="DEL"
+            android:keyWidth="20%p"
+            android:isRepeatable="true"
+            android:codes="-5"/>
+
+        <Key android:keyLabel="ENTR"
+            android:keyWidth="20%p"
+            android:keyEdgeFlags="right"
+            android:codes="-4"/>
+
+    </Row>
+</Keyboard>

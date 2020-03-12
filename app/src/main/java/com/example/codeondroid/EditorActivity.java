@@ -44,7 +44,8 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     Spinner Lang;
 
     String langs[] = {"Cpp14", "C", "Java", "Python3"};
-    int langPos = 4;
+    int langPos = 1;
+    int MIN_DISTANCE = 150;
 
 
     @Override
@@ -83,7 +84,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
         int spinnerPosition = adap1.getPosition(lang);
         Lang.setSelection(spinnerPosition);
-        Toast.makeText(getApplicationContext(),langPos + "\t" + lang, Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(),langPos + "\t" + lang, Toast.LENGTH_LONG).show();
 //
 //        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
 //        int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
@@ -187,7 +188,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                 x2 = touchevent.getX();
                 y2 = touchevent.getY();
                 View focusCurrent = getWindow().getCurrentFocus();
-                if (x1 < x2)
+                if (x2-x1>=MIN_DISTANCE)
                 {
                     //Toast.makeText(this, "Left to Right Swap Performed", Toast.LENGTH_LONG).show();
                     if (mCustomKeyboard.curr_layout>0)
@@ -198,7 +199,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                 }
 
                 // if right to left sweep event on screen
-                if (x1 > x2)
+                if (x1-x2>=MIN_DISTANCE)
                 {
                     //Toast.makeText(this, "Right to Left Swap Performed", Toast.LENGTH_LONG).show();
                     if (mCustomKeyboard.curr_layout< mCustomKeyboard.kbcount-1)
@@ -211,14 +212,6 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                 break;
             }
         }
-//        EditText codebox = findViewById(R.id.codebox);
-//        ViewGroup.LayoutParams lp = codebox.getLayoutParams();
-//        if(lp.height > 100){
-//            Toast.makeText(getApplicationContext(), "lp h = " + lp.height, Toast.LENGTH_SHORT).show();
-//            codebox.setLayoutParams(lp);
-//        }
-
-
         return false;
     }
 
@@ -226,9 +219,6 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Log.d("TAG", "onItemSelected: " + position + " " + id);
         langPos = position;
-        if(langPos == 0){
-            langPos = 4;
-        }
     }
 
     @Override

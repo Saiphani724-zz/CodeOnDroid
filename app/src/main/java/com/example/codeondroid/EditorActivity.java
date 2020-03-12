@@ -265,6 +265,11 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Log.d("TAG", "onItemSelected: " + position + " " + id);
         langPos = position;
+        SharedPreferences sf=getSharedPreferences("myfile", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit=sf.edit();
+        edit.clear(); // remove existing entries
+        edit.putString("selLang",langs[langPos]);
+        edit.commit();
     }
 
     @Override

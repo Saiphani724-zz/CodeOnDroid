@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
-    android:keyWidth="20%p"
+    android:keyWidth="17%p"
     android:verticalGap="0px"
     android:horizontalGap="0px"
     android:keyHeight="50dp">
@@ -10,7 +10,24 @@
         NOTE When we add a horizontalGap in pixels, this interferes with keyWidth in percentages adding up to 100%
         NOTE When we have a horizontalGap (on Keyboard level) of 0, this make the horizontalGap (on Key level) to move from after the key to before the key... (I consider this a bug)
      -->
+    <Row>
 
+        <Key android:keyLabel="Scanner"
+            android:keyEdgeFlags="left"
+            android:codes="501"/>
+
+        <Key android:keyLabel="import"
+            android:codes="502"/>
+        <Key android:keyLabel="System"
+            android:codes="503"/>
+
+        <Key android:keyLabel="psvm"
+            android:codes="504"/>
+
+        <Key android:codes="505" android:keyLabel="class"   />
+        <Key android:codes="506" android:keyLabel="new" android:keyEdgeFlags="right" />
+
+    </Row>
 
     <Row>
 
@@ -44,7 +61,7 @@
             android:codes="307"/>
 
         <Key android:keyLabel="input"
-            android:codes="308"/>
+            android:codes="507"/>
         <Key android:codes="-5"    android:keyIcon="@drawable/sym_keyboard_delete" android:isRepeatable="true"  />
         <Key android:codes="55006" android:keyLabel="CLR" android:keyEdgeFlags="right"/>
 
@@ -57,9 +74,9 @@
         <Key android:keyLabel=";"
             android:codes="310"/>
         <Key android:keyLabel="print"
-            android:codes="311"/>
-        <Key android:keyLabel="#"
-            android:codes="312"/>
+            android:codes="508"/>
+        <Key android:keyLabel="."
+            android:codes="46"/>
         <Key android:keyLabel="{ }"
             android:codes="313"/>
         <Key android:keyLabel='" "'

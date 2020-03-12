@@ -87,6 +87,9 @@ public class CustomKeyboard {
                 }
             }
             else { // insert character
+                if(primaryCode==9)
+                    editable.insert(start,"    ");
+                else
                 editable.insert(start, Character.toString((char) primaryCode));
             }
             //edittext.setText(editable.toString());
@@ -220,10 +223,10 @@ public class CustomKeyboard {
     }
     public void load_dict()
     {
-        keydict.put(301,"for(  ;  ;  )\n{\n\t\n}");
-        keydict.put(302,"while(  )\n{\n\t\n}");
-        keydict.put(303,"if()\n{\n\t\n}");
-        keydict.put(304,"else\n{\n\t\n}");
+        keydict.put(301,"for(  ;  ;  )\n{\n    \n}");
+        keydict.put(302,"while(  )\n{\n    \n}");
+        keydict.put(303,"if()\n{\n    \n}");
+        keydict.put(304,"else\n{\n    \n}");
         keydict.put(305,"int ");
         keydict.put(306,"float ");
         keydict.put(307,"char ");

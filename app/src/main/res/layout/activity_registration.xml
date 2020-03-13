@@ -81,7 +81,7 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:text="SIGN UP"
             android:textAllCaps="false"
-            android:textColor="#FE5295"
+            android:textColor="@color/colorPrimary"
             android:background="@drawable/button1"
 
             android:textSize="17sp"/>
@@ -95,7 +95,7 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:text="Already have an account? \nLog In"
             android:textAllCaps="false"
-            android:textColor="#B31A89"
+            android:textColor="@color/colorAccent"
             android:background="@drawable/button1"
             android:onClick="goBack"
             android:textSize="17sp"/>

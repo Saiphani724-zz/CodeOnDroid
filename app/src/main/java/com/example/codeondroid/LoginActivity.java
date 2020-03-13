@@ -66,6 +66,8 @@ public class LoginActivity extends AppCompatActivity {
                 SharedPreferences.Editor edit=sf.edit();
                 edit.clear(); // remove existing entries
                 edit.putString("favLang",favLang);
+                edit.putString("uname" , c.getString(0) );
+                edit.putString("email" , c.getString(2) );
                 edit.commit();
             }
             Intent i = new Intent(this, Navigationclass.class);

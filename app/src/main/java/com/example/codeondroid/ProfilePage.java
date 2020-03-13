@@ -3,7 +3,9 @@ package com.example.codeondroid;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -23,6 +26,7 @@ public class ProfilePage extends AppCompatActivity {
     Button but1,butmap;
     Bitmap bitmap = null;
     public static final int GET_FROM_GALLERY = 3;
+    TextView showUsername, showEmail , showFavLang;
 
 
     @Override
@@ -33,6 +37,16 @@ public class ProfilePage extends AppCompatActivity {
         img = (ImageView) findViewById(R.id.icon);
         but1 = (Button) findViewById(R.id.butProfile);
         butmap = (Button) findViewById(R.id.mapsButton);
+
+        showUsername = findViewById(R.id.showUsername);
+        showEmail = findViewById(R.id.showEmail);
+        showFavLang = findViewById(R.id.showFavLang);
+
+        SharedPreferences sf=getSharedPreferences("myfile", Context.MODE_PRIVATE);
+        showUsername.setText(sf.getString("uname","NA"));
+        showFavLang.setText(sf.getString("favLang","NA"));
+        showEmail.setText(sf.getString("email","NA"));
+
 
         but1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,8 +65,12 @@ public class ProfilePage extends AppCompatActivity {
         butmap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ProfilePage.this,AppMap.class);
-                startActivity(i);
+//                Intent i = new Intent(ProfilePage.this,AppMap.class);
+//                startActivity(i);
+                Uri uri = Uri.parse("geo:0,0?q=10.90455131 , 76.8986295 (Google+ab2)");
+                Intent in = new Intent(Intent.ACTION_VIEW, uri);
+                in.setPackage("com.google.android.apps.maps");
+                startActivity(in);
             }
         });
 

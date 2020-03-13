@@ -177,23 +177,8 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        String str = data.getStringExtra("msg");
-        EditText codebox = findViewById(R.id.codebox);
 
-        codebox.setText(codebox.getText().toString()+'\n'+str);
-
-    }
-
-    public void access_clip(View view) {
-//        Intent i;
-//        i = new Intent(this, Clip_Activity.class);
-//        startActivityForResult(i,MYREQUEST);
-
-    }
 
     public void compileCode(View view) {
 
@@ -326,21 +311,36 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
     public void share_code(View view) {
 
-        File file = new File(EditorActivity.this.getFilesDir() + "/shared");
-        if(!file.exists()){
-            file.mkdir();
-        }
-        try {
-            file = new File(EditorActivity.this.getFilesDir() + "/shared", "" + filename.getText().toString());
-            FileWriter writer = new FileWriter(file);
-            writer.append(codebox.getText().toString());
-            writer.flush();
-            writer.close();
-//            Toast.makeText(getApplicationContext(),"Save your code as " + filename.getText().toString(), Toast.LENGTH_LONG).show();
-        } catch (Exception e) {}
+//        File file = new File(EditorActivity.this.getFilesDir() + "/shared");
+//        if(!file.exists()){
+//            file.mkdir();
+//        }
+//        try {
+//            file = new File(EditorActivity.this.getFilesDir() + "/shared", "" + filename.getText().toString());
+//            FileWriter writer = new FileWriter(file);
+//            writer.append(codebox.getText().toString());
+//            writer.flush();
+//            writer.close();
+////            Toast.makeText(getApplicationContext(),"Save your code as " + filename.getText().toString(), Toast.LENGTH_LONG).show();
+//        } catch (Exception e) {}
+//
+//        String myFilePath = getApplicationContext().getFilesDir() + "/shared/" + filename.getText().toString();
+//        if(filename.getText().toString().equals(""))
+//        {
+//            Toast.makeText(this, "" + "Give filename to share" , Toast.LENGTH_SHORT).show();
+//        }
+//        else
+//        {
+//            Toast.makeText(this, "" + myFilePath , Toast.LENGTH_SHORT).show();
+//        }
+        String getText = codebox.getText().toString();
+        if (!getText.equals("") && getText.length() != 0)
+            shareText(getText);
+        else
+            Toast.makeText(this,
+                    "Please enter something to share.", Toast.LENGTH_SHORT)
+                    .show();
 
-        String myFilePath = getApplicationContext().getFilesDir() + "/shared/" + filename.getText().toString();
-        Toast.makeText(this, "" + myFilePath, Toast.LENGTH_SHORT).show();
 //        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
 //        File fileWithinMyDir = new File(myFilePath);
 ////
@@ -356,4 +356,19 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 //        }
 
     }
+
+    private void shareText(String text) {
+
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");// Plain format text
+
+        // You can add subject also
+        /*
+         * sharingIntent.putExtra( android.content.Intent.EXTRA_SUBJECT,
+         * "Subject Here");
+         */
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, text);
+        startActivityForResult(Intent.createChooser(sharingIntent, "Share Text Using"),0);
+    }
+
 }

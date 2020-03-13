@@ -341,19 +341,19 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
         String myFilePath = getApplicationContext().getFilesDir() + "/shared/" + filename.getText().toString();
         Toast.makeText(this, "" + myFilePath, Toast.LENGTH_SHORT).show();
-        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-        File fileWithinMyDir = new File(myFilePath);
+//        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+//        File fileWithinMyDir = new File(myFilePath);
+////
+//        if(fileWithinMyDir.exists()) {
+//            intentShareFile.setType("text/plain");
+//            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + myFilePath));
 //
-        if(fileWithinMyDir.exists()) {
-            intentShareFile.setType("text/plain");
-            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + myFilePath));
-
-            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-                    "Sharing File...");
-            intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
-
-            startActivity(Intent.createChooser(intentShareFile, "Share File"));
-        }
+//            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+//                    "Sharing File...");
+//            intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
+//
+//            startActivity(Intent.createChooser(intentShareFile, "Share File"));
+//        }
 
     }
 }

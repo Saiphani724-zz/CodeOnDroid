@@ -31,9 +31,8 @@
             android:layout_width="128dp"
             android:layout_height="102dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="65dp"
+            android:layout_marginLeft="25dp"
             android:src="@drawable/images" />
-
 
 
 
@@ -46,18 +45,88 @@
         android:layout_height="wrap_content"
         android:text="@string/about"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="0dp"
         android:textColor="#FF0"
         android:ems="18"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Developers:"
+        android:textSize="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textColor="#FF0"
+        android:ems="18"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1. Sai Phani P"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:textColor="@color/textcolor"
+        android:ems="18"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2. Prasanth S"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
 
+        android:textColor="@color/textcolor"
+        android:ems="18"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3. Thanga Manickam M"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:textColor="@color/textcolor"
+        android:ems="18"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Our Mentor"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:textSize="30dp"
+        android:textColor="@color/descriptions"
+        android:ems="18"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jeevitha Mam"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:textColor="@color/mentorcolor"
+        android:ems="18"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Special thanks to Geeks for Geeks"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:textSize="30dp"
+        android:textColor="@color/mentorcolor"
+        android:ems="18"
+        />
     <Button
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Report Bug"
+        android:text="Share feedback"
         android:layout_gravity="center"
         android:background="@drawable/button"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="100dp"
         android:id="@+id/ReportBug"
 
         />

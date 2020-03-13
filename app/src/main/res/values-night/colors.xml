@@ -8,6 +8,9 @@
     <color name="DungGreen">#C7C87D</color>
     <color name="FadeYellow">#F3F2DD</color>
     <color name="FadeRed">#AC5A58</color>
+    <color name="textcolor">#558802</color>
+    <color name = "mentorcolor">#268D97</color>
+    <color name="descriptions">#E47787</color>
     <color name="colorBackground">#01364E</color>
     <color name="colorBackground2">#7BC8EC</color>
     <color name="EditTextBox">#5C5A5E</color>

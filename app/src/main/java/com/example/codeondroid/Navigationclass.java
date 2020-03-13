@@ -25,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileFilter;
+import java.io.FilenameFilter;
 
 public class Navigationclass extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -34,6 +36,7 @@ public class Navigationclass extends AppCompatActivity implements AdapterView.On
 
     ListView myfiles;
     String[] files;
+    SharedPreferences sf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +51,17 @@ public class Navigationclass extends AppCompatActivity implements AdapterView.On
 
         myfiles = findViewById(R.id.myfiles);
 
+
+        registerForContextMenu(myfiles);
+
         File f = new File("" + getApplicationContext().getFilesDir());
-        files = f.list();
+        FilenameFilter fileFilter = new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.contains(".");
+            }
+        };
+        files = f.list(fileFilter);
 
         for (int i = 0; i < files.length; i++) {
             Log.d("TAG", "Files List: " + files[i]);
@@ -131,18 +143,45 @@ public class Navigationclass extends AppCompatActivity implements AdapterView.On
 
     }
 
+
     //Creating a context menu to provide the user with a walkthrough of the app upon pressing anywhere on the home screen
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.context_menu,menu);
+
+        if(v.getId()==R.id.ll)
+        {
+            inflater.inflate(R.menu.context_menu,menu);
+        }
+        if(v.getId()==R.id.myfiles)
+        {
+            inflater.inflate(R.menu.list_menu,menu);
+        }
+
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId())
         {
+//            case R.id.share:
+//                String myFilePath = getApplicationContext().getFilesDir() + "/" + sf.getString("filename","NA");;
+//                Toast.makeText(this, "" + myFilePath, Toast.LENGTH_SHORT).show();
+//                Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+//                File fileWithinMyDir = new File(myFilePath);
+//
+//                if(fileWithinMyDir.exists()) {
+//                    intentShareFile.setType("application/pdf");
+//                    intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+myFilePath));
+//
+//                    intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+//                            "Sharing File...");
+//                    intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
+//
+//                    startActivity(Intent.createChooser(intentShareFile, "Share File"));
+//                }
+//                return  true;
             case R.id.walkthrough:
                 Intent i=new Intent(getApplicationContext(),Walkthrough.class);
                 startActivity(i);
@@ -201,7 +240,7 @@ public class Navigationclass extends AppCompatActivity implements AdapterView.On
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.d("TAG", "onItemClick: " + files[position]);
 
-        SharedPreferences sf=getSharedPreferences("myfile1", Context.MODE_PRIVATE);
+        sf =getSharedPreferences("myfile1", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit=sf.edit();
         edit.clear(); // remove existing entries
         edit.putString("filename",files[position]);
@@ -217,7 +256,13 @@ public class Navigationclass extends AppCompatActivity implements AdapterView.On
 
 
         File f = new File("" + getApplicationContext().getFilesDir());
-        files = f.list();
+        FilenameFilter fileFilter = new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.contains(".");
+            }
+        };
+        files = f.list(fileFilter);
 
         ArrayAdapter<String> ada=new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,
@@ -226,5 +271,7 @@ public class Navigationclass extends AppCompatActivity implements AdapterView.On
         myfiles.setOnItemClickListener(this);
 
     }
+
+
 
 }

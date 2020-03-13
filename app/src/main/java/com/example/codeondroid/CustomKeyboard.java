@@ -380,7 +380,7 @@ public class CustomKeyboard {
                 {
                     continue;
                 }
-                if(varkeys.containsKey(varslist[i])||varslist[i]=="")
+                if(varslist[i].equals(""))
                 {
                     continue;
                 }

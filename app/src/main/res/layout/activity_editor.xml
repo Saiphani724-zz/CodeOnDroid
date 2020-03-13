@@ -91,9 +91,8 @@
         android:background="#DEFDEF"
         android:layout_marginLeft="20dp"
         android:ems="8"
-
-        android:onClick="access_clip"
-        android:text=" Clip board" />
+        android:onClick="share_code"
+        android:text=" Share Code" />
 
     <Spinner
         android:id="@+id/Lang"

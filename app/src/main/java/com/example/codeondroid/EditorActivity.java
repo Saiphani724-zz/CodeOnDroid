@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -320,5 +322,38 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         } catch (Exception e) {
 
         }
+    }
+
+    public void share_code(View view) {
+
+        File file = new File(EditorActivity.this.getFilesDir() + "/shared");
+        if(!file.exists()){
+            file.mkdir();
+        }
+        try {
+            file = new File(EditorActivity.this.getFilesDir() + "/shared", "" + filename.getText().toString());
+            FileWriter writer = new FileWriter(file);
+            writer.append(codebox.getText().toString());
+            writer.flush();
+            writer.close();
+//            Toast.makeText(getApplicationContext(),"Save your code as " + filename.getText().toString(), Toast.LENGTH_LONG).show();
+        } catch (Exception e) {}
+
+        String myFilePath = getApplicationContext().getFilesDir() + "/shared/" + filename.getText().toString();
+        Toast.makeText(this, "" + myFilePath, Toast.LENGTH_SHORT).show();
+        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+        File fileWithinMyDir = new File(myFilePath);
+//
+        if(fileWithinMyDir.exists()) {
+            intentShareFile.setType("text/plain");
+            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + myFilePath));
+
+            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+                    "Sharing File...");
+            intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
+
+            startActivity(Intent.createChooser(intentShareFile, "Share File"));
+        }
+
     }
 }

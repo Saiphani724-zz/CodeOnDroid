@@ -303,7 +303,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
             writer.append(codebox.getText().toString());
             writer.flush();
             writer.close();
-            Toast.makeText(getApplicationContext(),"Save your code as " + filename.getText().toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Saved your code as " + filename.getText().toString(), Toast.LENGTH_LONG).show();
         } catch (Exception e) {
 
         }

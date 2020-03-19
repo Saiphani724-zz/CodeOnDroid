@@ -31,6 +31,8 @@
         android:layout_height="140pt"
         android:gravity="top|left"
         android:hint="Type Your code"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/button"
         android:inputType="text|textMultiLine"
         android:foregroundGravity="top|left"
@@ -70,14 +72,14 @@
             android:lines="3" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:background="#DEFDEF"
+        android:background="@drawable/comiplebutton"
         android:ems="8"
         android:onClick="compileCode"
-        android:text="Compile Code" />
+        android:text="Compile Your Code" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -88,7 +90,7 @@
         android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
-        android:background="#DEFDEF"
+        android:background="@drawable/sharecode"
         android:layout_marginLeft="20dp"
         android:ems="8"
         android:onClick="share_code"
@@ -109,9 +111,10 @@
         android:layout_height="50dp"
         android:layout_marginTop="-65dp"
         android:layout_marginRight="10dp"
-        android:background="#DEFDEF"
+        android:background="@drawable/savecode"
         android:layout_gravity="right"
         android:onClick="saveCode"
+
         android:text=" Save Code\n in File" />
 
 

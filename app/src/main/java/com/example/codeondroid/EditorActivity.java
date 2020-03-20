@@ -341,20 +341,6 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                     "Please enter something to share.", Toast.LENGTH_SHORT)
                     .show();
 
-//        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-//        File fileWithinMyDir = new File(myFilePath);
-////
-//        if(fileWithinMyDir.exists()) {
-//            intentShareFile.setType("text/plain");
-//            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + myFilePath));
-//
-//            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-//                    "Sharing File...");
-//            intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
-//
-//            startActivity(Intent.createChooser(intentShareFile, "Share File"));
-//        }
-
     }
 
     private void shareText(String text) {
@@ -371,4 +357,12 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         startActivityForResult(Intent.createChooser(sharingIntent, "Share Text Using"),0);
     }
 
+
+    public void undo_function(View view) {
+        mCustomKeyboard.undo_action();
+    }
+
+    public void redo_function(View view) {
+        mCustomKeyboard.redo_action();
+    }
 }

@@ -8,19 +8,20 @@ import android.inputmethodservice.KeyboardView;
 import android.os.Build;
 import android.text.Editable;
 import android.text.InputType;
-import android.view.KeyboardShortcutGroup;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 
 public class CustomKeyboard {
     private KeyboardView mKeyboardView;
@@ -28,6 +29,7 @@ public class CustomKeyboard {
     public int keylayouts[]={R.xml.specialnumbers,R.xml.keyboard,R.xml.keywordboard,R.xml.variablekeys};
     int kbcount,curr_layout;
     int flag;
+    CustomLinkedList undo_stack,redo_stack;
     HashMap keydict,varkeys,wtype,revvar;
     private KeyboardView.OnKeyboardActionListener mOnKeyboardActionListener = new KeyboardView.OnKeyboardActionListener() {
 
@@ -54,6 +56,11 @@ public class CustomKeyboard {
 
             int start = edittext.getSelectionStart();
             // Apply the key to the edittext
+            redo_stack.clearContents();
+            if((primaryCode>0&&primaryCode<1000)||primaryCode==CodeClear||primaryCode==CodeEnter)
+            {
+                add_undo();
+            }
             if( primaryCode==CodeCancel ) {
                 hideCustomKeyboard();
             }
@@ -230,6 +237,7 @@ public class CustomKeyboard {
                 change_caps(flag);
                 mKeyboardView.invalidateAllKeys();
             }
+
             //edittext.setText(editable.toString());
         }
 
@@ -273,6 +281,8 @@ public class CustomKeyboard {
         varkeys = new HashMap();
         wtype = new HashMap();
         revvar = new HashMap();
+        undo_stack = new CustomLinkedList();
+        redo_stack = new CustomLinkedList();
         load_dict();
         load_wtype();
         mKeyboardView= (KeyboardView)mHostActivity.findViewById(viewid);
@@ -350,7 +360,7 @@ public class CustomKeyboard {
             String lang = sf.getString("selLang","NA");
             if(lang=="Java")
             {
-                mKeyboardView.setKeyboard(new Keyboard(mHostActivity,R.xml.keywordboard));
+                //mKeyboardView.setKeyboard(new Keyboard(mHostActivity,R.xml.keywordboard));
                 mKeyboardView.setKeyboard(new Keyboard(mHostActivity,R.xml.javakeyboard));
                 return;
             }
@@ -468,6 +478,71 @@ public class CustomKeyboard {
         else
         {
             keylist.get(30).label="CAPS";
+        }
+    }
+    public void add_undo()
+    {
+        View focusCurrent = mHostActivity.getWindow().getCurrentFocus();
+        EditText edittext = (EditText) focusCurrent;
+        String content= edittext.getText().toString();
+        int start = edittext.getSelectionStart();
+        CustomLinknode current = undo_stack.pop();
+        if (current != null) {
+            int prev_start=current.getcursor();
+            if(start-prev_start!=1 && start-prev_start!=0||content.length()-current.getcontent().length()!=1)
+            {
+                undo_stack.push(current.getcontent(),current.getcursor());
+            }
+
+        }
+        else
+        {
+            undo_stack.push("",0);
+        }
+        undo_stack.push(content, start);
+    }
+    public void undo_action()
+    {
+        try{
+        CustomLinknode current = undo_stack.pop();
+        String content = current.getcontent();
+        int cursor = current.getcursor();
+        View focusCurrent = mHostActivity.getWindow().getCurrentFocus();
+        EditText edittext = (EditText) focusCurrent;
+        int start = edittext.getSelectionStart();
+        String current_content = edittext.getText().toString();
+        if(start-cursor==1&&current_content.length()-content.length()==1)
+        {
+            current = undo_stack.pop();
+            content = current.getcontent();
+            cursor = current.getcursor();
+            //Toast.makeText(mHostActivity.getApplicationContext(),content.length()-current_content.length()+"",Toast.LENGTH_SHORT).show();
+        }
+
+        edittext.setText(content);
+        edittext.setSelection(cursor);
+        redo_stack.push(current_content,start);
+        }
+        catch (Exception e)
+        {
+           return;
+        }
+    }
+    public void redo_action()
+    {
+        try{
+            CustomLinknode current = redo_stack.pop();
+            String content = current.getcontent();
+            int cursor = current.getcursor();
+            View focusCurrent = mHostActivity.getWindow().getCurrentFocus();
+            EditText edittext = (EditText) focusCurrent;
+            edittext.setText(content);
+            edittext.setSelection(cursor);
+            add_undo();
+        }
+        catch (Exception e)
+        {
+            return;
         }
     }
 

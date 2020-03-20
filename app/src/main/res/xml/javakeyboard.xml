@@ -43,8 +43,8 @@
         <Key android:keyLabel="else"
             android:codes="304"/>
 
-        <Key android:codes="55001" android:keyIcon="@drawable/sym_keyboard_allleft"  />
-        <Key android:codes="55004" android:keyIcon="@drawable/sym_keyboard_allright" android:keyEdgeFlags="right" />
+        <Key android:codes="55001" android:keyIcon="@drawable/sym_keyboard_allleft" android:isRepeatable="true" />
+        <Key android:codes="55004" android:keyIcon="@drawable/sym_keyboard_allright" android:keyEdgeFlags="right" android:isRepeatable="true" />
 
     </Row>
 

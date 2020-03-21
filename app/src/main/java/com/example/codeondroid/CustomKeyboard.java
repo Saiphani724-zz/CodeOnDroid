@@ -497,9 +497,10 @@ public class CustomKeyboard {
         }
         else
         {
-            undo_stack.push("",0);
+            undo_stack.push(content,start);
         }
         undo_stack.push(content, start);
+        //Toast.makeText(mHostActivity.getApplicationContext(),content+" "+start,Toast.LENGTH_SHORT).show();
     }
     public void undo_action()
     {

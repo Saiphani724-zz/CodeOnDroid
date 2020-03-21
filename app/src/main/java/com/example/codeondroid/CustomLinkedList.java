@@ -22,8 +22,9 @@ public class CustomLinkedList {
         if(head==null || tail==null)
         {
             CustomLinknode temp = new CustomLinknode(content,cursor,null);
-            head = new CustomLinknode(temp);
+            //head = new CustomLinknode(temp);
             tail = new CustomLinknode(temp);
+            head=tail;
             count++;
         }
         else
@@ -32,6 +33,12 @@ public class CustomLinkedList {
             tail.setNext(content,cursor);
             count++;
             tail = tail.getNext();
+        }
+        if(count==max_count+ 1)
+        {
+            head = head.getNext();
+            head.prev=null;
+            count--;
         }
     }
     public CustomLinknode pop()

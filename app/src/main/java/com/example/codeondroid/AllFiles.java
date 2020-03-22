@@ -122,8 +122,6 @@ public class AllFiles extends Fragment implements AdapterView.OnItemClickListene
         return view;
     }
 
-
-
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.d("TAG", "onItemClick: " + files[position]);
 

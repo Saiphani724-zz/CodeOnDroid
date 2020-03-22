@@ -66,9 +66,9 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
     String langs[] = {"Cpp14", "C", "Java", "Python3"};
     String exts[] = {"cpp" , "c" , "java" , "py"};
+    String openfilename, lang , ext;
     int langPos = 1;
     int MIN_DISTANCE = 150;
-    EditText filename;
 
 
     @Override
@@ -138,14 +138,14 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 //        }
 
         SharedPreferences sf1=getSharedPreferences("myfile1", Context.MODE_PRIVATE);
-        String openfilename = sf1.getString("filename","NA");
+        openfilename = sf1.getString("filename","NA");
         if(true){
             Log.d("TAG", "onCreate: " + openfilename);
 
             SharedPreferences sf=getSharedPreferences("myfile", Context.MODE_PRIVATE);
-            String lang = sf.getString("favLang","NA");
+            lang = sf.getString("favLang","NA");
             try{
-                String ext = openfilename.substring(openfilename.indexOf(".") + 1);
+                ext = openfilename.substring(openfilename.indexOf(".") + 1);
 //                Log.d("TAG", "onCreate: myextension " + ext );
                 for(int i = 0;i < exts.length; i++)
                 {
@@ -160,7 +160,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                 Lang.setSelection(spinnerPosition);
             }
             catch (Exception e){
-//                Log.d("TAG", "onCreate: myextension " + "exsnkjefjsf"  + e + openfilename);
+                Log.d("TAG", "onCreate: myextension " + "exsnkjefjsf"  + e + openfilename);
                 for(int i = 0;i < langs.length; i++)
                 {
                     if(langs[i].equals((lang)))
@@ -337,7 +337,14 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
         final EditText edittext = new EditText(getApplicationContext());
-        edittext.setText(".py");
+        if(openfilename.equals("NA")){
+
+            edittext.setText("." + exts[langPos]);
+        }
+        else{
+            edittext.setText(openfilename);
+        }
+
         edittext.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         alert.setTitle("Save Your Code");

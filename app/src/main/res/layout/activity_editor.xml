@@ -24,19 +24,24 @@
             android:textSize="20dp"/>
 
 
-    <EditText
+    <customedittext.LineNumberEditText
         android:id="@+id/codebox"
         android:layout_width="match_parent"
         android:layout_height="170pt"
         android:gravity="top|left"
         android:hint="Type Your code"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:background="@drawable/button"
         android:inputType="text|textMultiLine"
         android:foregroundGravity="top|left"
         android:layout_marginTop="20dp"
-        android:lines="12" />
+        android:paddingLeft="45dp"
+        android:paddingTop="5dp"
+        android:layout_margin="5dp"
+
+
+        />
+
+
 
 
 
@@ -46,7 +51,8 @@
             android:gravity="top|left"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
+            android:padding="5dp"
             android:layout_gravity="left"
             android:hint="Input"
             android:foregroundGravity="top|left"
@@ -61,7 +67,8 @@
             android:gravity="top|left"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="5dp"
+            android:padding="5dp"
             android:layout_gravity="right"
             android:hint="Output"
             android:inputType="text|textMultiLine"
@@ -94,6 +101,9 @@
 
 
 </LinearLayout>
+
+
+
 
 
     <android.inputmethodservice.KeyboardView

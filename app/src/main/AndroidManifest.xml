@@ -75,7 +75,6 @@
         <activity
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"
-
             android:name=".LoginActivity"
             android:windowSoftInputMode="adjustResize"
             >

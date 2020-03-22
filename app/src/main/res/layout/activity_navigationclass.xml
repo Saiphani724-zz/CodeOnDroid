@@ -9,18 +9,6 @@
     android:id="@+id/ll"
     tools:context=".Navigationclass">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/app_name"
-        android:fontFamily="cursive"
-        android:textColor="@color/DarkBlue"
-        android:id="@+id/openAbout"
-        android:textSize="40dp"
-        />
-
     <ImageView
         android:layout_width="154dp"
         android:layout_height="123dp"
@@ -37,6 +25,7 @@
             android:layout_marginBottom="150dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+
             android:id="@+id/myfiles">
 
         </ListView>

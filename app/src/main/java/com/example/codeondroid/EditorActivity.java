@@ -1,15 +1,20 @@
 package com.example.codeondroid;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -108,7 +113,6 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 //        mCustomKeyboard.registerEditText(R.id.outputbox);
         mCustomKeyboard.registerEditText(R.id.inputbox);
 
-        filename = findViewById(R.id.filename);
         codebox = findViewById(R.id.codebox);
         inputbox = findViewById(R.id.inputbox);
         outputbox = findViewById(R.id.outputbox);
@@ -165,7 +169,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                     sb.append(line + "\n");
                 }
                 Log.d("TAG", "onCreate: " + sb.toString()  + "\n") ;
-                filename.setText(openfilename);
+                setTitle(openfilename);
                 codebox.setText(sb.toString());
 
             } catch (FileNotFoundException e) {
@@ -303,17 +307,53 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         Log.d("TAG", "onNothingSelected: ");
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void saveCode() {
-        try {
-            File file = new File(EditorActivity.this.getFilesDir(), "" + filename.getText().toString());
-            FileWriter writer = new FileWriter(file);
-            writer.append(codebox.getText().toString());
-            writer.flush();
-            writer.close();
-            Toast.makeText(getApplicationContext(),"Saved your code as " + filename.getText().toString(), Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
 
-        }
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        final EditText edittext = new EditText(getApplicationContext());
+        edittext.setText(".py");
+        edittext.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+        alert.setTitle("Save Your Code");
+        alert.setMessage("Enter Your File Name to save");
+
+        alert.setView(edittext);
+
+
+        alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //What ever you want to do with the value
+                String filename = edittext.getText().toString();
+
+                try {
+                    File file = new File(EditorActivity.this.getFilesDir(), "" + filename);
+                    FileWriter writer = new FileWriter(file);
+                    writer.append(codebox.getText().toString() + " ");
+                    writer.flush();
+                    writer.close();
+                    Toast.makeText(getApplicationContext(),"Saved your code as " + filename, Toast.LENGTH_LONG).show();
+                    setTitle(filename);
+                } catch (Exception e) {}
+
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+            }
+        });
+
+        alert.show();
+
+
+
+
+
+
+
+
     }
 
     public void share_code() {
@@ -380,6 +420,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         return super.onCreateOptionsMenu(menu);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId())

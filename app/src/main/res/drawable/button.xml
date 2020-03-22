@@ -10,7 +10,7 @@
 
             <corners android:radius="8dp"/>
 
-            <solid android:color="#F2F2F2"/>
+            <solid android:color="@color/EditorBackground"/>
 
 
             <stroke android:color="#BEBDBD" android:width="2dp"/>

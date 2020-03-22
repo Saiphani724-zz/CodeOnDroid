@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -30,7 +32,7 @@ import java.io.FilenameFilter;
 
 public class Navigationclass extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    TextView apname;
+
     LinearLayout l1;
     Button btnCC,btnCF,btnHR;
 
@@ -43,7 +45,7 @@ public class Navigationclass extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigationclass);
 
-        apname=(TextView)findViewById(R.id.openAbout);
+
         btnCC=(Button)findViewById(R.id.btnCC);
         btnCF=(Button)findViewById(R.id.btnCF);
         btnHR=(Button)findViewById(R.id.btnHR);
@@ -68,9 +70,27 @@ public class Navigationclass extends AppCompatActivity implements AdapterView.On
         }
 
 
-        ArrayAdapter<String> ada=new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,
-                files);
+
+
+        ArrayAdapter<String> ada = new ArrayAdapter<String>
+                (this, android.R.layout.simple_list_item_1, files){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent){
+                // Get the Item from ListView
+                View view = super.getView(position, convertView, parent);
+
+                // Initialize a TextView for ListView each Item
+                TextView tv = (TextView) view.findViewById(android.R.id.text1);
+
+                // Set the text color of TextView (ListView Item)
+                tv.setTextColor(getResources().getColor(R.color.CodeColor));
+
+                // Generate ListView Item using TextView
+                return view;
+            }
+        };
+
+        // DataBind ListView with items from ArrayAdapter
         myfiles.setAdapter(ada);
         myfiles.setOnItemClickListener(this);
 
@@ -81,13 +101,6 @@ public class Navigationclass extends AppCompatActivity implements AdapterView.On
         registerForContextMenu(l1);
 
 
-        apname.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Navigationclass.this,About.class);
-                startActivity(i);
-            }
-        });
 
 
         btnCC.setOnClickListener(new View.OnClickListener() {
@@ -264,9 +277,25 @@ public class Navigationclass extends AppCompatActivity implements AdapterView.On
         };
         files = f.list(fileFilter);
 
-        ArrayAdapter<String> ada=new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,
-                files);
+        ArrayAdapter<String> ada = new ArrayAdapter<String>
+                (this, android.R.layout.simple_list_item_1, files){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent){
+                // Get the Item from ListView
+                View view = super.getView(position, convertView, parent);
+
+                // Initialize a TextView for ListView each Item
+                TextView tv = (TextView) view.findViewById(android.R.id.text1);
+
+                // Set the text color of TextView (ListView Item)
+                tv.setTextColor(getResources().getColor(R.color.CodeColor));
+
+                // Generate ListView Item using TextView
+                return view;
+            }
+        };
+
+        // DataBind ListView with items from ArrayAdapter
         myfiles.setAdapter(ada);
         myfiles.setOnItemClickListener(this);
 

@@ -9,12 +9,40 @@
     android:id="@+id/ll"
     tools:context=".Navigationclass">
 
+    <android.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimary"
+        android:theme="@style/Theme.Design.NoActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    </android.widget.Toolbar>
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:tabTextColor="#000"
+        android:id="@+id/tablayout"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/Theme.Design.NoActionBar">
+
+    </com.google.android.material.tabs.TabLayout>
+
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:id="@+id/pager">
+    </androidx.viewpager.widget.ViewPager>
+
+
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
         android:onClick="openEditor"
         android:background="@drawable/startcoding"
         android:orientation="horizontal"
@@ -25,10 +53,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="20dp"
             android:fontFamily="serif"
+            android:text="Start Coding"
             android:textColor="#000"
-            android:text="Start Coding" />
+            android:textSize="20dp" />
 
         <ImageView
             android:layout_width="70dp"
@@ -38,23 +66,15 @@
 
     </LinearLayout>
 
-    <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="150dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
 
-            android:id="@+id/myfiles">
 
-        </ListView>
+
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="-100dp"
+        android:layout_marginTop="50dp"
         android:orientation="horizontal">
 
 
@@ -62,6 +82,10 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:text="Code Chef"
             android:id="@+id/btnCC"
             android:background="@drawable/button2"
@@ -70,18 +94,20 @@
         <Button
             android:id="@+id/btnHR"
             android:layout_width="wrap_content"
+            android:padding="15dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:background="@drawable/button3"
-            android:text="HackRank" />
+            android:text="HackerRank" />
+
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="Codeforce"
             android:id="@+id/btnCF"
+            android:padding="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
             android:background="@drawable/button4"
-            />
+            android:text="Codeforces" />
 
     </LinearLayout>
 

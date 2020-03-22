@@ -14,14 +14,14 @@
 
     <application
         android:allowBackup="true"
-        android:label="@string/app_name"
         android:icon="@mipmap/icon"
+        android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".SaveCodeInFile"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:name=".SaveCodeInFile" />
+            tools:ignore="LockedOrientationActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -35,49 +35,46 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-
             android:name=".AppMap"
-            android:label="@string/title_activity_app_map" />
-        <activity
+            android:label="@string/title_activity_app_map"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:name=".Walkthrough" />
+            tools:ignore="LockedOrientationActivity" />
         <activity
+            android:name=".Walkthrough"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:name=".ProfilePage" />
+            tools:ignore="LockedOrientationActivity" />
         <activity
+            android:name=".ProfilePage"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".EditorActivity"
             android:label="Happy Coding"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:name=".About" />
-        <activity
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:name=".webview" />
-        <activity
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:name=".Navigationclass" />
-        <activity
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:name=".RegistrationActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:name=".LoginActivity"
             android:windowSoftInputMode="adjustResize"
-            >
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".About"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".webview"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".Navigationclass"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".RegistrationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

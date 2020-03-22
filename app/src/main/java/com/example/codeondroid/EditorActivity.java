@@ -65,6 +65,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     Spinner Lang;
 
     String langs[] = {"Cpp14", "C", "Java", "Python3"};
+    String exts[] = {"cpp" , "c" , "java" , "py"};
     int langPos = 1;
     int MIN_DISTANCE = 150;
     EditText filename;
@@ -124,18 +125,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         Lang.setAdapter(adap1);
         Lang.setOnItemSelectedListener(this);
 
-        SharedPreferences sf=getSharedPreferences("myfile", Context.MODE_PRIVATE);
-        String lang = sf.getString("favLang","NA");
-        for(int i = 0;i < langs.length; i++)
-        {
-            if(langs[i].equals((lang)))
-            {
-                langPos = i;
-            }
-        }
 
-        int spinnerPosition = adap1.getPosition(lang);
-        Lang.setSelection(spinnerPosition);
 //        Toast.makeText(getApplicationContext(),langPos + "\t" + lang, Toast.LENGTH_LONG).show();
 //
 //        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
@@ -149,8 +139,42 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
         SharedPreferences sf1=getSharedPreferences("myfile1", Context.MODE_PRIVATE);
         String openfilename = sf1.getString("filename","NA");
-        if(!openfilename.equals("NA")){
+        if(true){
             Log.d("TAG", "onCreate: " + openfilename);
+
+            SharedPreferences sf=getSharedPreferences("myfile", Context.MODE_PRIVATE);
+            String lang = sf.getString("favLang","NA");
+            try{
+                String ext = openfilename.substring(openfilename.indexOf(".") + 1);
+//                Log.d("TAG", "onCreate: myextension " + ext );
+                for(int i = 0;i < exts.length; i++)
+                {
+                    if(exts[i].equals((ext)))
+                    {
+                        langPos = i;
+                        lang = langs[i];
+                    }
+                }
+
+                int spinnerPosition = adap1.getPosition(lang);
+                Lang.setSelection(spinnerPosition);
+            }
+            catch (Exception e){
+//                Log.d("TAG", "onCreate: myextension " + "exsnkjefjsf"  + e + openfilename);
+                for(int i = 0;i < langs.length; i++)
+                {
+                    if(langs[i].equals((lang)))
+                    {
+                        langPos = i;
+                    }
+                }
+                int spinnerPosition = adap1.getPosition(lang);
+                Lang.setSelection(spinnerPosition);
+            }
+
+
+
+
 
 
             try {
@@ -170,7 +194,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                 }
                 Log.d("TAG", "onCreate: " + sb.toString()  + "\n") ;
                 setTitle(openfilename);
-                codebox.setText(sb.toString());
+                codebox.setText(sb.toString() + " ");
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

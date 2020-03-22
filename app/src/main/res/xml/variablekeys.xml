@@ -22,8 +22,8 @@
 
         <Key android:codes="404"/>
 
-        <Key android:codes="404"  />
-        <Key android:codes="405"  android:keyEdgeFlags="right" />
+        <Key android:codes="405"  />
+        <Key android:codes="406"  android:keyEdgeFlags="right" />
 
     </Row>
 
@@ -31,26 +31,25 @@
 
 
         <Key android:keyEdgeFlags="left"
-            android:codes="406"/>
+            android:codes="407"/>
 
-        <Key android:codes="407"/>
         <Key android:codes="408"/>
-
         <Key android:codes="409"/>
-        <Key android:codes="-5"/>
-        <Key android:codes="410" android:keyEdgeFlags="right"/>
+        <Key android:codes="410"/>
+        <Key android:codes="411"/>
+        <Key android:codes="412" android:keyEdgeFlags="right"/>
 
 
     </Row>
     <Row >
         <Key android:keyEdgeFlags="left"
-            android:codes="411"/>
-        <Key android:codes="412"/>
-        <Key android:codes="413"/>
+            android:codes="413"/>
         <Key android:codes="414"/>
         <Key android:codes="415"/>
+        <Key android:codes="416"/>
+        <Key android:codes="417"/>
         <Key android:keyEdgeFlags="right"
-            android:codes="416"/>
+            android:codes="418"/>
     </Row>
 
 

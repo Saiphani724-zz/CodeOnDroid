@@ -122,9 +122,10 @@
 
     <Row>
 
-        <Key android:keyLabel="CAPS"
+        <Key android:keyLabel="caps"
             android:keyEdgeFlags="left"
-            android:codes="-1"/>
+            android:keyWidth ="15%p"
+            android:codes="-1,-2"/>
 
         <Key android:keyLabel="z"
             android:codes="122"/>
@@ -146,7 +147,7 @@
 
         <Key android:keyLabel="m"
             android:codes="109"/>
-        <Key android:codes="-5" android:keyWidth = "20%p"   android:keyIcon="@drawable/sym_keyboard_delete" android:isRepeatable="true"
+        <Key android:codes="-5" android:keyWidth = "15%p"   android:keyIcon="@drawable/sym_keyboard_delete" android:isRepeatable="true"
             android:keyEdgeFlags="right"/>
 
 

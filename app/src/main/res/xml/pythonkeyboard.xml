@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
-    android:keyWidth="20%p"
+    android:keyWidth="17%p"
     android:verticalGap="0px"
     android:horizontalGap="0px"
     android:keyHeight="50dp">
@@ -10,23 +10,40 @@
         NOTE When we add a horizontalGap in pixels, this interferes with keyWidth in percentages adding up to 100%
         NOTE When we have a horizontalGap (on Keyboard level) of 0, this make the horizontalGap (on Key level) to move from after the key to before the key... (I consider this a bug)
      -->
+    <Row>
 
+        <Key android:keyLabel="from"
+            android:keyEdgeFlags="left"
+            android:codes="601"/>
+
+        <Key android:keyLabel="import"
+            android:codes="602"/>
+        <Key android:keyLabel="map"
+            android:codes="603"/>
+
+        <Key android:keyLabel="list"
+            android:codes="604"/>
+
+        <Key android:codes="605" android:keyLabel="def"   />
+        <Key android:codes="606" android:keyLabel="range" android:keyEdgeFlags="right" />
+
+    </Row>
 
     <Row>
 
         <Key android:keyLabel="for"
             android:keyEdgeFlags="left"
-            android:codes="301"/>
+            android:codes="607"/>
 
         <Key android:keyLabel="while"
-            android:codes="302"/>
+            android:codes="608"/>
         <Key android:keyLabel="if"
-            android:codes="303"/>
+            android:codes="609"/>
 
-        <Key android:keyLabel="else"
-            android:codes="304"/>
+        <Key android:keyLabel="else:"
+            android:codes="610"/>
 
-        <Key android:codes="55001" android:keyIcon="@drawable/sym_keyboard_allleft" android:isRepeatable="true" />
+        <Key android:codes="55001" android:keyIcon="@drawable/sym_keyboard_allleft"  android:isRepeatable="true" />
         <Key android:codes="55004" android:keyIcon="@drawable/sym_keyboard_allright" android:keyEdgeFlags="right" android:isRepeatable="true" />
 
     </Row>
@@ -34,17 +51,17 @@
     <Row>
 
 
-        <Key android:keyLabel="int"
+        <Key android:keyLabel="split"
             android:keyEdgeFlags="left"
-            android:codes="305"/>
+            android:codes="611"/>
 
-        <Key android:keyLabel="float"
+        <Key android:keyLabel="int"
             android:codes="306"/>
-        <Key android:keyLabel="char"
-            android:codes="307"/>
+        <Key android:keyLabel="str"
+            android:codes="612"/>
 
         <Key android:keyLabel="input"
-            android:codes="308"/>
+            android:codes="613"/>
         <Key android:codes="-5"    android:keyIcon="@drawable/sym_keyboard_delete" android:isRepeatable="true"  />
         <Key android:codes="55006" android:keyLabel="CLR" android:keyEdgeFlags="right"/>
 
@@ -54,12 +71,12 @@
         <Key android:keyLabel="( )"
             android:keyEdgeFlags="left"
             android:codes="309"/>
-        <Key android:keyLabel=";"
-            android:codes="310"/>
+        <Key android:keyLabel="[]"
+            android:codes="614"/>
         <Key android:keyLabel="print"
-            android:codes="311"/>
-        <Key android:keyLabel="#"
-            android:codes="312"/>
+            android:codes="615"/>
+        <Key android:keyLabel=":"
+            android:codes="58"/>
         <Key android:keyLabel="{ }"
             android:codes="313"/>
         <Key android:keyLabel='" "'
@@ -68,10 +85,9 @@
     </Row>
     <Row>
 
-        <Key android:codes="-3"    android:keyIcon="@drawable/sym_keyboard_done" android:keyWidth="25%p"/>
-        <Key android:codes="55000" android:keyLabel="home"/>
+        <Key android:codes="55000" android:keyLabel="home" android:keyEdgeFlags="right"/>
         <Key android:codes="55005" android:keyLabel="end" />
-        <Key android:keyLabel="SPACE" android:keyWidth="40%p" android:isRepeatable="true" android:codes="32"/>
+        <Key android:keyLabel="SPACE" android:keyWidth="30%p" android:isRepeatable="true" android:codes="32"/>
         <Key android:keyLabel="tab" android:keyWidth="20%p" android:isRepeatable="true" android:codes="9"/>
         <Key android:keyLabel="ENTR" android:keyWidth="20%p" android:keyEdgeFlags="right" android:codes="-4"/>
 

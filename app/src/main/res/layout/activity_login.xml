@@ -73,6 +73,7 @@
             android:layout_marginTop="10dp"
             android:foreground="?android:attr/selectableItemBackground"
             android:text="SIGN IN"
+            android:background="@drawable/button1"
             android:textAllCaps="false"
             android:onClick="verify"
             android:textSize="17sp"/>

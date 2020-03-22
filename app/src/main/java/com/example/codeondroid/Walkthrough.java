@@ -1,7 +1,6 @@
 package com.example.codeondroid;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -58,4 +57,9 @@ public class Walkthrough extends AppCompatActivity {
         };
 
     };
+
+
+
+
+
 }

@@ -5,136 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/root"
     tools:context=".Walkthrough">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:src="@drawable/Walkthrough_Inc"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="How to use the App"
         android:layout_gravity="center"
-        android:textSize="30dp"
+        android:layout_margin="50dp"
+        android:text="This page describes the walkthrough of how to use the application"
         />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv"
-        xmlns:card_view="https://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        card_view:cardBackgroundColor="@color/grey_300"
-        card_view:cardCornerRadius="10dp"
-        card_view:cardElevation="5dp"
-        android:background="@color/colorBackground2"
-        card_view:cardUseCompatPadding="true">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-
-            >
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:tag="image_tag"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:src="@drawable/images"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_weight="2"
-                android:orientation="vertical"
-                >
-
-                <TextView
-                    android:id="@+id/textViewName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:text="Coding App"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
-
-                <TextView
-                    android:id="@+id/textViewVersion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-
-                    android:text="Eases coding on the applicaiton"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-            </LinearLayout>
-        </LinearLayout>
-
-
-
-
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv2"
-        xmlns:card_view="https://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        card_view:cardBackgroundColor="@color/grey_300"
-        card_view:cardCornerRadius="10dp"
-        card_view:cardElevation="5dp"
-        android:background="@color/FadeYellow"
-        card_view:cardUseCompatPadding="true">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            >
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_weight="2"
-                android:orientation="vertical"
-                >
-
-                <TextView
-                    android:id="@+id/textViewName2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:text="Click Code!"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
-
-                <TextView
-                    android:id="@+id/textViewVersion2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-
-                    android:text="Open Editor to code in Java, Python, C, C++"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-            </LinearLayout>
-        </LinearLayout>
-
-
-
-
-    </androidx.cardview.widget.CardView>
-
 
 </LinearLayout>

@@ -16,18 +16,28 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileFilter;
+import java.io.FilenameFilter;
 
-public class Navigationclass extends AppCompatActivity {
+public class Navigationclass extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     TextView apname;
     LinearLayout l1;
     Button btnCC,btnCF,btnHR;
+
+    ListView myfiles;
+    String[] files;
+    SharedPreferences sf;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +48,35 @@ public class Navigationclass extends AppCompatActivity {
         btnCF=(Button)findViewById(R.id.btnCF);
         btnHR=(Button)findViewById(R.id.btnHR);
         l1 = (LinearLayout)findViewById(R.id.ll);
+
+        myfiles = findViewById(R.id.myfiles);
+
+
+        registerForContextMenu(myfiles);
+
+        File f = new File("" + getApplicationContext().getFilesDir());
+        FilenameFilter fileFilter = new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.contains(".");
+            }
+        };
+        files = f.list(fileFilter);
+
+        for (int i = 0; i < files.length; i++) {
+            Log.d("TAG", "Files List: " + files[i]);
+        }
+
+
+        ArrayAdapter<String> ada=new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1,
+                files);
+        myfiles.setAdapter(ada);
+        myfiles.setOnItemClickListener(this);
+
+
+
+
 
         registerForContextMenu(l1);
 
@@ -104,18 +143,45 @@ public class Navigationclass extends AppCompatActivity {
 
     }
 
+
     //Creating a context menu to provide the user with a walkthrough of the app upon pressing anywhere on the home screen
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.context_menu,menu);
+
+        if(v.getId()==R.id.ll)
+        {
+            inflater.inflate(R.menu.context_menu,menu);
+        }
+        if(v.getId()==R.id.myfiles)
+        {
+            inflater.inflate(R.menu.list_menu,menu);
+        }
+
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId())
         {
+//            case R.id.share:
+//                String myFilePath = getApplicationContext().getFilesDir() + "/" + sf.getString("filename","NA");;
+//                Toast.makeText(this, "" + myFilePath, Toast.LENGTH_SHORT).show();
+//                Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+//                File fileWithinMyDir = new File(myFilePath);
+//
+//                if(fileWithinMyDir.exists()) {
+//                    intentShareFile.setType("application/pdf");
+//                    intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+myFilePath));
+//
+//                    intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+//                            "Sharing File...");
+//                    intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
+//
+//                    startActivity(Intent.createChooser(intentShareFile, "Share File"));
+//                }
+//                return  true;
             case R.id.walkthrough:
                 Intent i=new Intent(getApplicationContext(),Walkthrough.class);
                 startActivity(i);
@@ -161,8 +227,49 @@ public class Navigationclass extends AppCompatActivity {
 
     public void openEditor(View v)
     {
+        SharedPreferences sf=getSharedPreferences("myfile1", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit=sf.edit();
+        edit.clear(); // remove existing entries
+        edit.putString("filename","NA");
+        edit.commit();
         startActivity(new Intent(Navigationclass.this,EditorActivity.class));
-        Toast.makeText(getApplicationContext(),"Hello",Toast.LENGTH_LONG).show();
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.d("TAG", "onItemClick: " + files[position]);
+
+        sf =getSharedPreferences("myfile1", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit=sf.edit();
+        edit.clear(); // remove existing entries
+        edit.putString("filename",files[position]);
+        edit.commit();
+
+        startActivity(new Intent(Navigationclass.this,EditorActivity.class));
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+
+        File f = new File("" + getApplicationContext().getFilesDir());
+        FilenameFilter fileFilter = new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.contains(".");
+            }
+        };
+        files = f.list(fileFilter);
+
+        ArrayAdapter<String> ada=new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1,
+                files);
+        myfiles.setAdapter(ada);
+        myfiles.setOnItemClickListener(this);
+
     }
 
 

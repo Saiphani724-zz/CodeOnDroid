@@ -25,8 +25,8 @@ public class About extends AppCompatActivity {
 
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                         "mailto", "prashanthshiv954@gmail.com", null));
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "ReportBug");
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, "ReportBug");
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Suggestions");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, "Suggestions");
                 startActivity(emailIntent);
             }
         });

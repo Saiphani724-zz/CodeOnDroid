@@ -36,13 +36,87 @@
 
     </LinearLayout>
 
-    <Button
+
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Maps"
-        android:id="@+id/mapsButton"
-        android:layout_below="@+id/linearl"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="30dp"
+        android:text="Username :"
+        android:textSize="20dp"
         />
 
+    <TextView
+        android:id="@+id/showUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="300dp"
+        android:text="--"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="370dp"
+        android:layout_marginLeft="30dp"
+        android:text="Email :"
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/showEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="370dp"
+        android:layout_marginLeft="250dp"
+        android:text="--"
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="450dp"
+        android:layout_marginLeft="30dp"
+        android:text="Favourite Language :"
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/showFavLang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="450dp"
+        android:layout_marginLeft="250dp"
+        android:text="--"
+        android:textSize="20dp"
+        />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_marginTop="500dp"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/loctext"
+        android:layout_marginStart="67dp"
+        android:layout_marginLeft="67dp"
+        android:layout_alignParentBottom="true"
+
+        android:text="My Location: "
+        android:textSize="30dp" />
+    <Button
+        android:id="@+id/mapsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:text="Maps" />
+
+</LinearLayout>
 
 </RelativeLayout>

@@ -12,23 +12,15 @@
     android:orientation="vertical"
     android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/filename"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="12"
-            android:hint="Enter file name to save"
-            android:textColor="@color/DarkBlue"
-            android:layout_marginTop="10dp"
-            android:textSize="20dp"/>
 
 
     <customedittext.LineNumberEditText
         android:id="@+id/codebox"
         android:layout_width="match_parent"
-        android:layout_height="170pt"
+        android:layout_height="210pt"
+        android:textColor="@color/CodeColor"
         android:gravity="top|left"
+        android:textColorHint="@color/CodeColor"
         android:hint="Type Your code"
         android:background="@drawable/button"
         android:inputType="text|textMultiLine"
@@ -52,6 +44,8 @@
             android:layout_width="150dp"
             android:layout_height="60dp"
             android:layout_marginLeft="5dp"
+            android:textColor="@color/CodeColor"
+            android:textColorHint="@color/CodeColor"
             android:padding="5dp"
             android:layout_gravity="left"
             android:hint="Input"
@@ -66,6 +60,8 @@
             android:id="@+id/outputbox"
             android:gravity="top|left"
             android:layout_width="150dp"
+            android:textColor="@color/CodeColor"
+            android:textColorHint="@color/CodeColor"
             android:layout_height="60dp"
             android:layout_marginRight="5dp"
             android:padding="5dp"

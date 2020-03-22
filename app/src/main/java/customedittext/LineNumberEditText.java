@@ -1,5 +1,6 @@
 package customedittext;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,10 +9,13 @@ import android.graphics.Rect;
 import android.text.method.ScrollingMovementMethod;
 import android.util.AttributeSet;
 
+import com.example.codeondroid.R;
+
 public class LineNumberEditText extends androidx.appcompat.widget.AppCompatEditText {
     private Rect rect;
     private Paint paint;
     final LineNumberEditText me;
+
 
     public LineNumberEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -19,6 +23,7 @@ public class LineNumberEditText extends androidx.appcompat.widget.AppCompatEditT
         rect = new Rect();
         paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
+        paint.setColor(getResources().getColor(R.color.CodeColor));
         paint.setTextSize(40);
         setHorizontallyScrolling(true);
         setMovementMethod(new ScrollingMovementMethod());

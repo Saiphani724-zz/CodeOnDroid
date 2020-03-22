@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/savecodebutton"
+        android:title="Save Code Button"
+        app:showAsAction="always"
+        android:icon="@drawable/savecodebutton"/>
+    <item
+        android:id="@+id/sharecodebutton"
+        android:title="Share Code Button"
+        app:showAsAction="always"
+        android:icon="@drawable/sharecodebutton"/>
+    <item
+        android:id="@+id/undocodebutton"
+        android:title="Undo Code Button"
+        app:showAsAction="always"
+        android:icon="@drawable/undocodebutton"/>
+    <item
+        android:id="@+id/redocodebutton"
+        android:title="Redo Code Button"
+        app:showAsAction="always"
+        android:icon="@drawable/redocodebutton"/>
+
+    <item
+        android:id="@+id/runcodebutton"
+        android:title="Run Code Button"
+        app:showAsAction="always"
+        android:icon="@drawable/runcodebutton"/>
+
+
+
+</menu>

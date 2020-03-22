@@ -23,30 +23,11 @@
             android:layout_marginTop="10dp"
             android:textSize="20dp"/>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <Button
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:layout_marginRight="10dp"
-        android:background="#DEFDEF"
-        android:layout_gravity="right"
-        android:onClick="undo_function"
-        android:text="undo" />
-    <Button
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
-        android:background="#DEFDEF"
-        android:layout_gravity="left"
-        android:onClick="redo_function"
-        android:text="redo" />
-</LinearLayout>
+
     <EditText
         android:id="@+id/codebox"
         android:layout_width="match_parent"
-        android:layout_height="140pt"
+        android:layout_height="170pt"
         android:gravity="top|left"
         android:hint="Type Your code"
         android:layout_marginLeft="10dp"
@@ -89,30 +70,14 @@
             android:layout_marginTop="-60dp"
             android:lines="3" />
 
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/comiplebutton"
-        android:ems="8"
-        android:onClick="compileCode"
-        android:text="Compile Your Code" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         />
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/sharecode"
-        android:layout_marginLeft="20dp"
-        android:ems="8"
-        android:onClick="share_code"
-        android:text=" Share Code" />
+
 
     <Spinner
         android:id="@+id/Lang"
@@ -124,16 +89,7 @@
         android:padding="15dp"
         android:entries="@array/Lang"/>
 
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="-65dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/savecode"
-        android:layout_gravity="right"
-        android:onClick="saveCode"
 
-        android:text=" Save Code\n in File" />
 
 
 

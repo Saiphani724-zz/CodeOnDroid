@@ -1,5 +1,6 @@
 package com.example.codeondroid;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -10,6 +11,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -89,6 +93,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                     "    int main() {\n\n\n\n" +
                     "        return 0;\n" +
                     "    }");
+
             writer.flush();
             writer.close();
         } catch (Exception e) {
@@ -180,8 +185,9 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
 
 
-    public void compileCode(View view) {
+    public void compileCode() {
 
+        outputbox.setText(inputbox.getText().toString() + "\n" + "in is out on error");
         final RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
         StringRequest sr = new StringRequest(Request.Method.POST,"https://ide.geeksforgeeks.org/main.php/", new Response.Listener<String>() {
@@ -201,6 +207,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
                 Log.d("Volley", "onErrorResponse: " + error);
             }
         }){
@@ -296,7 +303,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         Log.d("TAG", "onNothingSelected: ");
     }
 
-    public void saveCode(View view) {
+    public void saveCode() {
         try {
             File file = new File(EditorActivity.this.getFilesDir(), "" + filename.getText().toString());
             FileWriter writer = new FileWriter(file);
@@ -309,7 +316,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         }
     }
 
-    public void share_code(View view) {
+    public void share_code() {
 
 //        File file = new File(EditorActivity.this.getFilesDir() + "/shared");
 //        if(!file.exists()){
@@ -358,11 +365,46 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
 
-    public void undo_function(View view) {
+    public void undo_function() {
         mCustomKeyboard.undo_action();
     }
 
-    public void redo_function(View view) {
+    public void redo_function() {
         mCustomKeyboard.redo_action();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.editor_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId())
+        {
+            case R.id.savecodebutton:
+                saveCode();
+                return true;
+            case R.id.sharecodebutton:
+                share_code();
+                return true;
+            case R.id.undocodebutton:
+                undo_function();
+                return true;
+            case R.id.redocodebutton:
+                redo_function();
+                return true;
+            case R.id.runcodebutton:
+                compileCode();
+                return true;
+            default:
+                return false;
+
+        }
+    }
+
+
+
 }

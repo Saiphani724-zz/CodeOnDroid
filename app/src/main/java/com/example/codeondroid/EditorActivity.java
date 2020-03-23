@@ -5,6 +5,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -471,10 +473,31 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
             case R.id.runcodebutton:
                 compileCode();
                 return true;
+            case R.id.clipbutton:
+                openclip();
+                return true;
             default:
                 return false;
 
         }
+    }
+
+    private void openclip() {
+        String text = "";
+        text = getClipboardDataForHoney(getApplicationContext());
+        EditText edittext = findViewById(R.id.codebox);
+        Editable editable = edittext.getText();
+        int start = edittext.getSelectionStart();
+        editable.insert(start, text);
+    }
+    private static String getClipboardDataForHoney(Context mContext) {
+        ClipboardManager clipboard = (ClipboardManager) mContext
+                .getSystemService(Context.CLIPBOARD_SERVICE);//get Clipboard manager
+        ClipData abc = clipboard.getPrimaryClip();//Get Primary clip
+        //Toast.makeText(mContext,abc.getItemCount()+"",Toast.LENGTH_SHORT).show();
+        ClipData.Item item = abc.getItemAt(0);//Get item from clip data
+
+        return item.getText().toString();
     }
 
 

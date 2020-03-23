@@ -33,7 +33,7 @@
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="350dp"
         android:id="@+id/pager">
     </androidx.viewpager.widget.ViewPager>
 

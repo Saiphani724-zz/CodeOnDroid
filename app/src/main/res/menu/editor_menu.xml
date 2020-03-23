@@ -22,12 +22,19 @@
         android:title="Redo Code Button"
         app:showAsAction="always"
         android:icon="@drawable/redocodebutton"/>
+    <item
+        android:id="@+id/clipbutton"
+        android:title="Clip"
+        app:showAsAction="always"
+        android:icon="@drawable/clipicon"/>
 
     <item
         android:id="@+id/runcodebutton"
         android:title="Run Code Button"
         app:showAsAction="always"
         android:icon="@drawable/runcodebutton"/>
+
+
 
 
 

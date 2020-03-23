@@ -15,5 +15,6 @@
     <color name="colorBackground2">#23ADEC</color>
     <color name="EditTextBox">#F4F5F6</color>
     <color name="CodeColor">#000000</color>
+    <color name="SplashText">#06183E</color>
     <color name="EditorBackground">#FFF</color>
 </resources>

@@ -20,6 +20,17 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Clipboardactivity"></activity>
         <activity
+            android:name=".Welcome"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".SaveCodeInFile"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
@@ -76,11 +87,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

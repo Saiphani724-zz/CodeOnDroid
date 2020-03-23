@@ -3,6 +3,9 @@ package com.example.codeondroid;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,73 +29,67 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
 
-public class Navigationclass extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class Navigationclass extends AppCompatActivity implements AllFiles.OnFragmentInteractionListener, PythonFiles.OnFragmentInteractionListener  {
 
 
     LinearLayout l1;
     Button btnCC,btnCF,btnHR;
 
-    ListView myfiles;
-    String[] files;
     SharedPreferences sf;
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigationclass);
 
+        TabLayout tabLayout = findViewById(R.id.tablayout);
+        tabLayout.addTab(tabLayout.newTab().setText("All Files"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.python_icon));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.cpp_icon));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.java_icon));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.c_icon));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        final ViewPager viewPager = findViewById(R.id.pager);
+        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager() , tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
 
         btnCC=(Button)findViewById(R.id.btnCC);
         btnCF=(Button)findViewById(R.id.btnCF);
         btnHR=(Button)findViewById(R.id.btnHR);
         l1 = (LinearLayout)findViewById(R.id.ll);
-
-        myfiles = findViewById(R.id.myfiles);
-
-
-        registerForContextMenu(myfiles);
-
-        File f = new File("" + getApplicationContext().getFilesDir());
-        FilenameFilter fileFilter = new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.contains(".");
-            }
-        };
-        files = f.list(fileFilter);
-
-        for (int i = 0; i < files.length; i++) {
-            Log.d("TAG", "Files List: " + files[i]);
-        }
-
-
-
-
-        ArrayAdapter<String> ada = new ArrayAdapter<String>
-                (this, android.R.layout.simple_list_item_1, files){
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent){
-                // Get the Item from ListView
-                View view = super.getView(position, convertView, parent);
-
-                // Initialize a TextView for ListView each Item
-                TextView tv = (TextView) view.findViewById(android.R.id.text1);
-
-                // Set the text color of TextView (ListView Item)
-                tv.setTextColor(getResources().getColor(R.color.CodeColor));
-
-                // Generate ListView Item using TextView
-                return view;
-            }
-        };
-
-        // DataBind ListView with items from ArrayAdapter
-        myfiles.setAdapter(ada);
-        myfiles.setOnItemClickListener(this);
 
 
 
@@ -249,58 +246,18 @@ public class Navigationclass extends AppCompatActivity implements AdapterView.On
     }
 
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("TAG", "onItemClick: " + files[position]);
-
-        sf =getSharedPreferences("myfile1", Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit=sf.edit();
-        edit.clear(); // remove existing entries
-        edit.putString("filename",files[position]);
-        edit.commit();
-
-        startActivity(new Intent(Navigationclass.this,EditorActivity.class));
-
-    }
 
     @Override
     protected void onRestart() {
         super.onRestart();
 
 
-        File f = new File("" + getApplicationContext().getFilesDir());
-        FilenameFilter fileFilter = new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.contains(".");
-            }
-        };
-        files = f.list(fileFilter);
-
-        ArrayAdapter<String> ada = new ArrayAdapter<String>
-                (this, android.R.layout.simple_list_item_1, files){
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent){
-                // Get the Item from ListView
-                View view = super.getView(position, convertView, parent);
-
-                // Initialize a TextView for ListView each Item
-                TextView tv = (TextView) view.findViewById(android.R.id.text1);
-
-                // Set the text color of TextView (ListView Item)
-                tv.setTextColor(getResources().getColor(R.color.CodeColor));
-
-                // Generate ListView Item using TextView
-                return view;
-            }
-        };
-
-        // DataBind ListView with items from ArrayAdapter
-        myfiles.setAdapter(ada);
-        myfiles.setOnItemClickListener(this);
+//        Fragment frg = null;
+//        frg = getSupportFragmentManager().findFragmentById(R.id.all_files);
+//        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//        ft.detach(frg);
+//        ft.attach(frg);
+//        ft.commit();
 
     }
-
-
-
 }

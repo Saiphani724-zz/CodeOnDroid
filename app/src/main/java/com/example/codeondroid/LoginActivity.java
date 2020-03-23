@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                 edit.putString("email" , c.getString(2) );
                 edit.commit();
             }
-            Intent i = new Intent(this, Navigationclass.class);
+            Intent i = new Intent(getApplicationContext(), Navigationclass.class);
             startActivity(i);
 //            Toast.makeText(LoginActivity.this,"Login Successfull",Toast.LENGTH_SHORT).show();
         }

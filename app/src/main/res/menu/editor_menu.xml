@@ -33,8 +33,11 @@
         android:title="Run Code Button"
         app:showAsAction="always"
         android:icon="@drawable/runcodebutton"/>
-
-
+    <item
+        android:id="@+id/snippetscode"
+        android:title="Snippets"
+        app:showAsAction="always"
+        android:icon="@drawable/snippet_icon"/>
 
 
 

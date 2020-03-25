@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CreateSnipetActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <!--
+    <EditText
+        android:id="@+id/snipettitle"
+        android:gravity="top|left"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/CodeColor"
+        android:textColorHint="@color/CodeColor"
+        android:padding="5dp"
+        android:layout_gravity="left"
+        android:hint="Snipet Title"
+        android:foregroundGravity="top|left"
+        android:inputType="text|textMultiLine"
+        android:ems="8"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button"
+        android:lines="1" />
+        -->
+    <EditText
+        android:id="@+id/snipetcode"
+        android:layout_width="match_parent"
+        android:layout_height="210pt"
+        android:textColor="@color/CodeColor"
+        android:gravity="top|left"
+        android:textColorHint="@color/CodeColor"
+        android:hint="Enter your snipet"
+        android:background="@drawable/button"
+        android:inputType="text|textMultiLine"
+        android:foregroundGravity="top|left"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="45dp"
+        android:paddingTop="5dp"
+        android:layout_margin="5dp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save snipet"
+        android:layout_gravity="center"
+        android:onClick="savesnip"
+        />
+    </LinearLayout>
+    <android.inputmethodservice.KeyboardView
+        android:id="@+id/snipkeyboardview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:focusableInTouchMode="true"
+        android:visibility="invisible"
+        />
+
+</RelativeLayout>

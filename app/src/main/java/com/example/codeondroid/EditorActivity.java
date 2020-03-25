@@ -476,10 +476,18 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
             case R.id.clipbutton:
                 openclip();
                 return true;
+            case R.id.snippetscode:
+                opensnippet();
+                return true;
             default:
                 return false;
 
         }
+    }
+
+    private void opensnippet() {
+        Intent i = new Intent(this,code_snippets.class);
+        startActivityForResult(i,MYREQUEST);
     }
 
     private void openclip() {
@@ -498,6 +506,20 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         ClipData.Item item = abc.getItemAt(0);//Get item from clip data
 
         return item.getText().toString();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==MYREQUEST)
+        {
+            if(resultCode == RESULT_OK) {
+                String snip = data.getStringExtra("snip");
+                EditText edittext = findViewById(R.id.codebox);
+                Editable editable = edittext.getText();
+                int start = edittext.getSelectionStart();
+                editable.insert(start,snip);
+            }
+        }
     }
 
 

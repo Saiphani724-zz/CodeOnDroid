@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Clipboardactivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cliptext" />
+    android:orientation="vertical"
+    tools:context=".code_snippets">
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/sniplist"
+        android:layout_height="300dp"/>
 
 </LinearLayout>

@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:background="@color/colorBackground"
     android:layout_height="match_parent"
+    android:weightSum="1"
     android:id="@+id/ll"
     tools:context=".Navigationclass">
 
@@ -31,11 +32,21 @@
 
 
 
-    <androidx.viewpager.widget.ViewPager
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:id="@+id/pager">
-    </androidx.viewpager.widget.ViewPager>
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        >
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/pager">
+        </androidx.viewpager.widget.ViewPager>
+
+
+    </LinearLayout>
+
+
 
 
 
@@ -46,7 +57,8 @@
         android:onClick="openEditor"
         android:background="@drawable/startcoding"
         android:orientation="horizontal"
-        android:padding="10dp"
+        android:padding="6dp"
+        android:layout_marginBottom="16dp"
         >
 
         <TextView
@@ -56,11 +68,11 @@
             android:fontFamily="serif"
             android:text="Start Coding"
             android:textColor="#000"
-            android:textSize="20dp" />
+            android:textSize="16dp" />
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:src="@drawable/startcodingicon" />
 
@@ -68,13 +80,12 @@
 
 
 
-
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_weight="0.01"
+        android:layout_marginBottom="80dp"
         android:orientation="horizontal">
 
 
@@ -82,8 +93,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:text="Code Chef"
@@ -94,40 +105,23 @@
         <Button
             android:id="@+id/btnHR"
             android:layout_width="wrap_content"
-            android:padding="15dp"
-            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:background="@drawable/button3"
             android:text="HackerRank" />
 
         <Button
             android:id="@+id/btnCF"
-            android:padding="15dp"
+            android:padding="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:background="@drawable/button4"
             android:text="Codeforces" />
 
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:layout_marginTop="30dp"
-        android:id="@+id/ScrollView">
-
-    </ScrollView>
-
-    <!--    <Button-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="200dp"-->
-    <!--        android:layout_gravity="center"-->
-    <!--        android:text="Previous Codes"-->
-    <!--        android:background="#FFFFFF"-->
-    <!--        android:onClick="getFiles"-->
-    <!--        />-->
 
 
 </LinearLayout>

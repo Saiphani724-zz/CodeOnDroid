@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,7 +25,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class code_snippets extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class code_snippets extends AppCompatActivity implements CustomAdapterCommunicator {
     String files[];
     ArrayList<Snipetcontaier> arr;
     @Override
@@ -32,6 +33,56 @@ public class code_snippets extends AppCompatActivity implements AdapterView.OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code_snippets);
         arr = new ArrayList<Snipetcontaier>();
+        load_snipets();
+        //l1.setOnItemClickListener(this);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId())
+        {
+            case R.id.addnewsnip:
+                create_new_snip();
+                return true;
+            default:
+                return false;
+
+        }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.snipet_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    /*public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent i=new Intent();
+        i.putExtra("snip",arr.get(position).getContent());
+        setResult(RESULT_OK,i);
+        finish();
+
+    }*/
+    private void create_new_snip() {
+        Intent i = new Intent(this,CreateSnipetActivity.class);
+        startActivity(i);
+    }
+
+    @Override
+    public void customsetresult(String snip) {
+        Intent i=new Intent();
+        i.putExtra("snip",snip);
+        setResult(RESULT_OK,i);
+        //Toast.makeText(this,snip,Toast.LENGTH_SHORT).show();
+        this.finish();
+    }
+
+    @Override
+    public void loadondelete() {
+        load_snipets();
+    }
+
+    public void load_snipets()
+    {
+        arr.clear();
         Snipetcontaier obj1= new Snipetcontaier("Input Testcase","int t;\ncin>>t;");
         Snipetcontaier obj2= new Snipetcontaier("output variable","cout<<var;");
         arr.add(obj1);
@@ -65,47 +116,20 @@ public class code_snippets extends AppCompatActivity implements AdapterView.OnIt
                     }
                     sb.append(line + "\n");
                 }
-                Log.d("TAG", "onCreate: " + sb.toString()  + "\n") ;
-                setTitle(fname);
-                Snipetcontaier temp = new Snipetcontaier(fname,sb.toString());
+                //Log.d("TAG", "onCreate: " + sb.toString()  + "\n") ;
+                Snipetcontaier temp = new Snipetcontaier(fname.substring(0,fname.length()-5),sb.toString());
                 arr.add(temp);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
         ListView l1= (ListView)findViewById(R.id.sniplist);
-        l1.setAdapter(new MyCustomAdapter(arr, getApplicationContext()));
-        l1.setOnItemClickListener(this);
+        l1.setAdapter(new MyCustomAdapter(arr, getApplicationContext(),this));
     }
+
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId())
-        {
-            case R.id.addnewsnip:
-                create_new_snip();
-                return true;
-            default:
-                return false;
-
-        }
+    protected void onRestart() {
+        load_snipets();
+        super.onRestart();
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.snipet_menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent i=new Intent();
-        i.putExtra("snip",arr.get(position).getContent());
-        setResult(RESULT_OK,i);
-        finish();
-
-    }
-
-    private void create_new_snip() {
-        Intent i = new Intent(this,CreateSnipetActivity.class);
-        startActivity(i);
-    }
-
 }

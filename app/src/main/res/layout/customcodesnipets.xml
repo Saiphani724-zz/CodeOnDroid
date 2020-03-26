@@ -7,13 +7,33 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="40dp"
     android:textColor="@color/CodeColor"
+    android:text="hiii"
     android:id="@+id/snipcontent"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:textSize="20sp"
         android:textStyle="bold"
         android:id="@+id/snipname"/>
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignRight="@+id/deltesnipicon"
+        android:background="@drawable/pastesnip"
+        android:id="@+id/pastesnipicon"
+        android:layout_marginRight="30dp" />
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/deltesnipicon"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/delete_snip"
+        android:layout_marginRight="20dp" />
+    </RelativeLayout>
 
 </RelativeLayout>

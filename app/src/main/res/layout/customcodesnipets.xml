@@ -23,7 +23,7 @@
     <Button
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_alignRight="@+id/deltesnipicon"
+        android:layout_alignRight="@+id/editsnipicon"
         android:background="@drawable/pastesnip"
         android:id="@+id/pastesnipicon"
         android:layout_marginRight="30dp" />
@@ -34,6 +34,13 @@
         android:layout_alignParentRight="true"
         android:background="@drawable/delete_snip"
         android:layout_marginRight="20dp" />
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/editsnipicon"
+            android:layout_alignRight="@id/deltesnipicon"
+            android:background="@drawable/editsnip"
+            android:layout_marginRight="30dp" />
     </RelativeLayout>
 
 </RelativeLayout>

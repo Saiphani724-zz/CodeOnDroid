@@ -4,7 +4,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,14 +17,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class CreateSnipetActivity extends AppCompatActivity {
     EditText code;
     float x1,x2;
     float y1, y2;
     int MIN_DISTANCE = 150;
+    String fname;
     CustomKeyboard mCustomKeyboard1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +38,41 @@ public class CreateSnipetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_snipet);
         //title=findViewById(R.id.snipettitle);
         code=findViewById(R.id.snipetcode);
+        SharedPreferences sf=getSharedPreferences("mysendsnipfile", Context.MODE_PRIVATE);
+        String filename = sf.getString("fname","NA");
+        fname="";
+        if(filename!="NA")
+        {
+            setfilecontent(filename);
+            fname=filename;
+        }
         mCustomKeyboard1 = new CustomKeyboard(this, R.id.snipkeyboardview, R.xml.keyboard);
         mCustomKeyboard1.registerEditText(R.id.snipetcode);
+    }
+
+    private void setfilecontent(String filename) {
+        try {
+            String yourFilePath = getApplicationContext().getFilesDir() + "/snip/" + filename+".snip";
+            FileInputStream fin=new FileInputStream(yourFilePath);
+            InputStreamReader isr = new InputStreamReader(fin);
+            BufferedReader bufferedReader = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while (true) {
+                try {
+                    if (!((line = bufferedReader.readLine()) != null)) break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                sb.append(line + "\n");
+            }
+            Log.d("TAG", "onCreate: " + sb.toString()  + "\n") ;
+            setTitle(filename);
+            code.setText(sb.toString() + " ");
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -45,7 +86,7 @@ public class CreateSnipetActivity extends AppCompatActivity {
             final EditText edittext = new EditText(getApplicationContext());
 
             edittext.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-
+            edittext.setText(fname);
             alert.setTitle("Save snippet");
             alert.setMessage("Enter Your File Name to save");
 

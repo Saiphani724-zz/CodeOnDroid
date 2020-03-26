@@ -398,7 +398,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 //        try {
 //            file = new File(EditorActivity.this.getFilesDir() + "/shared", "" + filename.getText().toString());
 //            FileWriter writer = new FileWriter(file);
-//            writer.append(codebox.getText().toString());
+//            writer.append(codebox.get Text().toString());
 //            writer.flush();
 //            writer.close();
 ////            Toast.makeText(getApplicationContext(),"Save your code as " + filename.getText().toString(), Toast.LENGTH_LONG).show();

@@ -1,104 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/LightBlue"
-    android:layout_height="match_parent"
-    tools:context=".EditorActivity">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
+    tools:context=".EditorActivity"
+    >
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/left_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.02" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.01"
+         />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/right_guideline"
+        app:layout_constraintGuide_percent=".98"
+        android:orientation="vertical"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/input_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/output_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
 
 
     <customedittext.LineNumberEditText
         android:id="@+id/codebox"
-        android:layout_width="match_parent"
-        android:layout_height="210pt"
-        android:textColor="@color/CodeColor"
-        android:gravity="top|left"
-        android:textColorHint="@color/CodeColor"
-        android:hint="Type Your code"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/button"
-        android:inputType="text|textMultiLine"
         android:foregroundGravity="top|left"
-        android:layout_marginTop="20dp"
+        android:gravity="top|left"
+        android:hint="Type Your code"
+        android:inputType="text|textMultiLine"
         android:paddingLeft="45dp"
-        android:paddingTop="5dp"
-        android:layout_margin="5dp"
+        android:textColor="@color/CodeColor"
+        android:textColorHint="@color/CodeColor"
+        app:layout_constraintBottom_toTopOf="@+id/Lang"
+        app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/left_guideline"
+        app:layout_constraintTop_toTopOf="@+id/top_guideline"
+        app:layout_constraintVertical_bias="1.0" />
 
 
-        />
-
-
-
-
-
-
-        <EditText
-            android:id="@+id/inputbox"
-            android:gravity="top|left"
-            android:layout_width="150dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="5dp"
-            android:textColor="@color/CodeColor"
-            android:textColorHint="@color/CodeColor"
-            android:padding="5dp"
-            android:layout_gravity="left"
-            android:hint="Input"
-            android:foregroundGravity="top|left"
-            android:inputType="text|textMultiLine"
-            android:ems="8"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/button"
-            android:lines="3" />
-
-        <EditText
-            android:id="@+id/outputbox"
-            android:gravity="top|left"
-            android:layout_width="150dp"
-            android:textColor="@color/CodeColor"
-            android:textColorHint="@color/CodeColor"
-            android:layout_height="60dp"
-            android:layout_marginRight="5dp"
-            android:padding="5dp"
-            android:layout_gravity="right"
-            android:hint="Output"
-            android:inputType="text|textMultiLine"
-            android:ems="8"
-            android:background="@drawable/button"
-            android:layout_marginTop="-60dp"
-            android:lines="3" />
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        />
-
+    <EditText
+        android:id="@+id/inputbox"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_gravity="left"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/button"
+        android:ems="8"
+        android:gravity="top|left"
+        android:hint="Input"
+        android:inputType="text|textMultiLine"
+        android:lines="3"
+        android:padding="5dp"
+        android:textColor="@color/CodeColor"
+        android:textColorHint="@color/CodeColor"
+        app:layout_constraintBottom_toTopOf="@+id/keyboardview"
+        app:layout_constraintEnd_toStartOf="@+id/input_guideline"
+        app:layout_constraintStart_toStartOf="@id/left_guideline" />
 
     <Spinner
         android:id="@+id/Lang"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="-60dp"
-        android:padding="15dp"
-        android:entries="@array/Lang"/>
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="48dp"
+        android:entries="@array/Lang"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/keyboardview"
+        app:layout_constraintEnd_toStartOf="@+id/output_guideline"
+        app:layout_constraintStart_toStartOf="@+id/input_guideline" />
 
 
-
-
-
-</LinearLayout>
-
-
+    <EditText
+        android:id="@+id/outputbox"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/button"
+        android:ems="8"
+        android:gravity="top|left"
+        android:hint="Output"
+        android:inputType="text|textMultiLine"
+        android:lines="3"
+        android:padding="5dp"
+        android:textColor="@color/CodeColor"
+        android:textColorHint="@color/CodeColor"
+        app:layout_constraintBottom_toTopOf="@+id/keyboardview"
+        app:layout_constraintEnd_toStartOf="@+id/right_guideline"
+        app:layout_constraintStart_toStartOf="@+id/output_guideline" />
 
 
 
@@ -110,11 +128,16 @@
         android:layout_centerHorizontal="true"
         android:focusableInTouchMode="true"
         android:visibility="invisible"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
 
 
 
-</RelativeLayout>

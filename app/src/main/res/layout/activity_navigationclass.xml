@@ -86,8 +86,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="0.005"
         android:layout_gravity="center"
-        android:layout_weight="0.01"
         android:layout_marginBottom="40dp"
         android:layout_marginTop="24dp"
         android:orientation="horizontal">
@@ -97,8 +97,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:text="Code Chef"
@@ -117,7 +117,7 @@
 
         <Button
             android:id="@+id/btnCF"
-            android:padding="10dp"
+            android:padding="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"

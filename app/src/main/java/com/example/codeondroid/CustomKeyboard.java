@@ -13,9 +13,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -30,6 +33,7 @@ public class CustomKeyboard {
     int kbcount,curr_layout;
     int flag;
     CustomLinkedList undo_stack,redo_stack;
+    TabLayout candview;
     HashMap keydict,varkeys,wtype,revvar;
     private KeyboardView.OnKeyboardActionListener mOnKeyboardActionListener = new KeyboardView.OnKeyboardActionListener() {
 
@@ -285,6 +289,7 @@ public class CustomKeyboard {
         redo_stack = new CustomLinkedList();
         load_dict();
         load_wtype();
+        candview = (TabLayout) host.findViewById(R.id.candidateview);
         mKeyboardView= (KeyboardView)mHostActivity.findViewById(viewid);
         mKeyboardView.setKeyboard(new Keyboard(mHostActivity, layoutid));
         mKeyboardView.setPreviewEnabled(false); // NOTE Do not show the preview balloons
@@ -304,12 +309,14 @@ public class CustomKeyboard {
         mKeyboardView.setVisibility(View.VISIBLE);
         mKeyboardView.setEnabled(true);
         if( v!=null ) ((InputMethodManager)mHostActivity.getSystemService(Activity.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(v.getWindowToken(), 0);
+        candview.setVisibility( View.VISIBLE);
     }
 
     /** Make the CustomKeyboard invisible. */
     public void hideCustomKeyboard() {
         mKeyboardView.setVisibility(View.GONE);
         mKeyboardView.setEnabled(false);
+        candview.setVisibility(View.INVISIBLE);
         flag=0;
         curr_layout=1;
     }

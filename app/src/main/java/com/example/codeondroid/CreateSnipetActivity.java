@@ -88,7 +88,7 @@ public class CreateSnipetActivity extends AppCompatActivity {
             edittext.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             edittext.setText(fname);
             alert.setTitle("Save snippet");
-            alert.setMessage("Enter Your File Name to save");
+            alert.setMessage("Enter Your Snippet Name to save");
 
             alert.setView(edittext);
 

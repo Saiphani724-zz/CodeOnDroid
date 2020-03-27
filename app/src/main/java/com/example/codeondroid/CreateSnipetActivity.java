@@ -14,8 +14,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,11 +30,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class CreateSnipetActivity extends AppCompatActivity {
+public class CreateSnipetActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     EditText code;
     float x1,x2;
     float y1, y2;
     int MIN_DISTANCE = 150;
+    String langs[] = {"Cpp14", "C", "Java", "Python3"};
+    TabLayout tabs;
+    Spinner Lang;
     String fname;
     CustomKeyboard mCustomKeyboard1;
     @Override
@@ -46,8 +54,33 @@ public class CreateSnipetActivity extends AppCompatActivity {
             setfilecontent(filename);
             fname=filename;
         }
-        mCustomKeyboard1 = new CustomKeyboard(this, R.id.snipkeyboardview, R.xml.keyboard);
+        Lang = findViewById(R.id.langsnip);
+        ArrayAdapter<String> adap1 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, langs);
+
+        Lang.setAdapter(adap1);
+        Lang.setOnItemSelectedListener(this);
+        mCustomKeyboard1 = new CustomKeyboard(this, R.id.snipkeyboardview, R.xml.keyboard,R.id.candidateview1,"snipfilesel");
         mCustomKeyboard1.registerEditText(R.id.snipetcode);
+        tabs = (TabLayout) findViewById(R.id.candidateview1);
+        tabs.getTabAt(1).select();
+        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mCustomKeyboard1.curr_layout=tab.getPosition();
+                mCustomKeyboard1.change_keyboard( mCustomKeyboard1.keylayouts[mCustomKeyboard1.curr_layout]);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     private void setfilecontent(String filename) {
@@ -149,7 +182,8 @@ public class CreateSnipetActivity extends AppCompatActivity {
                     if (mCustomKeyboard1.curr_layout>0)
                     {
                         mCustomKeyboard1.curr_layout-=1;
-                        mCustomKeyboard1.change_keyboard( mCustomKeyboard1.keylayouts[mCustomKeyboard1.curr_layout]);
+                        tabs.getTabAt(mCustomKeyboard1.curr_layout).select();
+                        //mCustomKeyboard1.change_keyboard( mCustomKeyboard1.keylayouts[mCustomKeyboard1.curr_layout]);
                     }
                 }
 
@@ -160,7 +194,8 @@ public class CreateSnipetActivity extends AppCompatActivity {
                     if (mCustomKeyboard1.curr_layout< mCustomKeyboard1.kbcount-1)
                     {
                         mCustomKeyboard1.curr_layout+=1;
-                        mCustomKeyboard1.change_keyboard(mCustomKeyboard1.keylayouts[mCustomKeyboard1.curr_layout]);
+                        tabs.getTabAt(mCustomKeyboard1.curr_layout).select();
+                        //mCustomKeyboard1.change_keyboard(mCustomKeyboard1.keylayouts[mCustomKeyboard1.curr_layout]);
                     }
                 }
 
@@ -171,4 +206,18 @@ public class CreateSnipetActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        tabs.getTabAt(1).select();
+        SharedPreferences sf=getSharedPreferences("snipfilesel", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit=sf.edit();
+        edit.clear(); // remove existing entries
+        edit.putString("selLang",langs[position]);
+        edit.commit();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }

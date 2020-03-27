@@ -32,6 +32,7 @@ public class CustomKeyboard {
     public int keylayouts[]={R.xml.specialnumbers,R.xml.keyboard,R.xml.keywordboard,R.xml.variablekeys};
     int kbcount,curr_layout;
     int flag;
+    String sf_file_name;
     CustomLinkedList undo_stack,redo_stack;
     TabLayout candview;
     HashMap keydict,varkeys,wtype,revvar;
@@ -277,7 +278,7 @@ public class CustomKeyboard {
         }
     };
 
-    public CustomKeyboard(Activity host, int viewid, int layoutid) {
+    public CustomKeyboard(Activity host, int viewid, int layoutid,int candid,String sf_file_name) {
         mHostActivity= host;
         kbcount = keylayouts.length;
         curr_layout=1;
@@ -289,7 +290,8 @@ public class CustomKeyboard {
         redo_stack = new CustomLinkedList();
         load_dict();
         load_wtype();
-        candview = (TabLayout) host.findViewById(R.id.candidateview);
+        this.sf_file_name = sf_file_name;
+        candview = (TabLayout) host.findViewById(candid);
         mKeyboardView= (KeyboardView)mHostActivity.findViewById(viewid);
         mKeyboardView.setKeyboard(new Keyboard(mHostActivity, layoutid));
         mKeyboardView.setPreviewEnabled(false); // NOTE Do not show the preview balloons
@@ -363,7 +365,7 @@ public class CustomKeyboard {
     {
         if(layid==R.xml.keywordboard)
         {
-            SharedPreferences sf= mHostActivity.getSharedPreferences("myfile2", Context.MODE_PRIVATE);
+            SharedPreferences sf= mHostActivity.getSharedPreferences(sf_file_name, Context.MODE_PRIVATE);
             String lang = sf.getString("selLang","NA");
             if(lang=="Java")
             {

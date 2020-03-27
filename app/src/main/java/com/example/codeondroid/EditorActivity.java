@@ -112,7 +112,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
 //        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 //        Intent batteryStatus = getApplicationContext().registerReceiver(null, ifilter);
-        mCustomKeyboard = new CustomKeyboard(this, R.id.keyboardview, R.xml.keyboard);
+        mCustomKeyboard = new CustomKeyboard(this, R.id.keyboardview, R.xml.keyboard,R.id.candidateview,"myfile2");
         mCustomKeyboard.registerEditText(R.id.codebox);
 //        mCustomKeyboard.registerEditText(R.id.outputbox);
         mCustomKeyboard.registerEditText(R.id.inputbox);
@@ -336,10 +336,9 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("TAG", "onItemSelected: " + position + " " + id);
+        //Log.d("TAG", "onItemSelected: " + position + " " + id);
         langPos = position;
-        mCustomKeyboard.change_keyboard(R.xml.keyboard);
-        mCustomKeyboard.curr_layout=1;
+        tabs.getTabAt(1).select();
         SharedPreferences sf=getSharedPreferences("myfile2", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit=sf.edit();
         edit.clear(); // remove existing entries

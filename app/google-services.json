@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "172723606875",
+    "firebase_url": "https://codeondroid.firebaseio.com",
+    "project_id": "codeondroid",
+    "storage_bucket": "codeondroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172723606875:android:fefcc2a7f4d4646ec2f67e",
+        "android_client_info": {
+          "package_name": "com.example.codeondroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172723606875-gqmoavtfijauojspo5rui9bhkgq864rk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.codeondroid",
+            "certificate_hash": "7ca571b775bf9442da0e50ab752e2fd787b59d4f"
+          }
+        },
+        {
+          "client_id": "172723606875-rtr8p55fgmcd184lu2so943f0537jdf7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTfoSBjOjBW5PwZoBNtl6DfX-oarE3eOY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "172723606875-rtr8p55fgmcd184lu2so943f0537jdf7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

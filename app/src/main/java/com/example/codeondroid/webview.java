@@ -16,7 +16,7 @@ public class webview extends AppCompatActivity {
         setContentView(R.layout.activity_webview);
         wv1=(WebView)findViewById(R.id.webView);
         wv1.setWebViewClient(new MyBrowser());
-        SharedPreferences sf=getSharedPreferences("myfile", Context.MODE_PRIVATE);
+        SharedPreferences sf=getSharedPreferences("myfileweb", Context.MODE_PRIVATE);
         String url=sf.getString("url","NA");
         wv1.getSettings().setLoadsImagesAutomatically(true);
         wv1.getSettings().setJavaScriptEnabled(true);

@@ -30,6 +30,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -40,6 +46,7 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
 
     LinearLayout l1;
     Button btnCC,btnCF,btnHR;
+    DatabaseReference reff;
 
     SharedPreferences sf;
 
@@ -65,6 +72,41 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
         final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager() , tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+
+        final FirebaseAuth fAuth = FirebaseAuth.getInstance();
+
+        String email = fAuth.getCurrentUser().getEmail();
+        reff = FirebaseDatabase.getInstance().getReference().child("Users");
+
+        final String uid = fAuth.getCurrentUser().getUid();
+//        Toast.makeText(getApplicationContext(),uid,Toast.LENGTH_LONG).show();
+
+       reff.addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+               String username = dataSnapshot.child(uid).child("username").getValue(String.class);
+               String emailsend  = dataSnapshot.child(uid).child("eamil").getValue(String.class);
+                String favlang  = dataSnapshot.child(uid).child("favlang").getValue(String.class);
+
+
+                SharedPreferences sf=getSharedPreferences("myfile", Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit=sf.edit();
+                edit.clear(); // remove existing entries
+                edit.putString("favLang",favlang);
+                edit.putString("uname" , username );
+                edit.putString("email" , emailsend );
+                Toast.makeText(getApplicationContext(),"Welcome "+username,Toast.LENGTH_LONG).show();
+                edit.commit();
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError databaseError) {
+
+           }
+       });
+
 
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -106,7 +148,7 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
 //                Intent l = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.codechef.com/"));
 //                startActivity(l);
 
-                SharedPreferences sf=getSharedPreferences("myfile", Context.MODE_PRIVATE);
+                SharedPreferences sf=getSharedPreferences("myfileweb", Context.MODE_PRIVATE);
                 SharedPreferences.Editor edit=sf.edit();
                 edit.clear(); // remove existing entries
                 edit.putString("url","https://www.codechef.com/");
@@ -123,7 +165,7 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
 //                Intent m = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hackerrank.com/?utm_expid=.2u09ecQTSny1HV02SEVoCg.0&utm_referrer="));
 //                startActivity(m);
 
-                SharedPreferences sf=getSharedPreferences("myfile", Context.MODE_PRIVATE);
+                SharedPreferences sf=getSharedPreferences("myfileweb", Context.MODE_PRIVATE);
                 SharedPreferences.Editor edit=sf.edit();
                 edit.clear(); // remove existing entries
                 edit.putString("url","https://www.hackerrank.com/?utm_expid=.2u09ecQTSny1HV02SEVoCg.0&utm_referrer=");
@@ -139,7 +181,7 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
             public void onClick(View v) {
 //                Intent n = new Intent(Intent.ACTION_VIEW, Uri.parse("https://codeforces.com/"));
 //                startActivity(n);
-                SharedPreferences sf=getSharedPreferences("myfile", Context.MODE_PRIVATE);
+                SharedPreferences sf=getSharedPreferences("myfileweb", Context.MODE_PRIVATE);
                 SharedPreferences.Editor edit=sf.edit();
                 edit.clear(); // remove existing entries
                 edit.putString("url","https://www.codeforces.com/");
@@ -228,6 +270,12 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "ReportBug");
                 emailIntent.putExtra(Intent.EXTRA_EMAIL, "ReportBug");
                 startActivity(emailIntent);
+                return true;
+
+            case  R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(),Welcome.class));
+                finish();
                 return true;
             default:
                 return false;

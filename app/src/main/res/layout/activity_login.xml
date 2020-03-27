@@ -38,7 +38,7 @@
         android:orientation="vertical"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="45dp"
         android:layout_alignParentBottom="true"
         android:gravity="center">
 
@@ -46,9 +46,9 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
+            android:hint="Registered Email id"
             android:inputType="textPersonName"
-            android:id="@+id/uname"
+            android:id="@+id/email"
             android:background="@drawable/transparent_button"
             android:textColorHint="#FF0"
             android:textColor="#FF0"
@@ -75,7 +75,7 @@
             android:text="SIGN IN"
             android:background="@drawable/button1"
             android:textAllCaps="false"
-            android:onClick="verify"
+            android:id="@+id/signin"
             android:textSize="17sp"/>
 
         <TextView
@@ -91,6 +91,12 @@
             android:textStyle="bold"
 
             android:fontFamily="sans-serif"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:id="@+id/prgsBarLogin"/>
 
 
     </LinearLayout>

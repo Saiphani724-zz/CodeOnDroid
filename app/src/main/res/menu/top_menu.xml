@@ -18,5 +18,10 @@
         app:showAsAction="always"
         android:icon="@drawable/report_bug"/>
 
+    <item
+        android:id="@+id/logout"
+        android:title="Logout"
+        app:showAsAction="always"
+        android:icon="@drawable/logout"/>
 
 </menu>

@@ -62,6 +62,11 @@ public class code_snippets extends AppCompatActivity implements CustomAdapterCom
 
     }*/
     private void create_new_snip() {
+        SharedPreferences sf=getSharedPreferences("mysendsnipfile", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit=sf.edit();
+        edit.clear(); // remove existing entries
+        edit.putString("fname","NA");
+        edit.commit();
         Intent i = new Intent(this,CreateSnipetActivity.class);
         startActivity(i);
     }
@@ -78,6 +83,17 @@ public class code_snippets extends AppCompatActivity implements CustomAdapterCom
     @Override
     public void loadondelete() {
         load_snipets();
+    }
+
+    @Override
+    public void customstartactivity(String Filename) {
+        SharedPreferences sf=getSharedPreferences("mysendsnipfile", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit=sf.edit();
+        edit.clear(); // remove existing entries
+        edit.putString("fname",Filename);
+        edit.commit();
+        Intent i = new Intent(this,CreateSnipetActivity.class);
+        startActivity(i);
     }
 
     public void load_snipets()

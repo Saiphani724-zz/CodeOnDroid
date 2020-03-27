@@ -38,6 +38,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,7 +66,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     String code;
     TextView outputbox;
     Spinner Lang;
-
+    TabLayout tabs;
     String langs[] = {"Cpp14", "C", "Java", "Python3"};
     String exts[] = {"cpp" , "c" , "java" , "py"};
     String openfilename, lang , ext;
@@ -111,7 +112,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
 //        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 //        Intent batteryStatus = getApplicationContext().registerReceiver(null, ifilter);
-        mCustomKeyboard = new CustomKeyboard(this, R.id.keyboardview, R.xml.keyboard);
+        mCustomKeyboard = new CustomKeyboard(this, R.id.keyboardview, R.xml.keyboard,R.id.candidateview,"myfile2");
         mCustomKeyboard.registerEditText(R.id.codebox);
 //        mCustomKeyboard.registerEditText(R.id.outputbox);
         mCustomKeyboard.registerEditText(R.id.inputbox);
@@ -126,7 +127,25 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
         Lang.setAdapter(adap1);
         Lang.setOnItemSelectedListener(this);
+        tabs = (TabLayout) findViewById(R.id.candidateview);
+        tabs.getTabAt(1).select();
+        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mCustomKeyboard.curr_layout=tab.getPosition();
+                mCustomKeyboard.change_keyboard( mCustomKeyboard.keylayouts[mCustomKeyboard.curr_layout]);
+            }
 
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
 //        Toast.makeText(getApplicationContext(),langPos + "\t" + lang, Toast.LENGTH_LONG).show();
 //
@@ -292,7 +311,8 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                     if (mCustomKeyboard.curr_layout>0)
                     {
                         mCustomKeyboard.curr_layout-=1;
-                        mCustomKeyboard.change_keyboard( mCustomKeyboard.keylayouts[mCustomKeyboard.curr_layout]);
+                        tabs.getTabAt(mCustomKeyboard.curr_layout).select();
+                        //mCustomKeyboard.change_keyboard( mCustomKeyboard.keylayouts[mCustomKeyboard.curr_layout]);
                     }
                 }
 
@@ -303,7 +323,8 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                     if (mCustomKeyboard.curr_layout< mCustomKeyboard.kbcount-1)
                     {
                         mCustomKeyboard.curr_layout+=1;
-                        mCustomKeyboard.change_keyboard(mCustomKeyboard.keylayouts[mCustomKeyboard.curr_layout]);
+                        tabs.getTabAt(mCustomKeyboard.curr_layout).select();
+                        //mCustomKeyboard.change_keyboard(mCustomKeyboard.keylayouts[mCustomKeyboard.curr_layout]);
                     }
                 }
 
@@ -315,10 +336,9 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("TAG", "onItemSelected: " + position + " " + id);
+        //Log.d("TAG", "onItemSelected: " + position + " " + id);
         langPos = position;
-        mCustomKeyboard.change_keyboard(R.xml.keyboard);
-        mCustomKeyboard.curr_layout=1;
+        tabs.getTabAt(1).select();
         SharedPreferences sf=getSharedPreferences("myfile2", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit=sf.edit();
         edit.clear(); // remove existing entries
@@ -390,29 +410,6 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     public void share_code() {
-
-//        File file = new File(EditorActivity.this.getFilesDir() + "/shared");
-//        if(!file.exists()){
-//            file.mkdir();
-//        }
-//        try {
-//            file = new File(EditorActivity.this.getFilesDir() + "/shared", "" + filename.getText().toString());
-//            FileWriter writer = new FileWriter(file);
-//            writer.append(codebox.getText().toString());
-//            writer.flush();
-//            writer.close();
-////            Toast.makeText(getApplicationContext(),"Save your code as " + filename.getText().toString(), Toast.LENGTH_LONG).show();
-//        } catch (Exception e) {}
-//
-//        String myFilePath = getApplicationContext().getFilesDir() + "/shared/" + filename.getText().toString();
-//        if(filename.getText().toString().equals(""))
-//        {
-//            Toast.makeText(this, "" + "Give filename to share" , Toast.LENGTH_SHORT).show();
-//        }
-//        else
-//        {
-//            Toast.makeText(this, "" + myFilePath , Toast.LENGTH_SHORT).show();
-//        }
         String getText = codebox.getText().toString();
         if (!getText.equals("") && getText.length() != 0)
             shareText(getText);

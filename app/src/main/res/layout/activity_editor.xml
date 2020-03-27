@@ -119,7 +119,30 @@
         app:layout_constraintStart_toStartOf="@+id/output_guideline" />
 
 
-
+<com.google.android.material.tabs.TabLayout
+    android:layout_width="match_parent"
+    android:layout_height="20dp"
+    android:id="@+id/candidateview"
+    app:layout_constraintBottom_toTopOf="@id/keyboardview"
+    android:visibility="invisible"
+    >
+    <com.google.android.material.tabs.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Symb"/>
+    <com.google.android.material.tabs.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="qwerty"/>
+    <com.google.android.material.tabs.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="keyword"/>
+    <com.google.android.material.tabs.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="var"/>
+</com.google.android.material.tabs.TabLayout>
     <android.inputmethodservice.KeyboardView
         android:id="@+id/keyboardview"
         android:layout_width="fill_parent"

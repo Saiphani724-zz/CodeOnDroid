@@ -52,9 +52,10 @@ class MyCustomAdapter extends BaseAdapter implements ListAdapter {
         title.setText(list.get(position).getTitle());
         final TextView content= (TextView)view.findViewById(R.id.snipcontent);
         content.setText(list.get(position).getContent());
-        Button button_del,button_paste;
+        Button button_del,button_paste,button_edit;
         button_del=(Button)view.findViewById(R.id.deltesnipicon);
         button_paste=(Button)view.findViewById(R.id.pastesnipicon);
+        button_edit=(Button)view.findViewById(R.id.editsnipicon);
         button_paste.setOnClickListener((new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -82,6 +83,13 @@ class MyCustomAdapter extends BaseAdapter implements ListAdapter {
                 }
            }
         }));
+        button_edit.setOnClickListener((new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        comm.customstartactivity(list.get(position).getTitle());
+                    }
+                })
+        );
         return view;
     }
 

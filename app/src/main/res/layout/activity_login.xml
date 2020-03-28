@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Registered Email id"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:id="@+id/email"
             android:background="@drawable/transparent_button"
             android:textColorHint="#FF0"

@@ -194,7 +194,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 AlertDialog.Builder next = new AlertDialog.Builder(LoginActivity.this);
                                                 next.setTitle("Pasword RESET ERROR");
                                                 next.setMessage("Entered Email Id is not Registered in Database");
-                                                next.setIcon(R.drawable.resetcomplete);
+                                                next.setIcon(R.drawable.emailnotregistered);
                                                 // Setting Netural "Cancel" Button
                                                 next.setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                                     public void onClick(DialogInterface dialog, int which) {

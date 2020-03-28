@@ -176,7 +176,6 @@ public class LoginActivity extends AppCompatActivity {
                                                 next.setIcon(R.drawable.resetcomplete);
                                                 next.setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                                     public void onClick(DialogInterface dialog, int which) {
-                                                        // User pressed Cancel button. Write Logic Here
                                                         Toast.makeText(getApplicationContext(), "Check Registered Email!",
                                                                 Toast.LENGTH_LONG).show();
                                                     }
@@ -207,14 +206,12 @@ public class LoginActivity extends AppCompatActivity {
                 });
                 alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // Write your code here to invoke NO event
                         Toast.makeText(LoginActivity.this, "Try Logging in again :)", Toast.LENGTH_SHORT).show();
                         // dialog.cancel();
                     }
                 });
                 alertDialog.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // User pressed Cancel button. Write Logic Here
                         Toast.makeText(LoginActivity.this, "Cancelled",
                                 Toast.LENGTH_SHORT).show();
                     }

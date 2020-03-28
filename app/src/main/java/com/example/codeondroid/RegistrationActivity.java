@@ -45,13 +45,13 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     private static final String TAG = "";
     Button submitB;
-    EditText usernameET,passwordET,emailET;
+    EditText usernameET, passwordET, emailET;
     Spinner favLangS;
     String favLang = "";
 
     DatabaseReference reff;
-    long  uno = 0;
-//    SQLiteDatabase db;
+    long uno = 0;
+    //    SQLiteDatabase db;
     Users user;
     ProgressBar prgsBar;
     FirebaseAuth fAuth;
@@ -71,11 +71,10 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
         user = new Users();
 
-        prgsBar = (ProgressBar)findViewById(R.id.prgsBar);
+        prgsBar = (ProgressBar) findViewById(R.id.prgsBar);
 
         reff = FirebaseDatabase.getInstance().getReference().child("Users");
         fAuth = FirebaseAuth.getInstance();
-
 
 
 //        reff.addValueEventListener(new ValueEventListener() {
@@ -95,7 +94,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
 
         favLangS = findViewById(R.id.favLang);
-        ArrayAdapter adap1=ArrayAdapter.createFromResource(this,R.array.Favourite_Lang,android.R.layout.simple_list_item_activated_1);
+        ArrayAdapter adap1 = ArrayAdapter.createFromResource(this, R.array.Favourite_Lang, android.R.layout.simple_list_item_activated_1);
         favLangS.setAdapter(adap1);
         favLangS.setOnItemSelectedListener(this);
 
@@ -106,12 +105,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-
-
-
-
-
-
     @Override
     public void onClick(View v) {
         final String username = usernameET.getText().toString().trim();
@@ -119,40 +112,32 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         String email = emailET.getText().toString().trim();
 
 
-
-
-        if(TextUtils.isEmpty(username)&&TextUtils.isEmpty(password)&&TextUtils.isEmpty(favLang))
-        {
-            Toast.makeText(getApplicationContext(),"All fields are empty",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(username) && TextUtils.isEmpty(password) && TextUtils.isEmpty(favLang)) {
+            Toast.makeText(getApplicationContext(), "All fields are empty", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if(TextUtils.isEmpty(username))
-        {
+        if (TextUtils.isEmpty(username)) {
             usernameET.setError("Username Not Entered");
             return;
         }
 
-        if(TextUtils.isEmpty(email))
-        {
+        if (TextUtils.isEmpty(email)) {
             emailET.setError("EmailID Not Entered");
             return;
         }
 
-        if(TextUtils.isEmpty(password))
-        {
+        if (TextUtils.isEmpty(password)) {
             passwordET.setError("Password Not Entered");
             return;
         }
 
-        if(favLang.equals("") || favLang.equals("Choose Your Favourite Language"))
-        {
-            Toast.makeText(getApplicationContext(),"Favorite Language not selected",Toast.LENGTH_SHORT).show();
+        if (favLang.equals("") || favLang.equals("Choose Your Favourite Language")) {
+            Toast.makeText(getApplicationContext(), "Favorite Language not selected", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if(password.length() < 6)
-        {
+        if (password.length() < 6) {
             passwordET.setError("Firebase authentication\n requires password of length greater than 6");
             return;
         }
@@ -164,21 +149,19 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
         prgsBar.setVisibility(View.VISIBLE);
 
-        //Authorising user
 
-        fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     prgsBar.setVisibility(View.INVISIBLE);
-                    Toast.makeText(getApplicationContext(),"Successfully Registered",Toast.LENGTH_LONG).show();
-                    String userId =fAuth.getCurrentUser().getUid();
+                    Toast.makeText(getApplicationContext(), "Successfully Registered", Toast.LENGTH_LONG).show();
+                    String userId = fAuth.getCurrentUser().getUid();
                     reff.child(userId).setValue(user);
                     startActivity(new Intent(RegistrationActivity.this, Navigationclass.class));
-                }
-                else {
+                } else {
                     prgsBar.setVisibility(View.INVISIBLE);
-                    Toast.makeText(getApplicationContext(),"Error!\n"+task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Error!\n" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     return;
                 }
             }
@@ -186,23 +169,11 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
 //        String userid = fAuth.getCurrentUser().getUid();
 
-        // FireBase pushing the values into firebase
-
-
-
-
-
-
-
-
-
 
 //        if(username.equals("") || password.equals("") || email.equals("") || favLang.equals("") || favLang.equals("Choose Your Favourite Language")){
 //            Toast.makeText(getApplicationContext(),"Enter All Fields",Toast.LENGTH_LONG).show();
 //            return;
 //        }
-
-
 
 
 //        Cursor c = db.rawQuery("SELECT * FROM users WHERE username ='" + username + "'", null);
@@ -219,11 +190,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 //            output += "Email: " + c.getString(2) + "\n";
 //        }
 //        showMessage("Student Details", output);
-
-
-
-
-
 
 
     }
@@ -243,14 +209,16 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-    public void showMessage(String title, String message){
+
+    public void showMessage(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle(title);
         builder.setMessage(message);
         builder.show();
     }
-    public void goBack(View v){
+
+    public void goBack(View v) {
         startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
     }
 

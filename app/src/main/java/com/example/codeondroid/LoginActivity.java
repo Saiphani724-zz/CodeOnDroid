@@ -217,12 +217,6 @@ public class LoginActivity extends AppCompatActivity {
                         // dialog.cancel();
                     }
                 });
-                alertDialog.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(LoginActivity.this, "Cancelled",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
                 final AlertDialog dialog = alertDialog.create();
                 dialog.show();
                 if (TextUtils.isEmpty(input2.getText().toString())) {

@@ -22,8 +22,6 @@
             android:text="SIGN UP"
             android:textColor="@color/textcolor"
             android:textSize="20sp" />
-
-
     </LinearLayout>
 
 

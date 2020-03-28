@@ -141,10 +141,6 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
-
-
-
-
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     void makeNotificationChannel(String id, String name, int importance)

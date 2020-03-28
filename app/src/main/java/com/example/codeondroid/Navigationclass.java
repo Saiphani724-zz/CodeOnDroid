@@ -3,6 +3,8 @@ package com.example.codeondroid;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
@@ -148,14 +150,16 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
 //                Intent l = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.codechef.com/"));
 //                startActivity(l);
 
-                SharedPreferences sf=getSharedPreferences("myfileweb", Context.MODE_PRIVATE);
-                SharedPreferences.Editor edit=sf.edit();
-                edit.clear(); // remove existing entries
-                edit.putString("url","https://www.codechef.com/");
+//                SharedPreferences sf=getSharedPreferences("myfileweb", Context.MODE_PRIVATE);
+//                SharedPreferences.Editor edit=sf.edit();
+//                edit.clear(); // remove existing entries
+//                edit.putString("url","https://www.codechef.com/");
 
-                edit.commit();
-                Intent i=new Intent(getApplicationContext(),webview.class);
-                startActivity(i);
+//                edit.commit();
+//
+//                CustomTab.openCustomTab();
+                openCustomTab("https://www.codechef.com/");
+
             }
         });
 
@@ -165,14 +169,18 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
 //                Intent m = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hackerrank.com/?utm_expid=.2u09ecQTSny1HV02SEVoCg.0&utm_referrer="));
 //                startActivity(m);
 
-                SharedPreferences sf=getSharedPreferences("myfileweb", Context.MODE_PRIVATE);
-                SharedPreferences.Editor edit=sf.edit();
-                edit.clear(); // remove existing entries
-                edit.putString("url","https://www.hackerrank.com/?utm_expid=.2u09ecQTSny1HV02SEVoCg.0&utm_referrer=");
+//                SharedPreferences sf=getSharedPreferences("myfileweb", Context.MODE_PRIVATE);
+//                SharedPreferences.Editor edit=sf.edit();
+//                edit.clear(); // remove existing entries
+//                edit.putString("url","https://www.hackerrank.com/?utm_expid=.2u09ecQTSny1HV02SEVoCg.0&utm_referrer=");
+//
+//                edit.commit();
+//                Intent i=new Intent(getApplicationContext(),webview.class);
+//                startActivity(i);
 
-                edit.commit();
-                Intent i=new Intent(getApplicationContext(),webview.class);
-                startActivity(i);
+                openCustomTab("https://www.hackerrank.com/?utm_expid=.2u09ecQTSny1HV02SEVoCg.0&utm_referrer=");
+
+
             }
         });
 
@@ -181,18 +189,29 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
             public void onClick(View v) {
 //                Intent n = new Intent(Intent.ACTION_VIEW, Uri.parse("https://codeforces.com/"));
 //                startActivity(n);
-                SharedPreferences sf=getSharedPreferences("myfileweb", Context.MODE_PRIVATE);
-                SharedPreferences.Editor edit=sf.edit();
-                edit.clear(); // remove existing entries
-                edit.putString("url","https://www.codeforces.com/");
-
-                edit.commit();
-                Intent i=new Intent(getApplicationContext(),webview.class);
-                startActivity(i);
+//                SharedPreferences sf=getSharedPreferences("myfileweb", Context.MODE_PRIVATE);
+////                SharedPreferences.Editor edit=sf.edit();
+////                edit.clear(); // remove existing entries
+////                edit.putString("url","https://www.codeforces.com/");
+////
+////                edit.commit();
+////                Intent i=new Intent(getApplicationContext(),webview.class);
+////                startActivity(i);
+                openCustomTab("https://www.codeforces.com/");
             }
         });
 
+    }
 
+    void openCustomTab(String url)
+    {
+        CustomTabsIntent.Builder cusTab = new CustomTabsIntent.Builder();
+        cusTab.setToolbarColor(ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary));
+        cusTab.addDefaultShareMenuItem();
+//        cusTab.setStartAnimations(this, R.anim.slide_in_right, R.anim.slide_out_left);
+//        cusTab.setExitAnimations(this, R.anim.slide_in_left, R.anim.slide_out_right);
+        CustomTabsIntent customTabsIntent = cusTab.build();
+        customTabsIntent.launchUrl(this,Uri.parse(url));
     }
 
 

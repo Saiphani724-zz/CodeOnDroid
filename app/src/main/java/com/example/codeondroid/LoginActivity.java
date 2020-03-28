@@ -152,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
                 alertDialog.setTitle("Reset password");
-                alertDialog.setMessage("Are you sure you want reset your account password this?");
+                alertDialog.setMessage("Are you sure you want reset your account password?");
                 final EditText input2 = new EditText(getApplicationContext());
                 input2.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
                 input2.setHint("Enter registered Email ID");
@@ -163,7 +163,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         if(TextUtils.isEmpty(input2.getText().toString()))
                         {
-                            Toast.makeText(LoginActivity.this,"Emailid not Entered",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,"Email-Id not Entered",Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
@@ -175,14 +175,14 @@ public class LoginActivity extends AppCompatActivity {
                 alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Write your code here to invoke NO event
-                        Toast.makeText(LoginActivity.this, "Try Loging in again :)", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Try Logging in again :)", Toast.LENGTH_SHORT).show();
                         // dialog.cancel();
                     }
                 });
                 alertDialog.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // User pressed Cancel button. Write Logic Here
-                        Toast.makeText(LoginActivity.this, "Cancel",
+                        Toast.makeText(LoginActivity.this, "Cancelled",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });

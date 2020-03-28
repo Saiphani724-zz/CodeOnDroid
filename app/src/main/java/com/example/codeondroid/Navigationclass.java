@@ -100,7 +100,7 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
                 edit.putString("favLang",favlang);
                 edit.putString("uname" , username );
                 edit.putString("email" , emailsend );
-                Toast.makeText(getApplicationContext(),"Welcome "+username,Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(),"Welcome "+username,Toast.LENGTH_LONG).show();
                 edit.commit();
            }
 

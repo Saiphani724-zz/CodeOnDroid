@@ -58,8 +58,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         final FirebaseAuth fAuth = FirebaseAuth.getInstance();
-
-        //User already registered
         if(fAuth.getCurrentUser()!=null)
         {
             // make the channel. The method has been discussed before.

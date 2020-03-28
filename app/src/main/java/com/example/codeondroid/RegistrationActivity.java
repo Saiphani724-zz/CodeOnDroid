@@ -174,7 +174,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                     Toast.makeText(getApplicationContext(),"Successfully Registered",Toast.LENGTH_LONG).show();
                     String userId =fAuth.getCurrentUser().getUid();
                     reff.child(userId).setValue(user);
-                    startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
+                    startActivity(new Intent(RegistrationActivity.this, Navigationclass.class));
                 }
                 else {
                     prgsBar.setVisibility(View.INVISIBLE);

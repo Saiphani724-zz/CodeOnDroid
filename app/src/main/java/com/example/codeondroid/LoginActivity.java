@@ -168,13 +168,27 @@ public class LoginActivity extends AppCompatActivity {
                         else
                         {
                             prgs.setVisibility(View.VISIBLE);
-                            FirebaseAuth.getInstance().sendPasswordResetEmail("user@example.com")
+                            FirebaseAuth.getInstance().sendPasswordResetEmail(input2.getText().toString())
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
                                                 prgs.setVisibility(View.INVISIBLE);
                                                 Toast.makeText(LoginActivity.this,"Password RESET initiated\nCheck your email for further instructions",Toast.LENGTH_LONG).show();
+                                                AlertDialog.Builder next = new AlertDialog.Builder(LoginActivity.this);
+                                                next.setTitle("Pasword RESET");
+                                                next.setMessage("Password RESET initiated\nCheck your email for further instructions");
+                                                next.setIcon(R.drawable.resetcomplete);
+                                                // Setting Netural "Cancel" Button
+                                                next.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        // User pressed Cancel button. Write Logic Here
+                                                        Toast.makeText(getApplicationContext(), "Check Registered Email!",
+                                                                Toast.LENGTH_LONG).show();
+                                                    }
+                                                });
+
+                                                next.show();
                                             }
                                         }
                                     });

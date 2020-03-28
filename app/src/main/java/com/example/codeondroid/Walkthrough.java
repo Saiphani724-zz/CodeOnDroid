@@ -26,6 +26,8 @@ public class Walkthrough extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walkthrough);
+        this.overridePendingTransition(R.anim.zoomin,
+                R.anim.zoomout);
 //
 //        root = findViewById(R.id.root);
 //        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);

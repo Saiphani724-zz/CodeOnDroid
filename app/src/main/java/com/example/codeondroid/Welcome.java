@@ -8,14 +8,15 @@ import android.os.Handler;
 
 public class Welcome extends AppCompatActivity {
 
-    public static int SPLASH_TIME_OUT=2500;
+    public static int SPLASH_TIME_OUT=1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         getSupportActionBar().hide();
-
+        this.overridePendingTransition(R.anim.zoomin,
+                R.anim.zoomout);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -33,7 +33,8 @@ public class ProfilePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
-
+        this.overridePendingTransition(R.anim.zoomin,
+                R.anim.zoomout);
         img = (ImageView) findViewById(R.id.icon);
         but1 = (Button) findViewById(R.id.butProfile);
         butmap = (Button) findViewById(R.id.mapsButton);

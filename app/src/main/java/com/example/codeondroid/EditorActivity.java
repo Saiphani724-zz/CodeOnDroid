@@ -78,7 +78,8 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
-
+        this.overridePendingTransition(R.anim.zoomin,
+                R.anim.zoomout);
         try{
             File file = new File(EditorActivity.this.getFilesDir(), "java_default_template.java");
             FileWriter writer = new FileWriter(file);

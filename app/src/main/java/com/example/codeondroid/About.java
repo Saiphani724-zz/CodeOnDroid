@@ -16,7 +16,8 @@ public class About extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
+        this.overridePendingTransition(R.anim.zoomin,
+                R.anim.zoomout);
         b=(Button)findViewById(R.id.ReportBug);
 
         b.setOnClickListener(new View.OnClickListener() {

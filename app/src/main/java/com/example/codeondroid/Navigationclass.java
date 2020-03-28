@@ -61,6 +61,8 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigationclass);
+        this.overridePendingTransition(R.anim.anim_slide_in_right,
+                R.anim.anim_slide_out_right);
 
         TabLayout tabLayout = findViewById(R.id.tablayout);
         tabLayout.addTab(tabLayout.newTab().setText("All Files"));
@@ -208,8 +210,8 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
         CustomTabsIntent.Builder cusTab = new CustomTabsIntent.Builder();
         cusTab.setToolbarColor(ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary));
         cusTab.addDefaultShareMenuItem();
-//        cusTab.setStartAnimations(this, R.anim.slide_in_right, R.anim.slide_out_left);
-//        cusTab.setExitAnimations(this, R.anim.slide_in_left, R.anim.slide_out_right);
+        cusTab.setStartAnimations(this, R.anim.fadein, R.anim.fadeout);
+        cusTab.setExitAnimations(this, R.anim.fadeout, R.anim.fadein);
         CustomTabsIntent customTabsIntent = cusTab.build();
         customTabsIntent.launchUrl(this,Uri.parse(url));
     }

@@ -167,7 +167,15 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else
                         {
-                            Toast.makeText(LoginActivity.this, "You clicked on YES :   "+which, Toast.LENGTH_SHORT).show();
+                            FirebaseAuth.getInstance().sendPasswordResetEmail("user@example.com")
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(LoginActivity.this,"Password RESET initiated\nCheck your email for further instructions",Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    });
                         }
                     }
 

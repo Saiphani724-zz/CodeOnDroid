@@ -167,11 +167,13 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else
                         {
+                            prgs.setVisibility(View.VISIBLE);
                             FirebaseAuth.getInstance().sendPasswordResetEmail("user@example.com")
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
+                                                prgs.setVisibility(View.INVISIBLE);
                                                 Toast.makeText(LoginActivity.this,"Password RESET initiated\nCheck your email for further instructions",Toast.LENGTH_LONG).show();
                                             }
                                         }

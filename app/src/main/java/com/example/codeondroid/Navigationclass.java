@@ -61,8 +61,8 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigationclass);
-        this.overridePendingTransition(R.anim.anim_slide_in_right,
-                R.anim.anim_slide_out_right);
+        this.overridePendingTransition(R.anim.anim_slide_in_left,
+                R.anim.anim_slide_out_left);
         TabLayout tabLayout = findViewById(R.id.tablayout);
         tabLayout.addTab(tabLayout.newTab().setText("All Files"));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.python_icon));

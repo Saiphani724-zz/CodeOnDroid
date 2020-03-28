@@ -90,7 +90,7 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                String username = dataSnapshot.child(uid).child("username").getValue(String.class);
-               String emailsend  = dataSnapshot.child(uid).child("eamil").getValue(String.class);
+               String emailsend  = dataSnapshot.child(uid).child("email").getValue(String.class);
                 String favlang  = dataSnapshot.child(uid).child("favlang").getValue(String.class);
 
 

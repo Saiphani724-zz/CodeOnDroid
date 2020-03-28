@@ -19,9 +19,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -146,6 +149,7 @@ public class LoginActivity extends AppCompatActivity {
         frgt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final int[] someerror = {0};
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
                 alertDialog.setTitle("Reset password");
                 alertDialog.setMessage("Are you sure you want reset your account password?");
@@ -153,13 +157,16 @@ public class LoginActivity extends AppCompatActivity {
                 input2.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
                 input2.setHint("Enter registered Email ID");
                 alertDialog.setView(input2);
+//                final int[] num = {0};
                 alertDialog.setIcon(R.drawable.sendemail);
+
                 alertDialog.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(TextUtils.isEmpty(input2.getText().toString()))
                         {
                             Toast.makeText(LoginActivity.this,"Email-Id not Entered",Toast.LENGTH_SHORT).show();
+//                            input2.setError("Enter Email ID");
                         }
                         else
                         {
@@ -216,7 +223,41 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
-                alertDialog.show();
+                final AlertDialog dialog = alertDialog.create();
+                dialog.show();
+                if (TextUtils.isEmpty(input2.getText().toString())) {
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                }
+//                input2.setOnTouchListener(new View.OnTouchListener() {
+//                    @Override
+//                    public boolean onTouch(View v, MotionEvent event) {
+//                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+//                        return false;
+//                    }
+//                });
+
+                input2.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        if(s.toString().length()==0){
+                            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                        }
+                        else {
+                            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+
             }
         });
 

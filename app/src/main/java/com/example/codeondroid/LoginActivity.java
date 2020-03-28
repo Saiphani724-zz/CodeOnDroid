@@ -186,10 +186,27 @@ public class LoginActivity extends AppCompatActivity {
                                                                 Toast.LENGTH_LONG).show();
                                                     }
                                                 });
-
+                                                next.show();
+                                            }
+                                            else
+                                            {
+                                                prgs.setVisibility(View.INVISIBLE);
+                                                AlertDialog.Builder next = new AlertDialog.Builder(LoginActivity.this);
+                                                next.setTitle("Pasword RESET ERROR");
+                                                next.setMessage("Entered Email Id is not Registered in Database");
+                                                next.setIcon(R.drawable.resetcomplete);
+                                                // Setting Netural "Cancel" Button
+                                                next.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        // User pressed Cancel button. Write Logic Here
+                                                        Toast.makeText(getApplicationContext(), "Check Entered Email!",
+                                                                Toast.LENGTH_LONG).show();
+                                                    }
+                                                });
                                                 next.show();
                                             }
                                         }
+
                                     });
                         }
                     }

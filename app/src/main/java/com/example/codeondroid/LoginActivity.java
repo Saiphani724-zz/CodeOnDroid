@@ -47,9 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         this.overridePendingTransition(R.anim.anim_slide_in_left,
                 R.anim.anim_slide_out_left);
-
-
-
         b = (Button)findViewById(R.id.signin);
         prgs = (ProgressBar) findViewById(R.id.prgsBarLogin);
 
@@ -67,7 +64,6 @@ public class LoginActivity extends AppCompatActivity {
         final FirebaseAuth fAuth = FirebaseAuth.getInstance();
         if(fAuth.getCurrentUser()!=null)
         {
-            // make the channel. The method has been discussed before.
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 makeNotificationChannel("CHANNEL_1", "Example channel", NotificationManager.IMPORTANCE_HIGH);
             }
@@ -178,7 +174,6 @@ public class LoginActivity extends AppCompatActivity {
                                                 next.setTitle("Pasword RESET");
                                                 next.setMessage("Password RESET initiated\nCheck your email for further instructions");
                                                 next.setIcon(R.drawable.resetcomplete);
-                                                // Setting Netural "Cancel" Button
                                                 next.setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                                     public void onClick(DialogInterface dialog, int which) {
                                                         // User pressed Cancel button. Write Logic Here
@@ -195,10 +190,8 @@ public class LoginActivity extends AppCompatActivity {
                                                 next.setTitle("Pasword RESET ERROR");
                                                 next.setMessage("Entered Email Id is not Registered in Database");
                                                 next.setIcon(R.drawable.emailnotregistered);
-                                                // Setting Netural "Cancel" Button
                                                 next.setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                                     public void onClick(DialogInterface dialog, int which) {
-                                                        // User pressed Cancel button. Write Logic Here
                                                         Toast.makeText(getApplicationContext(), "Check Entered Email!",
                                                                 Toast.LENGTH_LONG).show();
                                                     }

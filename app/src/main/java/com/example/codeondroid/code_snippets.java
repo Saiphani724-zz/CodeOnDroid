@@ -32,6 +32,8 @@ public class code_snippets extends AppCompatActivity implements CustomAdapterCom
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code_snippets);
+        this.overridePendingTransition(R.anim.bounce,
+                R.anim.bounce);
         arr = new ArrayList<Snipetcontaier>();
         load_snipets();
         //l1.setOnItemClickListener(this);

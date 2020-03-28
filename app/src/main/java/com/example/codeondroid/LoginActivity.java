@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -134,6 +135,10 @@ public class LoginActivity extends AppCompatActivity {
                         {
                             prgs.setVisibility(View.INVISIBLE);
                             Toast.makeText(getApplicationContext(),"Error!\n"+task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                            AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext());
+                            alertDialog.setTitle("Forgot your password?");
+
+
                             return;
                         }
                     }

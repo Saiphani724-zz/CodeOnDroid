@@ -174,7 +174,6 @@ public class LoginActivity extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
                                                 prgs.setVisibility(View.INVISIBLE);
-                                                Toast.makeText(LoginActivity.this,"Password RESET initiated\nCheck your email for further instructions",Toast.LENGTH_LONG).show();
                                                 AlertDialog.Builder next = new AlertDialog.Builder(LoginActivity.this);
                                                 next.setTitle("Pasword RESET");
                                                 next.setMessage("Password RESET initiated\nCheck your email for further instructions");

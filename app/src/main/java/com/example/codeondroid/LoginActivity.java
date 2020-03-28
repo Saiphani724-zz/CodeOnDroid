@@ -5,10 +5,12 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -17,6 +19,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -36,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 //    SQLiteDatabase db;
     Button b;
     ProgressBar prgs;
+    int someError=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,8 @@ public class LoginActivity extends AppCompatActivity {
 
         b = (Button)findViewById(R.id.signin);
         prgs = (ProgressBar) findViewById(R.id.prgsBarLogin);
+
+        TextView frgt = (TextView) findViewById(R.id.forgotpassword);
 
         TextView signUp_text = findViewById(R.id.signUp_text);
 //        db = openOrCreateDatabase("CodeEditorDB", MODE_PRIVATE, null);
@@ -135,17 +141,68 @@ public class LoginActivity extends AppCompatActivity {
                         {
                             prgs.setVisibility(View.INVISIBLE);
                             Toast.makeText(getApplicationContext(),"Error!\n"+task.getException().getMessage(),Toast.LENGTH_LONG).show();
-                            AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext());
-                            alertDialog.setTitle("Forgot your password?");
-
-
-                            return;
                         }
                     }
                 });
             }
         });
+
+        frgt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
+                alertDialog.setTitle("Reset password");
+                alertDialog.setMessage("Are you sure you want reset your account password this?");
+                final EditText input2 = new EditText(getApplicationContext());
+                input2.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                input2.setHint("Enter registered Email ID");
+                alertDialog.setView(input2);
+                alertDialog.setIcon(R.drawable.sendemail);
+                alertDialog.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(TextUtils.isEmpty(input2.getText().toString()))
+                        {
+                            Toast.makeText(LoginActivity.this,"Emailid not Entered",Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(LoginActivity.this, "You clicked on YES :   "+which, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                });
+                alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to invoke NO event
+                        Toast.makeText(LoginActivity.this, "Try Loging in again :)", Toast.LENGTH_SHORT).show();
+                        // dialog.cancel();
+                    }
+                });
+                alertDialog.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // User pressed Cancel button. Write Logic Here
+                        Toast.makeText(LoginActivity.this, "Cancel",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+                alertDialog.show();
+            }
+        });
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     void makeNotificationChannel(String id, String name, int importance)
     {

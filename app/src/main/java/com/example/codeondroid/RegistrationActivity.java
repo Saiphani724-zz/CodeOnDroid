@@ -61,8 +61,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        this.overridePendingTransition(R.anim.anim_slide_in_left,
-                R.anim.anim_slide_out_left);
+        this.overridePendingTransition(R.anim.anim_slide_in_right,
+                R.anim.anim_slide_out_right);
 
         usernameET = findViewById(R.id.username);
         passwordET = findViewById(R.id.password);

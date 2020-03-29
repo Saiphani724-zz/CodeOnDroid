@@ -63,7 +63,7 @@ public class ProfilePage extends AppCompatActivity {
         but2 = (Button) findViewById(R.id.butUpload);
         butmap = (Button) findViewById(R.id.mapsButton);
         pbar = (ProgressBar)findViewById(R.id.pbar);
-
+        but2.setEnabled(false);
         showUsername = findViewById(R.id.showUsername);
         showEmail = findViewById(R.id.showEmail);
         showFavLang = findViewById(R.id.showFavLang);
@@ -105,6 +105,7 @@ public class ProfilePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 chooseFile();
+                but2.setEnabled(true);
             }
         });
 
@@ -124,9 +125,11 @@ public class ProfilePage extends AppCompatActivity {
                         }
                     });
                 }
+                else{
+                    pbar.setVisibility(View.VISIBLE);
+                    uploadFile(uid);
+                }
 
-                pbar.setVisibility(View.VISIBLE);
-                uploadFile(uid);
             }
         });
 

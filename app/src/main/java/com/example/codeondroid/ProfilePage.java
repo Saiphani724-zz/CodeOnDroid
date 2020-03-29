@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
@@ -48,7 +49,7 @@ public class ProfilePage extends AppCompatActivity {
     ProgressBar pbar;
     public static final int GET_FROM_GALLERY = 3;
     TextView showUsername, showEmail , showFavLang;
-
+    private StorageTask uploadTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +111,20 @@ public class ProfilePage extends AppCompatActivity {
         but2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(uploadTask != null && uploadTask.isInProgress())
+                {
+                    AlertDialog.Builder next2 = new AlertDialog.Builder(ProfilePage.this);
+                    next2.setTitle("Upload In Progress");
+                    next2.setMessage("Be Patient\nElse\nGet a better internet connection");
+                    next2.setIcon(R.drawable.uploadprogress);
+                    next2.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "Ok!",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+
                 pbar.setVisibility(View.VISIBLE);
                 uploadFile(uid);
             }
@@ -126,7 +141,7 @@ public class ProfilePage extends AppCompatActivity {
 
     private void uploadFile(String uid) {
         StorageReference Ref = refstore.child(uid+"."+getExtension(imguri));
-        Ref.putFile(imguri)
+        uploadTask = Ref.putFile(imguri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

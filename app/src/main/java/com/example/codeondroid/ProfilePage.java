@@ -19,6 +19,7 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,7 @@ public class ProfilePage extends AppCompatActivity {
     StorageReference refstore;
     public Uri imguri;
     DatabaseReference reff;
+    ProgressBar pbar;
     public static final int GET_FROM_GALLERY = 3;
     TextView showUsername, showEmail , showFavLang;
 
@@ -59,6 +61,7 @@ public class ProfilePage extends AppCompatActivity {
         but1 = (Button) findViewById(R.id.butProfile);
         but2 = (Button) findViewById(R.id.butUpload);
         butmap = (Button) findViewById(R.id.mapsButton);
+        pbar = (ProgressBar)findViewById(R.id.pbar);
 
         showUsername = findViewById(R.id.showUsername);
         showEmail = findViewById(R.id.showEmail);
@@ -107,6 +110,7 @@ public class ProfilePage extends AppCompatActivity {
         but2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pbar.setVisibility(View.VISIBLE);
                 uploadFile(uid);
             }
         });
@@ -128,6 +132,7 @@ public class ProfilePage extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         // Get a URL to the uploaded content
                         //Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                        pbar.setVisibility(View.INVISIBLE);
                         AlertDialog.Builder next = new AlertDialog.Builder(ProfilePage.this);
                         next.setTitle("Profile Image");
                         next.setMessage("The profile image has been uploaded to database");

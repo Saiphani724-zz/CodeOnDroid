@@ -17,16 +17,63 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 
-
-public class CFiles extends Fragment implements AdapterView.OnItemClickListener {
+public class CFiles extends Fragment implements AdapterView.OnItemClickListener,Recycleviewcommunicator {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    @Override
+    public void load_files() {
+        //load files and set adapter for recycler view
+    }
+
+    @Override
+    public void share_files(String filename) {
+        try {
+            String yourFilePath = getActivity().getFilesDir() + "/" + filename;
+            FileInputStream fin=new FileInputStream(yourFilePath);
+            InputStreamReader isr = new InputStreamReader(fin);
+            BufferedReader bufferedReader = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while (true) {
+                try {
+                    if (!((line = bufferedReader.readLine()) != null)) break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                sb.append(line + "\n");
+            }
+            //Log.d("TAG", "onCreate: " + sb.toString()  + "\n") ;
+            shareText(sb.toString());
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    private void shareText(String text) {
+
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");// Plain format text
+
+        // You can add subject also
+        /*
+         * sharingIntent.putExtra( android.content.Intent.EXTRA_SUBJECT,
+         * "Subject Here");
+         */
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, text);
+        startActivityForResult(Intent.createChooser(sharingIntent, "Share Text Using"),0);
+    }
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

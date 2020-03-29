@@ -19,8 +19,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 
 /**
@@ -28,11 +33,75 @@ import java.io.FilenameFilter;
  * Use the {@link AllFiles#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AllFiles extends Fragment implements AdapterView.OnItemClickListener {
+public class AllFiles extends Fragment implements AdapterView.OnItemClickListener,Recycleviewcommunicator {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    ListView myfiles;
+    String[] files;
+    SharedPreferences sf;
+
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    @Override
+    public void load_files() {
+        File f = new File("" + getActivity().getFilesDir());
+        FilenameFilter fileFilter = new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.contains(".");
+            }
+        };
+        files = f.list(fileFilter);
+        mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.myfiles);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new CardViewDataAdapter(files,this);
+        mRecyclerView.setAdapter(mAdapter);
+
+    }
+
+    @Override
+    public void share_files(String filename) {
+        try {
+            String yourFilePath = getActivity().getFilesDir() + "/" + filename;
+            FileInputStream fin=new FileInputStream(yourFilePath);
+            InputStreamReader isr = new InputStreamReader(fin);
+            BufferedReader bufferedReader = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while (true) {
+                try {
+                    if (!((line = bufferedReader.readLine()) != null)) break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                sb.append(line + "\n");
+            }
+            //Log.d("TAG", "onCreate: " + sb.toString()  + "\n") ;
+            shareText(sb.toString());
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    private void shareText(String text) {
+
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");// Plain format text
+
+        // You can add subject also
+        /*
+         * sharingIntent.putExtra( android.content.Intent.EXTRA_SUBJECT,
+         * "Subject Here");
+         */
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, text);
+        startActivityForResult(Intent.createChooser(sharingIntent, "Share Text Using"),0);
+    }
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
@@ -44,13 +113,7 @@ public class AllFiles extends Fragment implements AdapterView.OnItemClickListene
     private String mParam2;
 
 
-    ListView myfiles;
-    String[] files;
-    SharedPreferences sf;
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
 
 
 
@@ -130,7 +193,7 @@ public class AllFiles extends Fragment implements AdapterView.OnItemClickListene
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new CardViewDataAdapter(files);
+        mAdapter = new CardViewDataAdapter(files,this);
         mRecyclerView.setAdapter(mAdapter);
 
 

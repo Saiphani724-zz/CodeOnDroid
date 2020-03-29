@@ -29,14 +29,31 @@
             android:src="@drawable/adding"
             android:autofillHints="Choose Profile photo"
             />
-
-        <Button
-            android:id="@+id/butProfile"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="Profile Photo" />
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/butProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button3"
+                android:text="Profile Photo" />
+            <Button
+                android:layout_width="match_parent"
+                android:id="@+id/butUpload"
+                android:padding="5dp"
+                android:background="@drawable/button4"
+                android:layout_height="wrap_content"
+                android:text="Upload as profile Photo"/>
+
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 

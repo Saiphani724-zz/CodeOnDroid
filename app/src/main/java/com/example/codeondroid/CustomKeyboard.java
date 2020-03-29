@@ -344,22 +344,19 @@ public class CustomKeyboard {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override public boolean onTouch(View v, MotionEvent event) {
                 EditText edittext = (EditText) v;
-                int inType = edittext.getInputType();       // Backup the input type
+                //int inType = edittext.getInputType();       // Backup the input type
                 //edittext.setInputType(InputType.TYPE_NULL); // Disable standard keyboard
                 edittext.setShowSoftInputOnFocus(false);
                 edittext.onTouchEvent(event);               // Call native handler
-                edittext.setInputType(inType);              // Restore input type
+                //edittext.setInputType(inType);              // Restore input type
 
-                //return true; // Consume touch event
-                InputMethodManager imm = (InputMethodManager) mHostActivity.getApplicationContext().getSystemService(
-                        android.content.Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
-                return true;
+                return false;
             }
         });
         // Disable spell check (hex strings look like words to Android)
         edittext.setInputType(edittext.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        edittext.setTextIsSelectable(true);
     }
     public void change_keyboard(int layid)
     {

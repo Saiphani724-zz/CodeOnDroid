@@ -105,11 +105,11 @@ public class ProfilePage extends AppCompatActivity {
                 public void onFailure(@NonNull Exception e) {
                     pbar.setVisibility(View.INVISIBLE);
                     but1.setEnabled(true);
-                    Toast.makeText(ProfilePage.this,"Failed to load Profile Photo.\nCheck Internet Connection!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfilePage.this,"No Profile photo uploaded",Toast.LENGTH_SHORT).show();
                 }
             });
         } catch (IOException e) {
-            Toast.makeText(ProfilePage.this,"No Profile photo chosen",Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfilePage.this,"Failed to load Profile Photo.\nCheck Internet Connection!",Toast.LENGTH_SHORT).show();
             but1.setEnabled(true);
             e.printStackTrace();
         }

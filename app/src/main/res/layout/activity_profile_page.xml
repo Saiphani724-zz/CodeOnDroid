@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,10 +8,14 @@
     android:layout_height="match_parent"
     tools:context=".ProfilePage">
 
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:layout_weight="2"
         android:id="@+id/linearl"
         android:orientation="horizontal"
         android:background="@color/colorBackground">
@@ -20,7 +24,7 @@
         <ImageView
             android:id="@+id/icon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="10"
             android:src="@drawable/adding"
             android:autofillHints="Choose Profile photo"
@@ -37,65 +41,95 @@
     </LinearLayout>
 
 
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
-        android:layout_marginLeft="30dp"
-        android:text="Username :"
-        android:textSize="20dp"
-        />
+        android:layout_weight="5"
+        android:padding="30dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/showUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="300dp"
-        android:text="--"
-        android:textSize="20dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="370dp"
-        android:layout_marginLeft="30dp"
-        android:text="Email :"
-        android:textSize="20dp"
-        />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="Username :"
+                android:textSize="20dp"
+                />
 
-    <TextView
-        android:id="@+id/showEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="370dp"
-        android:layout_marginLeft="250dp"
-        android:text="--"
-        android:textSize="20dp"
-        />
+            <TextView
+                android:id="@+id/showUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textSize="20dp" />
+        </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="450dp"
-        android:layout_marginLeft="30dp"
-        android:text="Favourite Language :"
-        android:textSize="20dp"
-        />
 
-    <TextView
-        android:id="@+id/showFavLang"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="450dp"
-        android:layout_marginLeft="250dp"
-        android:text="--"
-        android:textSize="20dp"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email :"
+                android:layout_marginLeft="30dp"
+                android:textSize="20dp"
+                />
+
+            <TextView
+                android:id="@+id/showEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textSize="20dp"
+                />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="Favourite Language :"
+                android:textSize="20dp"
+                />
+
+            <TextView
+                android:id="@+id/showFavLang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textSize="20dp"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_marginTop="500dp"
+    android:layout_weight=".05"
     android:layout_height="wrap_content">
     <TextView
         android:layout_width="wrap_content"
@@ -119,4 +153,4 @@
 
 </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

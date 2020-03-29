@@ -1,5 +1,6 @@
 package com.example.codeondroid;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -21,13 +22,15 @@ import com.google.firebase.storage.StorageReference;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
 
 public class ProfilePage extends AppCompatActivity {
 
     ImageView img;
-    Button but1,butmap;
+    Button but1,but2,butmap;
     Bitmap bitmap = null;
     StorageReference refstore;
+    public Uri imguri;
     public static final int GET_FROM_GALLERY = 3;
     TextView showUsername, showEmail , showFavLang;
 
@@ -40,6 +43,7 @@ public class ProfilePage extends AppCompatActivity {
                 R.anim.zoomout);
         img = (ImageView) findViewById(R.id.icon);
         but1 = (Button) findViewById(R.id.butProfile);
+        but2 = (Button) findViewById(R.id.butUpload);
         butmap = (Button) findViewById(R.id.mapsButton);
 
         showUsername = findViewById(R.id.showUsername);
@@ -78,9 +82,35 @@ public class ProfilePage extends AppCompatActivity {
             }
         });
 
+        but1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseFile();
+            }
+        });
+
+
+
     }
 
-//    @Override
+    private void chooseFile() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1&&resultCode==RESULT_OK&&data!=null && data.getData()!=null)
+        {
+            imguri = data.getData();
+            img.setImageURI(imguri);
+        }
+    }
+
+    //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
 //
@@ -106,6 +136,13 @@ public class ProfilePage extends AppCompatActivity {
 //        bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
 //        return outputStream.toByteArray();//CHANGE FOR IMAGE IN DB
 //    }
+
+
+
+
+
+
+
 
 
 

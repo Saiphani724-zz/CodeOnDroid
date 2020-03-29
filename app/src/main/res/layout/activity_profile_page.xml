@@ -41,11 +41,12 @@
                 android:padding="5dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/button3"
-                android:text="Profile Photo" />
+                android:text="Select\nProfile Photo" />
             <Button
                 android:layout_width="match_parent"
                 android:id="@+id/butUpload"
                 android:padding="5dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/button4"
                 android:layout_height="wrap_content"
                 android:text="Upload as profile Photo"/>

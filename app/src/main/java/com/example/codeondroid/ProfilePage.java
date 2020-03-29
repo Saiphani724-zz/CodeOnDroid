@@ -71,7 +71,7 @@ public class ProfilePage extends AppCompatActivity {
         showEmail = findViewById(R.id.showEmail);
         showFavLang = findViewById(R.id.showFavLang);
         final FirebaseAuth fAuth = FirebaseAuth.getInstance();
-
+        but1.setEnabled(false);
         SharedPreferences sf=getSharedPreferences("myfile", Context.MODE_PRIVATE);
         showUsername.setText(sf.getString("uname","NA"));
         showFavLang.setText(sf.getString("favLang","NA"));
@@ -97,17 +97,20 @@ public class ProfilePage extends AppCompatActivity {
                     pbar.setVisibility(View.INVISIBLE);
                     Bitmap myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
                     img.setImageBitmap(myBitmap);
+                    but1.setEnabled(true);
                     Toast.makeText(ProfilePage.this,"Profile Image\nFound in Database",Toast.LENGTH_LONG).show();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     pbar.setVisibility(View.INVISIBLE);
+                    but1.setEnabled(true);
                     Toast.makeText(ProfilePage.this,"Failed to load Profile Photo.\nCheck Internet Connection!",Toast.LENGTH_SHORT).show();
                 }
             });
         } catch (IOException e) {
             Toast.makeText(ProfilePage.this,"No Profile photo chosen",Toast.LENGTH_SHORT).show();
+            but1.setEnabled(true);
             e.printStackTrace();
         }
 

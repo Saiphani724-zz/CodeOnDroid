@@ -1,10 +1,14 @@
 package com.example.codeondroid;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -12,12 +16,20 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -31,6 +43,7 @@ public class ProfilePage extends AppCompatActivity {
     Bitmap bitmap = null;
     StorageReference refstore;
     public Uri imguri;
+    DatabaseReference reff;
     public static final int GET_FROM_GALLERY = 3;
     TextView showUsername, showEmail , showFavLang;
 
@@ -41,6 +54,7 @@ public class ProfilePage extends AppCompatActivity {
         setContentView(R.layout.activity_profile_page);
         this.overridePendingTransition(R.anim.zoomin,
                 R.anim.zoomout);
+        reff = FirebaseDatabase.getInstance().getReference().child("Users");
         img = (ImageView) findViewById(R.id.icon);
         but1 = (Button) findViewById(R.id.butProfile);
         but2 = (Button) findViewById(R.id.butUpload);
@@ -49,12 +63,13 @@ public class ProfilePage extends AppCompatActivity {
         showUsername = findViewById(R.id.showUsername);
         showEmail = findViewById(R.id.showEmail);
         showFavLang = findViewById(R.id.showFavLang);
+        final FirebaseAuth fAuth = FirebaseAuth.getInstance();
 
         SharedPreferences sf=getSharedPreferences("myfile", Context.MODE_PRIVATE);
         showUsername.setText(sf.getString("uname","NA"));
         showFavLang.setText(sf.getString("favLang","NA"));
         showEmail.setText(sf.getString("email","NA"));
-
+        final String uid = fAuth.getCurrentUser().getUid();
 
 //        but1.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -69,7 +84,7 @@ public class ProfilePage extends AppCompatActivity {
                 Toast.makeText(ProfilePage.this,"Profile Photo",Toast.LENGTH_SHORT).show();
             }
         });
-
+        refstore = FirebaseStorage.getInstance().getReference("Images");
         butmap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +104,50 @@ public class ProfilePage extends AppCompatActivity {
             }
         });
 
+        but2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadFile(uid);
+            }
+        });
 
+    }
+
+    private String getExtension(Uri uri)
+    {
+        ContentResolver cr = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(cr.getType(uri));
+    }
+
+    private void uploadFile(String uid) {
+        StorageReference Ref = refstore.child(uid+"."+getExtension(imguri));
+        Ref.putFile(imguri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // Get a URL to the uploaded content
+                        //Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                        AlertDialog.Builder next = new AlertDialog.Builder(ProfilePage.this);
+                        next.setTitle("Profile Image");
+                        next.setMessage("The profile image has been uploaded to database");
+                        next.setIcon(R.drawable.resetcomplete);
+                        next.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getApplicationContext(), "Success!",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        next.show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle unsuccessful uploads
+                        // ...
+                    }
+                });
 
     }
 

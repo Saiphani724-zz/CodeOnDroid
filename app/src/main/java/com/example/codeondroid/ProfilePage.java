@@ -141,6 +141,7 @@ public class ProfilePage extends AppCompatActivity {
         but1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 chooseFile();
             }
         });
@@ -213,10 +214,21 @@ public class ProfilePage extends AppCompatActivity {
     }
 
     private void chooseFile() {
-        Intent intent = new Intent();
+        final Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,1);
+        AlertDialog.Builder next3 = new AlertDialog.Builder(ProfilePage.this);
+                next3.setTitle("FileSelect");
+                next3.setMessage("      Preferably select a landscape photo.\n\n\nSince the image is uploaded to Firebase (Firestore) as a bitmap, the orientation will change if the image is taken in Portrait mode." +
+                        "\n\nHowever a portrait photo will also work normally.");
+                next3.setIcon(R.drawable.landscapelock);
+                next3.setNeutralButton("Will Try!", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        startActivityForResult(intent,1);
+                    }
+                });
+        next3.show();
     }
 
     @Override

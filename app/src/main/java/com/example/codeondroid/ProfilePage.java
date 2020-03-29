@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -28,12 +29,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
@@ -73,7 +76,40 @@ public class ProfilePage extends AppCompatActivity {
         showUsername.setText(sf.getString("uname","NA"));
         showFavLang.setText(sf.getString("favLang","NA"));
         showEmail.setText(sf.getString("email","NA"));
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ProfilePage.this,"Profile Photo",Toast.LENGTH_SHORT).show();
+            }
+        });
+        pbar.setVisibility(View.VISIBLE);
+        Toast.makeText(ProfilePage.this,"Retreiving Profile Photo\nfrom Database",Toast.LENGTH_LONG).show();
+        refstore = FirebaseStorage.getInstance().getReference("Images");
         final String uid = fAuth.getCurrentUser().getUid();
+        final File file;
+        try {
+            file = File.createTempFile("image",".jpg");//
+            StorageReference myProfilePhoto = FirebaseStorage.getInstance().getReferenceFromUrl("gs://codeondroid.appspot.com/Images").child(uid+".jpg");
+
+            myProfilePhoto.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    pbar.setVisibility(View.INVISIBLE);
+                    Bitmap myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                    img.setImageBitmap(myBitmap);
+                    Toast.makeText(ProfilePage.this,"Profile Image\nFound in Database",Toast.LENGTH_LONG).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    pbar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(ProfilePage.this,"Failed to load Profile Photo.\nCheck Internet Connection!",Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (IOException e) {
+            Toast.makeText(ProfilePage.this,"No Profile photo chosen",Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
 
 //        but1.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -82,13 +118,7 @@ public class ProfilePage extends AppCompatActivity {
 //            }
 //        });
 
-        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(ProfilePage.this,"Profile Photo",Toast.LENGTH_SHORT).show();
-            }
-        });
-        refstore = FirebaseStorage.getInstance().getReference("Images");
+
         butmap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,11 +131,14 @@ public class ProfilePage extends AppCompatActivity {
             }
         });
 
+
+
+
+
         but1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 chooseFile();
-                but2.setEnabled(true);
             }
         });
 
@@ -132,6 +165,8 @@ public class ProfilePage extends AppCompatActivity {
 
             }
         });
+
+
 
     }
 
@@ -188,6 +223,7 @@ public class ProfilePage extends AppCompatActivity {
         {
             imguri = data.getData();
             img.setImageURI(imguri);
+            but2.setEnabled(true);
         }
     }
 

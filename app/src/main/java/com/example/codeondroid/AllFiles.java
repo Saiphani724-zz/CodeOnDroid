@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,6 +48,13 @@ public class AllFiles extends Fragment implements AdapterView.OnItemClickListene
     String[] files;
     SharedPreferences sf;
 
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+
+
+
     public AllFiles() {
         // Required empty public constructor
 
@@ -83,7 +92,7 @@ public class AllFiles extends Fragment implements AdapterView.OnItemClickListene
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_all_files, container, false);
-        myfiles = view.findViewById(R.id.myfiles);
+//        myfiles = view.findViewById(R.id.myfiles);
 
         File f = new File("" + getActivity().getFilesDir());
         FilenameFilter fileFilter = new FilenameFilter() {
@@ -94,28 +103,35 @@ public class AllFiles extends Fragment implements AdapterView.OnItemClickListene
         };
         files = f.list(fileFilter);
 
-        ArrayAdapter<String> ada = new ArrayAdapter<String>
-                (getActivity(), android.R.layout.simple_list_item_1, files){
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent){
-                // Get the Item from ListView
-                View view = super.getView(position, convertView, parent);
+//        ArrayAdapter<String> ada = new ArrayAdapter<String>
+//                (getActivity(), android.R.layout.simple_list_item_1, files){
+//            @Override
+//            public View getView(int position, View convertView, ViewGroup parent){
+//                // Get the Item from ListView
+//                View view = super.getView(position, convertView, parent);
+//
+//                // Initialize a TextView for ListView each Item
+//                TextView tv = (TextView) view.findViewById(android.R.id.text1);
+//
+//                // Set the text color of TextView (ListView Item)
+//                tv.setTextColor(getResources().getColor(R.color.CodeColor));
+//
+//                // Generate ListView Item using TextView
+//                return view;
+//            }
+//        };
+//
+//        // DataBind ListView with items from ArrayAdapter
+//        myfiles.setAdapter(ada);
+//        myfiles.setOnItemClickListener(this);
+//
 
-                // Initialize a TextView for ListView each Item
-                TextView tv = (TextView) view.findViewById(android.R.id.text1);
-
-                // Set the text color of TextView (ListView Item)
-                tv.setTextColor(getResources().getColor(R.color.CodeColor));
-
-                // Generate ListView Item using TextView
-                return view;
-            }
-        };
-
-        // DataBind ListView with items from ArrayAdapter
-        myfiles.setAdapter(ada);
-        myfiles.setOnItemClickListener(this);
-
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.myfiles);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new CardViewDataAdapter(files);
+        mRecyclerView.setAdapter(mAdapter);
 
 
 

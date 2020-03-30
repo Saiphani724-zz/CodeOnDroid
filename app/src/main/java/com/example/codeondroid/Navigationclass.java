@@ -13,11 +13,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -27,6 +30,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.io.File;
+import java.io.FileWriter;
 
 public class Navigationclass extends AppCompatActivity implements AllFiles.OnFragmentInteractionListener, PythonFiles.OnFragmentInteractionListener  {
 
@@ -48,6 +54,9 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
         setContentView(R.layout.activity_navigationclass);
         this.overridePendingTransition(R.anim.anim_slide_in_left,
                 R.anim.anim_slide_out_left);
+
+        createTemplates();
+
         TabLayout tabLayout = findViewById(R.id.tablayout);
         tabLayout.addTab(tabLayout.newTab().setText("All Files"));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.python_icon));
@@ -302,15 +311,57 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
 
     @Override
     protected void onRestart() {
-        super.onRestart();
-
-
 //        Fragment frg = null;
 //        frg = getSupportFragmentManager().findFragmentById(R.id.all_files);
 //        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //        ft.detach(frg);
 //        ft.attach(frg);
 //        ft.commit();
+        createTemplates();
+        super.onRestart();
+        startActivity(new Intent(getApplicationContext(), Navigationclass.class));
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        createTemplates();
+        super.onResume();
+//        startActivity(new Intent(getApplicationContext(), Navigationclass.class));
+    }
+
+    public void createTemplates(){
+        try{
+            File file = new File(Navigationclass.this.getFilesDir(), "java_default_template.java");
+            FileWriter writer = new FileWriter(file);
+            writer.append("import java.util.*;\n" +
+                    "class Hello{\n" +
+                    "public static void main(String args[]){\n" +
+                    "Scanner sc = new Scanner(System.in);\n" +
+                    "int a = sc.nextInt();\n" +
+                    "System.out.println(a*a%3);}\n" +
+                    "}");
+            writer.flush();
+            writer.close();
+        } catch (Exception e) {
+
+        }
+        try{
+            File file = new File(Navigationclass.this.getFilesDir(), "cpp_default_template.cpp");
+            FileWriter writer = new FileWriter(file);
+            writer.append("#include <iostream>\n" +
+                    "    using namespace std;\n" +
+                    "    int main() {\n\n\n\n" +
+                    "        return 0;\n" +
+                    "    }");
+
+            writer.flush();
+            writer.close();
+        } catch (Exception e) {
+
+        }
+
 
     }
 }

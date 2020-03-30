@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,33 +29,27 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link PythonFiles#newInstance} factory method to
+ * create an instance of this fragment.
+ */
 public class PythonFiles extends Fragment implements AdapterView.OnItemClickListener,Recycleviewcommunicator {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
-    }
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-
     ListView myfiles;
     String[] files;
     SharedPreferences sf;
 
-    public PythonFiles() {
-        // Required empty public constructor
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
-    }
     @Override
     public void load_files() {
-        //load files and set adapter for recycler view
+        onResume();
     }
 
     @Override
@@ -93,6 +90,28 @@ public class PythonFiles extends Fragment implements AdapterView.OnItemClickList
         startActivityForResult(Intent.createChooser(sharingIntent, "Share Text Using"),0);
     }
 
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        public void onFragmentInteraction(Uri uri);
+    }
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+    public View view;
+
+
+
+
+
+
+
+    public PythonFiles() {
+        // Required empty public constructor
+
+    }
+
+
 
     public static PythonFiles newInstance(String param1, String param2) {
         PythonFiles fragment = new PythonFiles();
@@ -122,9 +141,9 @@ public class PythonFiles extends Fragment implements AdapterView.OnItemClickList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view =inflater.inflate(R.layout.fragment_python_files, container, false);
-        myfiles = view.findViewById(R.id.myfiles);
+
+        view =inflater.inflate(R.layout.fragment_python_files, container, false);
+
 
         File f = new File("" + getActivity().getFilesDir());
         FilenameFilter fileFilter = new FilenameFilter() {
@@ -135,28 +154,13 @@ public class PythonFiles extends Fragment implements AdapterView.OnItemClickList
         };
         files = f.list(fileFilter);
 
-        ArrayAdapter<String> ada = new ArrayAdapter<String>
-                (getActivity(), android.R.layout.simple_list_item_1, files){
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent){
-                // Get the Item from ListView
-                View view = super.getView(position, convertView, parent);
 
-                // Initialize a TextView for ListView each Item
-                TextView tv = (TextView) view.findViewById(android.R.id.text1);
-
-                // Set the text color of TextView (ListView Item)
-                tv.setTextColor(getResources().getColor(R.color.CodeColor));
-
-                // Generate ListView Item using TextView
-                return view;
-            }
-        };
-
-        // DataBind ListView with items from ArrayAdapter
-        myfiles.setAdapter(ada);
-        myfiles.setOnItemClickListener(this);
-
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.myfiles);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new CardViewDataAdapter(files,this);
+        mRecyclerView.setAdapter(mAdapter);
 
 
 
@@ -176,4 +180,28 @@ public class PythonFiles extends Fragment implements AdapterView.OnItemClickList
 
     }
 
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        File f = new File("" + getActivity().getFilesDir());
+        FilenameFilter fileFilter = new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.contains(".py");
+            }
+        };
+        files = f.list(fileFilter);
+
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.myfiles);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new CardViewDataAdapter(files,this);
+        mRecyclerView.setAdapter(mAdapter);
+
+    }
 }

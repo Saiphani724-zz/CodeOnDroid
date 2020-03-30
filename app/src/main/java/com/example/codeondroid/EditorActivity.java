@@ -80,35 +80,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         setContentView(R.layout.activity_editor);
         this.overridePendingTransition(R.anim.zoomin,
                 R.anim.zoomout);
-        try{
-            File file = new File(EditorActivity.this.getFilesDir(), "java_default_template.java");
-            FileWriter writer = new FileWriter(file);
-            writer.append("import java.util.*;\n" +
-                    "class Hello{\n" +
-                    "public static void main(String args[]){\n" +
-                    "Scanner sc = new Scanner(System.in);\n" +
-                    "int a = sc.nextInt();\n" +
-                    "System.out.println(a*a%3);}\n" +
-                    "}");
-            writer.flush();
-            writer.close();
-        } catch (Exception e) {
 
-        }
-        try{
-            File file = new File(EditorActivity.this.getFilesDir(), "cpp_default_template.cpp");
-            FileWriter writer = new FileWriter(file);
-            writer.append("#include <iostream>\n" +
-                    "    using namespace std;\n" +
-                    "    int main() {\n\n\n\n" +
-                    "        return 0;\n" +
-                    "    }");
-
-            writer.flush();
-            writer.close();
-        } catch (Exception e) {
-
-        }
 
 
 //        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
@@ -410,16 +382,16 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
     }
 
-    public void share_code() {
-        String getText = codebox.getText().toString();
-        if (!getText.equals("") && getText.length() != 0)
-            shareText(getText);
-        else
-            Toast.makeText(this,
-                    "Please enter something to share.", Toast.LENGTH_SHORT)
-                    .show();
-
-    }
+//    public void share_code() {
+//        String getText = codebox.getText().toString();
+//        if (!getText.equals("") && getText.length() != 0)
+//            shareText(getText);
+//        else
+//            Toast.makeText(this,
+//                    "Please enter something to share.", Toast.LENGTH_SHORT)
+//                    .show();
+//
+//    }
 
     private void shareText(String text) {
 
@@ -459,9 +431,9 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
             case R.id.savecodebutton:
                 saveCode();
                 return true;
-            case R.id.sharecodebutton:
-                share_code();
-                return true;
+//            case R.id.sharecodebutton:
+//                share_code();
+//                return true;
             case R.id.undocodebutton:
                 undo_function();
                 return true;

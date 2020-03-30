@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.fragment.app.FragmentTransaction;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.File;
@@ -71,9 +73,11 @@ public class CardViewDataAdapter extends RecyclerView.Adapter<CardViewDataAdapte
                 File delfile = new File(context.getFilesDir() + "/" + mDataset[position]);
                 try {
                     boolean deleted = delfile.delete();
+
                     if (deleted) {
-                        Toast.makeText(context, "File " + mDataset[position]+ " was successfully deleted", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "File " + mDataset[position]+ " was successfully deleted", Toast.LENGTH_SHORT).show();
                         comm.load_files();
+
                     }
                     else {
                         //Toast.makeText(context, "Default snipets cannot be deleted"+mDataset[position], Toast.LENGTH_SHORT).show();

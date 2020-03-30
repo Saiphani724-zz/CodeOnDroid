@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -48,21 +49,7 @@ public class AllFiles extends Fragment implements AdapterView.OnItemClickListene
 
     @Override
     public void load_files() {
-        File f = new File("" + getActivity().getFilesDir());
-        FilenameFilter fileFilter = new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.contains(".");
-            }
-        };
-        files = f.list(fileFilter);
-        mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.myfiles);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new CardViewDataAdapter(files,this);
-        mRecyclerView.setAdapter(mAdapter);
-
+        onResume();
     }
 
     @Override
@@ -111,6 +98,7 @@ public class AllFiles extends Fragment implements AdapterView.OnItemClickListene
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    public View view;
 
 
 
@@ -153,9 +141,9 @@ public class AllFiles extends Fragment implements AdapterView.OnItemClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view =inflater.inflate(R.layout.fragment_all_files, container, false);
-//        myfiles = view.findViewById(R.id.myfiles);
+
+        view =inflater.inflate(R.layout.fragment_all_files, container, false);
+
 
         File f = new File("" + getActivity().getFilesDir());
         FilenameFilter fileFilter = new FilenameFilter() {
@@ -166,28 +154,6 @@ public class AllFiles extends Fragment implements AdapterView.OnItemClickListene
         };
         files = f.list(fileFilter);
 
-//        ArrayAdapter<String> ada = new ArrayAdapter<String>
-//                (getActivity(), android.R.layout.simple_list_item_1, files){
-//            @Override
-//            public View getView(int position, View convertView, ViewGroup parent){
-//                // Get the Item from ListView
-//                View view = super.getView(position, convertView, parent);
-//
-//                // Initialize a TextView for ListView each Item
-//                TextView tv = (TextView) view.findViewById(android.R.id.text1);
-//
-//                // Set the text color of TextView (ListView Item)
-//                tv.setTextColor(getResources().getColor(R.color.CodeColor));
-//
-//                // Generate ListView Item using TextView
-//                return view;
-//            }
-//        };
-//
-//        // DataBind ListView with items from ArrayAdapter
-//        myfiles.setAdapter(ada);
-//        myfiles.setOnItemClickListener(this);
-//
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.myfiles);
         mRecyclerView.setHasFixedSize(true);
@@ -214,4 +180,28 @@ public class AllFiles extends Fragment implements AdapterView.OnItemClickListene
 
     }
 
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        File f = new File("" + getActivity().getFilesDir());
+        FilenameFilter fileFilter = new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.contains(".");
+            }
+        };
+        files = f.list(fileFilter);
+
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.myfiles);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new CardViewDataAdapter(files,this);
+        mRecyclerView.setAdapter(mAdapter);
+
+    }
 }

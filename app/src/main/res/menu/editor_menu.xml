@@ -30,6 +30,11 @@
         app:showAsAction="always"
         android:icon="@drawable/runcodebutton"/>
     <item
+        android:id="@+id/switchwebbutton"
+        android:title="Switch"
+        app:showAsAction="always"
+        android:icon="@drawable/switchwebicon"/>
+    <item
         android:id="@+id/snippetscode"
         android:title="Snippets"
         app:showAsAction="always"

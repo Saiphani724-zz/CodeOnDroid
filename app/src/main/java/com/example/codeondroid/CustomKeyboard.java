@@ -2,6 +2,7 @@ package com.example.codeondroid;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
@@ -29,7 +30,7 @@ import java.util.Stack;
 public class CustomKeyboard {
     private KeyboardView mKeyboardView;
     private Activity mHostActivity;
-    public int keylayouts[]={R.xml.specialnumbers,R.xml.keyboard,R.xml.keywordboard,R.xml.variablekeys};
+    public int keylayouts[]={R.xml.specialnumbers,R.xml.keyboard,R.xml.keywordboard,R.xml.variablekeys,R.xml.customkeyboard};
     int kbcount,curr_layout;
     int flag;
     String sf_file_name;
@@ -154,7 +155,12 @@ public class CustomKeyboard {
                 mKeyboardView.invalidateAllKeys();
                 return;
             }
-            else if(primaryCode>=600)
+            else if(primaryCode==700)
+            {
+                Intent i = new Intent(mHostActivity,Editkeys.class);
+                mHostActivity.startActivity(i);
+            }
+            else if(primaryCode>=600&&primaryCode<700)
             {
                 editable.insert(start, keydict.get(primaryCode).toString());
                 if(primaryCode==603)

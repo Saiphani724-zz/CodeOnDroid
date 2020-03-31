@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
     android:keyWidth="16%p"
-    android:verticalGap="0px"
-    android:horizontalGap="0px"
+    android:verticalGap="0.50%p"
+    android:horizontalGap="0.50%p"
     android:keyHeight="50dp">
     <!--
         android:horizontalGap="0.50%p"
@@ -11,7 +11,12 @@
         NOTE When we have a horizontalGap (on Keyboard level) of 0, this make the horizontalGap (on Key level) to move from after the key to before the key... (I consider this a bug)
      -->
 
-
+    <Row>
+        <Key android:keyEdgeFlags="right|left"
+            android:codes="700"
+            android:keyWidth="100%p"
+            android:keyLabel="Edit your text here"/>
+    </Row>
     <Row>
 
         <Key android:keyEdgeFlags="left"

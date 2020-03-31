@@ -72,7 +72,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     String openfilename, lang , ext;
     int langPos = 1;
     int MIN_DISTANCE = 150;
-
+    boolean from_webview=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +80,11 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         setContentView(R.layout.activity_editor);
         this.overridePendingTransition(R.anim.zoomin,
                 R.anim.zoomout);
-
-
+        Bundle b = getIntent().getExtras();
+        if(b!=null)
+        {
+            from_webview = b.getBoolean("fromwebview",false);
+        }
 
 //        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 //        Intent batteryStatus = getApplicationContext().registerReceiver(null, ifilter);
@@ -119,6 +122,8 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
             }
         });
+        if(from_webview)
+            openlastcontent();
 
 //        Toast.makeText(getApplicationContext(),langPos + "\t" + lang, Toast.LENGTH_LONG).show();
 //
@@ -203,8 +208,49 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
     }
 
+    private void openlastcontent() {
+        try {
+            String yourFilePath = getApplicationContext().getFilesDir() + "/webeditfiles/"+"tempfile" ;
+            FileInputStream fin=new FileInputStream(yourFilePath);
+            InputStreamReader isr = new InputStreamReader(fin);
+            BufferedReader bufferedReader = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while (true) {
+                try {
+                    if (!((line = bufferedReader.readLine()) != null)) break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                sb.append(line + "\n");
+            }
+            Log.d("TAG", "onCreate: " + sb.toString()  + "\n") ;
+            codebox.setText(sb.toString() + " ");
 
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            String yourFilePath = getApplicationContext().getFilesDir() + "/webeditfiles/"+"cursorfile" ;
+            FileInputStream fin=new FileInputStream(yourFilePath);
+            InputStreamReader isr = new InputStreamReader(fin);
+            BufferedReader bufferedReader = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while (true) {
+                try {
+                    if (!((line = bufferedReader.readLine()) != null)) break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            Log.d("parseint",sb.toString());
+            //codebox.setSelection(Integer.parseInt(sb.toString()));
 
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public void compileCode() {
@@ -259,7 +305,28 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
     @Override public void onBackPressed() {
         // NOTE Trap the back key: when the CustomKeyboard is still visible hide it, only when it is invisible, finish activity
-        if( mCustomKeyboard.isCustomKeyboardVisible() ) mCustomKeyboard.hideCustomKeyboard(); else this.finish();
+        if( mCustomKeyboard.isCustomKeyboardVisible() ) mCustomKeyboard.hideCustomKeyboard();
+        else {
+            File file1 = new File(EditorActivity.this.getFilesDir() + "/webeditfiles");
+            if(!file1.exists()){
+                boolean success=file1.mkdir();
+            }
+            try {
+                File file = new File(EditorActivity.this.getFilesDir() + "/webeditfiles/"+"tempfile");
+                FileWriter writer = new FileWriter(file);
+                writer.append(codebox.getText().toString() + " ");
+                writer.flush();
+                writer.close();
+            } catch (Exception e) {e.printStackTrace();}
+            try {
+                File file = new File(EditorActivity.this.getFilesDir() + "/webeditfiles/"+"cursorfile");
+                FileWriter writer = new FileWriter(file);
+                writer.append(codebox.getSelectionStart()+" ");
+                writer.flush();
+                writer.close();
+            } catch (Exception e) {e.printStackTrace();}
+            this.finish();
+        }
     }
     @Override
     public boolean onTouchEvent(MotionEvent touchevent)
@@ -393,19 +460,19 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 //
 //    }
 
-    private void shareText(String text) {
+    /*private void shareText(String text) {
 
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");// Plain format text
 
         // You can add subject also
-        /*
+        *//*
          * sharingIntent.putExtra( android.content.Intent.EXTRA_SUBJECT,
          * "Subject Here");
-         */
+         *//*
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, text);
         startActivityForResult(Intent.createChooser(sharingIntent, "Share Text Using"),0);
-    }
+    }*/
 
 
     public void undo_function() {
@@ -420,6 +487,10 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.editor_menu,menu);
+        if(!from_webview)
+        {
+            menu.findItem(R.id.switchwebbutton).setVisible(false);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -449,6 +520,8 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
             case R.id.snippetscode:
                 opensnippet();
                 return true;
+            case R.id.switchwebbutton:
+                switch_to_web();
             default:
                 return false;
 
@@ -490,6 +563,28 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                 editable.insert(start,snip);
             }
         }
+    }
+    private void switch_to_web()
+    {
+        File file1 = new File(EditorActivity.this.getFilesDir() + "/webeditfiles");
+        if(!file1.exists()){
+            boolean success=file1.mkdir();
+        }
+        try {
+            File file = new File(EditorActivity.this.getFilesDir() + "/webeditfiles/"+"tempfile");
+            FileWriter writer = new FileWriter(file);
+            writer.append(codebox.getText().toString() + " ");
+            writer.flush();
+            writer.close();
+        } catch (Exception e) {e.printStackTrace();}
+        try {
+            File file = new File(EditorActivity.this.getFilesDir() + "/webeditfiles/"+"cursorfile");
+            FileWriter writer = new FileWriter(file);
+            writer.append(codebox.getSelectionStart()+" ");
+            writer.flush();
+            writer.close();
+        } catch (Exception e) {e.printStackTrace();}
+        this.finish();
     }
 
 

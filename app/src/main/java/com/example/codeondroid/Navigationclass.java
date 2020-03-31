@@ -1,9 +1,11 @@
 
 package com.example.codeondroid;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -205,6 +207,8 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
         cusTab.addDefaultShareMenuItem();
         cusTab.setStartAnimations(this, R.anim.fadein, R.anim.fadeout);
         cusTab.setExitAnimations(this, R.anim.fadeout, R.anim.fadein);
+        cusTab.setActionButton(BitmapFactory.decodeResource(getResources(), R.mipmap.icon),"Action Button",
+                createPendingIntent(ChromeTabActionBroadcastReceiver.ACTION_ACTION_BUTTON));
         CustomTabsIntent customTabsIntent = cusTab.build();
         customTabsIntent.launchUrl(this,Uri.parse(url));
     }
@@ -363,5 +367,10 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
         }
 
 
+    }
+    private PendingIntent createPendingIntent(int actionSource) {
+        Intent actionIntent = new Intent(this, ChromeTabActionBroadcastReceiver.class);
+        actionIntent.putExtra(ChromeTabActionBroadcastReceiver.KEY_ACTION_SOURCE, actionSource);
+        return PendingIntent.getBroadcast(this, actionSource, actionIntent, 0);
     }
 }

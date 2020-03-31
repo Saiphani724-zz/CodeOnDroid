@@ -222,7 +222,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                sb.append(line + "\n");
+                //sb.append(line + "\n");
             }
             Log.d("TAG", "onCreate: " + sb.toString()  + "\n") ;
             codebox.setText(sb.toString() + " ");

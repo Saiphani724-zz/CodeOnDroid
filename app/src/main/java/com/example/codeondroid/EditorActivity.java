@@ -193,6 +193,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                 }
                 Log.d("TAG", "onCreate: " + sb.toString()  + "\n") ;
                 setTitle(openfilename);
+                if(!from_webview)
                 codebox.setText(sb.toString() + " ");
 
             } catch (FileNotFoundException e) {
@@ -222,11 +223,13 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                //sb.append(line + "\n");
+                sb.append(line + "\n");
             }
-            Log.d("TAG", "onCreate: " + sb.toString()  + "\n") ;
-            codebox.setText(sb.toString() + " ");
+            String[] file_contents=sb.toString().split("my\\$cursor\\$position\\$",2);
 
+            Log.d("TAG", "onCreate: " + sb.toString()  + "\n") ;
+            codebox.setText(file_contents[1]);
+            codebox.setSelection(Integer.parseInt(file_contents[0]));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -314,14 +317,9 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
             try {
                 File file = new File(EditorActivity.this.getFilesDir() + "/webeditfiles/"+"tempfile");
                 FileWriter writer = new FileWriter(file);
+                writer.append(codebox.getSelectionStart()+"");
+                writer.append("my$cursor$position$");
                 writer.append(codebox.getText().toString() + " ");
-                writer.flush();
-                writer.close();
-            } catch (Exception e) {e.printStackTrace();}
-            try {
-                File file = new File(EditorActivity.this.getFilesDir() + "/webeditfiles/"+"cursorfile");
-                FileWriter writer = new FileWriter(file);
-                writer.append(codebox.getSelectionStart()+" ");
                 writer.flush();
                 writer.close();
             } catch (Exception e) {e.printStackTrace();}
@@ -573,14 +571,9 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         try {
             File file = new File(EditorActivity.this.getFilesDir() + "/webeditfiles/"+"tempfile");
             FileWriter writer = new FileWriter(file);
+            writer.append(codebox.getSelectionStart()+"");
+            writer.append("my$cursor$position$");
             writer.append(codebox.getText().toString() + " ");
-            writer.flush();
-            writer.close();
-        } catch (Exception e) {e.printStackTrace();}
-        try {
-            File file = new File(EditorActivity.this.getFilesDir() + "/webeditfiles/"+"cursorfile");
-            FileWriter writer = new FileWriter(file);
-            writer.append(codebox.getSelectionStart()+" ");
             writer.flush();
             writer.close();
         } catch (Exception e) {e.printStackTrace();}

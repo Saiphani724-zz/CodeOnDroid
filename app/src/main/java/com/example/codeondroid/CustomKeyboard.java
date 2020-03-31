@@ -39,16 +39,16 @@ public class CustomKeyboard {
     HashMap keydict,varkeys,wtype,revvar;
     private KeyboardView.OnKeyboardActionListener mOnKeyboardActionListener = new KeyboardView.OnKeyboardActionListener() {
 
-        public final static int CodeDelete   = -5; // Keyboard.KEYCODE_DELETE
-        public final static int CodeCancel   = -3; // Keyboard.KEYCODE_CANCEL
-        public final static int CodeEnter   = -4;
-        public final static int CodePrev     = 55000;
-        public final static int CodeAllLeft  = 55001;
-        public final static int CodeLeft     = 55002;
-        public final static int CodeRight    = 55003;
-        public final static int CodeAllRight = 55004;
-        public final static int CodeNext     = 55005;
-        public final static int CodeClear    = 55006;
+        final static int CodeDelete   = -5; // Keyboard.KEYCODE_DELETE
+        final static int CodeCancel   = -3; // Keyboard.KEYCODE_CANCEL
+        final static int CodeEnter   = -4;
+        final static int CodePrev     = 55000;
+        final static int CodeAllLeft  = 55001;
+        final static int CodeLeft     = 55002;
+        final static int CodeRight    = 55003;
+        final static int CodeAllRight = 55004;
+        final static int CodeNext     = 55005;
+        final static int CodeClear    = 55006;
 
         @Override public void onKey(int primaryCode, int[] keyCodes) {
             // NOTE We can say '<Key android:codes="49,50" ... >' in the xml file; all codes come in keyCodes, the first in this list in primaryCode
@@ -135,7 +135,7 @@ public class CustomKeyboard {
                 {
                     flag=0;
                 }
-                mKeyboardView.setShifted((flag==1)||(flag==2));
+                mKeyboardView.setShifted((flag==1));
                 change_caps(flag);
                 mKeyboardView.invalidateAllKeys();
                 return;
@@ -150,7 +150,7 @@ public class CustomKeyboard {
                 {
                     flag=0;
                 }
-                mKeyboardView.setShifted((flag==1)||(flag==2));
+                mKeyboardView.setShifted((flag==2));
                 change_caps(flag);
                 mKeyboardView.invalidateAllKeys();
                 return;
@@ -536,9 +536,9 @@ public class CustomKeyboard {
         edittext.setSelection(cursor);
         redo_stack.push(current_content,start);
         }
-        catch (Exception e)
+        catch (Exception ignored)
         {
-           return;
+
         }
     }
     public void redo_action()
@@ -553,9 +553,9 @@ public class CustomKeyboard {
             edittext.setSelection(cursor);
             add_undo();
         }
-        catch (Exception e)
+        catch (Exception ignored)
         {
-            return;
+
         }
     }
 

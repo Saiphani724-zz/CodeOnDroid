@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0EF1D9</color>
-    <color name="colorPrimaryDark">#07332D</color>
+    <color name="colorPrimary">#4E4E4E</color>
+    <color name="colorPrimaryDark">#232323</color>
     <color name="colorAccent">#BA7E94</color>
     <color name="LightBlue">#1E5895</color>
     <color name="DarkBlue">#468372</color>
@@ -17,4 +17,8 @@
     <color name="CodeColor">#FFFFFF</color>
     <color name="SplashText">#85F0FA</color>
     <color name="EditorBackground">#000</color>
+
+    <color name="NavigationclassButtonColor">#EEE</color>
+    <color name="filesBackground">#4E4E4E</color>
+    <color name="NavigationclassBackground">#232323</color>
 </resources>

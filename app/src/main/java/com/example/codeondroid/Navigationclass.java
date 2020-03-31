@@ -4,18 +4,25 @@ package com.example.codeondroid;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
@@ -48,17 +55,32 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_navigationclass);
         this.overridePendingTransition(R.anim.anim_slide_in_left,
                 R.anim.anim_slide_out_left);
 
         createTemplates();
 
+
+
         TabLayout tabLayout = findViewById(R.id.tablayout);
-        tabLayout.addTab(tabLayout.newTab().setText("All Files"));
+        TabLayout.Tab tab = tabLayout.newTab();
+        TextView tv=new TextView(getApplicationContext());
+        tv.setText("All Files");
+        tv.setTextColor(getResources().getColor(R.color.CodeColor));
+        tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        tab.setCustomView(tv);
+        tabLayout.addTab(tab);
+
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.python_icon));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.cpp_icon));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.java_icon));
@@ -263,6 +285,7 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.top_menu,menu);
+
         return super.onCreateOptionsMenu(menu);
     }
 

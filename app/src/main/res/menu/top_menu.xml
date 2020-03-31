@@ -10,18 +10,21 @@
         android:id="@+id/profile"
         android:title="My Profile"
         app:showAsAction="always"
+        android:iconTint="@color/NavigationclassButtonColor"
         android:icon="@drawable/profile_icon"/>
 
     <item
         android:id="@+id/bug_report"
         android:title="Report a Bug"
         app:showAsAction="always"
+        android:iconTintMode="src_atop"
         android:icon="@drawable/report_bug"/>
 
     <item
         android:id="@+id/logout"
         android:title="Logout"
         app:showAsAction="always"
+        android:iconTint="@color/NavigationclassButtonColor"
         android:icon="@drawable/logout"/>
 
 </menu>

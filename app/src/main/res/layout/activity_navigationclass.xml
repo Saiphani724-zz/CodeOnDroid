@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorBackground"
+    android:background="@color/NavigationclassBackground"
     android:layout_height="match_parent"
     android:id="@+id/ll"
     tools:context=".Navigationclass">
@@ -12,22 +12,31 @@
     <android.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/toolbar"
-        android:background="@color/colorPrimary"
-        android:theme="@style/Theme.Design.NoActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        android:id="@+id/toolbar">
     </android.widget.Toolbar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="right"
+        android:text="Saved files"
+        android:textColor="@color/CodeColor"
+        android:fontFamily="serif"
+        />
 
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:tabTextColor="#000"
         android:id="@+id/tablayout"
-        android:background="@color/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/Theme.Design.NoActionBar">
+        android:background="@color/NavigationclassBackground"
+        >
 
     </com.google.android.material.tabs.TabLayout>
+
 
 
 
@@ -36,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         >
+
         <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
@@ -44,6 +54,7 @@
 
 
     </LinearLayout>
+
 
 
 
@@ -58,10 +69,10 @@
         android:orientation="horizontal"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginTop="32dp"
         >
 
         <TextView
@@ -71,11 +82,11 @@
             android:fontFamily="serif"
             android:text="Start Coding"
             android:textColor="#000"
-            android:textSize="16dp" />
+            android:textSize="24dp" />
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="30dp"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
             android:src="@drawable/startcodingicon" />
 
@@ -94,37 +105,73 @@
 
 
 
-        <Button
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:text="Code Chef"
-            android:id="@+id/btnCC"
-            android:background="@drawable/button2"
-            />
+            android:background="@drawable/button1"
+            android:padding="4dp"
+            >
+            <Button
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:id="@+id/btnCC"
+                android:background="@drawable/codechef_logo"
+                />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/btnHR"
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:padding="10dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/button3"
-            android:text="HackerRank" />
+            android:background="@drawable/button1"
+            android:layout_marginLeft="70dp"
+            android:padding="4dp"
+            >
+            <Button
+                android:id="@+id/btnHR"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
 
+
+                android:background="@drawable/hackerrank_logo"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button1"
+            android:layout_marginLeft="70dp"
+            android:padding="4dp"
+            >
         <Button
             android:id="@+id/btnCF"
-            android:padding="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/button4"
-            android:text="Codeforces" />
+
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+
+
+            android:background="@drawable/codeforces_logo"
+            />
+        </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:layout_marginBottom="10dp"
+
+        android:layout_gravity="center"
+        android:text="Long Press for App Walkthorugh"
+        android:textColor="@color/CodeColor"
+        android:fontFamily="serif"
+        />
+
+
+
 
 
 

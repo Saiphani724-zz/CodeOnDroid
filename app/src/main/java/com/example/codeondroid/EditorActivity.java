@@ -88,6 +88,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
 //        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 //        Intent batteryStatus = getApplicationContext().registerReceiver(null, ifilter);
+        checkCustomKeyList();
         mCustomKeyboard = new CustomKeyboard(this, R.id.keyboardview, R.xml.keyboard,R.id.candidateview,"myfile2");
         mCustomKeyboard.registerEditText(R.id.codebox);
 //        mCustomKeyboard.registerEditText(R.id.outputbox);
@@ -207,6 +208,21 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
 
 
+    }
+
+    private void checkCustomKeyList() {
+        SharedPreferences sf=getSharedPreferences("keylistfile", Context.MODE_PRIVATE);
+        if(sf.getString("already_there", "NA").equals("NA"))
+        {
+            SharedPreferences.Editor edit = sf.edit();
+            for(int i=0;i<18;i++)
+            {
+                edit.putString("key"+i+"name","key"+(i+1));
+                edit.putString("key"+i+"content","");
+            }
+            edit.putString("already_there","yes");
+            edit.apply();
+        }
     }
 
     private void openlastcontent() {
@@ -580,6 +596,9 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         this.finish();
     }
 
-
-
+    @Override
+    protected void onRestart() {
+        mCustomKeyboard.reload_keys();
+        super.onRestart();
+    }
 }

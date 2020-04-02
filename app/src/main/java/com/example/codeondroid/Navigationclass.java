@@ -346,7 +346,7 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
 //        ft.commit();
         createTemplates();
         super.onRestart();
-        startActivity(new Intent(getApplicationContext(), Navigationclass.class));
+        //startActivity(new Intent(getApplicationContext(), Navigationclass.class));
 
 
     }

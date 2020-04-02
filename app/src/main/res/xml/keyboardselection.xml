@@ -12,23 +12,17 @@
      -->
 
     <Row>
-        <Key android:keyEdgeFlags="right|left"
-            android:codes="700"
-            android:keyWidth="100%p"
-            android:keyLabel="Edit your keys here"/>
-    </Row>
-    <Row>
 
         <Key android:keyEdgeFlags="left"
-            android:codes="701"/>
+            android:codes="0"/>
 
-        <Key android:codes="702"/>
-        <Key android:codes="703"/>
+        <Key android:codes="1"/>
+        <Key android:codes="2"/>
 
-        <Key android:codes="704"/>
+        <Key android:codes="3"/>
 
-        <Key android:codes="705"  />
-        <Key android:codes="706"  android:keyEdgeFlags="right" />
+        <Key android:codes="4"  />
+        <Key android:codes="5"  android:keyEdgeFlags="right" />
 
     </Row>
 
@@ -36,25 +30,25 @@
 
 
         <Key android:keyEdgeFlags="left"
-            android:codes="707"/>
+            android:codes="6"/>
 
-        <Key android:codes="708"/>
-        <Key android:codes="709"/>
-        <Key android:codes="710"/>
-        <Key android:codes="711"/>
-        <Key android:codes="712" android:keyEdgeFlags="right"/>
+        <Key android:codes="7"/>
+        <Key android:codes="8"/>
+        <Key android:codes="9"/>
+        <Key android:codes="10"/>
+        <Key android:codes="11" android:keyEdgeFlags="right"/>
 
 
     </Row>
     <Row >
         <Key android:keyEdgeFlags="left"
-            android:codes="713"/>
-        <Key android:codes="714"/>
-        <Key android:codes="715"/>
-        <Key android:codes="716"/>
-        <Key android:codes="717"/>
+            android:codes="12"/>
+        <Key android:codes="13"/>
+        <Key android:codes="14"/>
+        <Key android:codes="15"/>
+        <Key android:codes="16"/>
         <Key android:keyEdgeFlags="right"
-            android:codes="718"/>
+            android:codes="17"/>
     </Row>
 
 

@@ -32,9 +32,10 @@ public class CustomKeyboard {
     private Activity mHostActivity;
     public int keylayouts[]={R.xml.specialnumbers,R.xml.keyboard,R.xml.keywordboard,R.xml.variablekeys,R.xml.customkeyboard};
     int kbcount,curr_layout;
-    int flag;
+    int flag,cust_key_count=18;
     String sf_file_name;
     CustomLinkedList undo_stack,redo_stack;
+    String[] custKeyName,custKeycontent;
     TabLayout candview;
     HashMap keydict,varkeys,wtype,revvar;
     private KeyboardView.OnKeyboardActionListener mOnKeyboardActionListener = new KeyboardView.OnKeyboardActionListener() {
@@ -159,6 +160,10 @@ public class CustomKeyboard {
             {
                 Intent i = new Intent(mHostActivity,Editkeys.class);
                 mHostActivity.startActivity(i);
+            }
+            else if(primaryCode>700)
+            {
+                editable.insert(start,custKeycontent[primaryCode- 701]);
             }
             else if(primaryCode>=600&&primaryCode<700)
             {
@@ -294,8 +299,11 @@ public class CustomKeyboard {
         revvar = new HashMap();
         undo_stack = new CustomLinkedList();
         redo_stack = new CustomLinkedList();
+        custKeyName = new String[cust_key_count];
+        custKeycontent = new String[cust_key_count];
         load_dict();
         load_wtype();
+        load_custom_keys();
         this.sf_file_name = sf_file_name;
         candview = (TabLayout) host.findViewById(candid);
         mKeyboardView= (KeyboardView)mHostActivity.findViewById(viewid);
@@ -307,6 +315,9 @@ public class CustomKeyboard {
         mHostActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
     }
+
+
+
     /** Returns whether the CustomKeyboard is visible. */
     public boolean isCustomKeyboardVisible() {
         return mKeyboardView.getVisibility() == View.VISIBLE;
@@ -415,6 +426,14 @@ public class CustomKeyboard {
                 {
                     break;
                 }
+            }
+        }
+        if(layid==R.xml.customkeyboard)
+        {
+            List<Keyboard.Key> keylist = mKeyboardView.getKeyboard().getKeys();
+            for(int j=0;j<cust_key_count;j++)
+            {
+                keylist.get(j+1).label=custKeyName[j];
             }
         }
     }
@@ -557,6 +576,20 @@ public class CustomKeyboard {
         {
 
         }
+    }
+    private void load_custom_keys() {
+        SharedPreferences sf= mHostActivity.getSharedPreferences("keylistfile", Context.MODE_PRIVATE);
+        for(int i=0;i<cust_key_count;i++)
+        {
+            custKeyName[i]=sf.getString("key"+i+"name","");
+            custKeycontent[i]=sf.getString("key"+i+"content","");
+        }
+    }
+    public void  reload_keys()
+    {
+        load_custom_keys();
+        mKeyboardView.invalidateAllKeys();
+        change_keyboard(keylayouts[curr_layout]);
     }
 
 }

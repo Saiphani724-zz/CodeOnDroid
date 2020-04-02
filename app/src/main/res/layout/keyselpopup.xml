@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground2"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/keynamedesc"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Enter the name you want to be displayed in key"/>
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:maxLength="5"
+        android:layout_marginTop="20dp"
+        android:id="@+id/keyname"
+        android:background="@drawable/button3"
+        android:hint="Key name"
+        android:lines="1"
+        android:ems="8"
+        android:inputType="text|textMultiLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/keynamedesc"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/keycontentdesc"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/keyname"
+        android:text="Enter the content you want to be entered while
+pressing the key"/>
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="20dp"
+        android:ems="8"
+        android:foregroundGravity="top|left"
+        android:gravity="top|left"
+        android:hint="Key Content"
+        android:id="@+id/keycontent"
+        android:background="@drawable/button3"
+        android:lines="8"
+        android:inputType="text|textMultiLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/keycontentdesc"/>
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_gravity="center"
+        android:id="@+id/savekeybutton"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/keycontent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:layout_gravity="center"
+        android:id="@+id/cancelbutton"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/keycontent"
+        app:layout_constraintStart_toEndOf="@id/savekeybutton"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

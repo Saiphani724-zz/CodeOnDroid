@@ -19,6 +19,7 @@
     <color name="EditorBackground">#000</color>
 
     <color name="NavigationclassButtonColor">#EEE</color>
+    <color name="IconsColor">#EEE</color>
     <color name="filesBackground">#4E4E4E</color>
     <color name="NavigationclassBackground">#232323</color>
 </resources>

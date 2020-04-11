@@ -71,8 +71,8 @@
         android:paddingRight="16dp"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
-        android:layout_marginBottom="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="48dp"
+        android:layout_marginTop="72dp"
         >
 
         <TextView
@@ -147,11 +147,8 @@
             >
         <Button
             android:id="@+id/btnCF"
-
             android:layout_width="72dp"
             android:layout_height="72dp"
-
-
             android:background="@drawable/codeforces_logo"
             />
         </LinearLayout>

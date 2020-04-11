@@ -6,7 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="40dp"
-    android:textColor="@color/CodeColor"
+    android:textColor="#000"
     android:text="hiii"
     android:id="@+id/snipcontent"/>
     <RelativeLayout
@@ -32,6 +32,7 @@
         android:layout_height="30dp"
         android:id="@+id/deltesnipicon"
         android:layout_alignParentRight="true"
+        android:backgroundTint="#000"
         android:background="@drawable/delete_snip"
         android:layout_marginRight="20dp" />
         <Button

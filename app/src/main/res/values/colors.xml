@@ -3,23 +3,23 @@
     <color name="colorPrimary">#4E4E4E</color>
     <color name="colorPrimaryDark">#232323</color>
     <color name="colorAccent">#BA7E94</color>
-    <color name="LightBlue">#1E5895</color>
-    <color name="DarkBlue">#468372</color>
-    <color name="DungGreen">#C7C87D</color>
+    <color name="LightBlue">#90C3F8</color>
+    <color name="DarkBlue">#A6ECD8</color>
+    <color name="DungGreen">#E9EAB0</color>
     <color name="FadeYellow">#F3F2DD</color>
-    <color name="FadeRed">#AC5A58</color>
+    <color name="FadeRed">#DF9190</color>
     <color name="textcolor">#558802</color>
     <color name = "mentorcolor">#268D97</color>
-    <color name="descriptions">#E47787</color>
-    <color name="colorBackground">#01364E</color>
+    <color name="descriptions">#1185B3</color>
+    <color name="colorBackground">#78AAC1</color>
     <color name="colorBackground2">#7BC8EC</color>
-    <color name="EditTextBox">#5C5A5E</color>
-    <color name="CodeColor">#FFFFFF</color>
-    <color name="SplashText">#85F0FA</color>
-    <color name="EditorBackground">#000</color>
+    <color name="EditTextBox">#F9F3FF</color>
+    <color name="CodeColor">#191111</color>
+    <color name="SplashText">#22595E</color>
+    <color name="EditorBackground">#FFFFFF</color>
 
-    <color name="NavigationclassButtonColor">#EEE</color>
-    <color name="IconsColor">#EEE</color>
-    <color name="filesBackground">#4E4E4E</color>
-    <color name="NavigationclassBackground">#232323</color>
+    <color name="NavigationclassButtonColor">#A8DD007A</color>
+    <color name="IconsColor">#05F1C4</color>
+    <color name="filesBackground">#CDDC39</color>
+    <color name="NavigationclassBackground">#A1FFFF</color>
 </resources>

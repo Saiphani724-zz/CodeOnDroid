@@ -2,12 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground2"
+    android:background="@color/colorBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/keynamedesc"
+        android:textColor="@color/CodeColor"
         app:layout_constraintTop_toTopOf="parent"
         android:text="Enter the name you want to be displayed in key"/>
     <EditText
@@ -28,6 +29,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/keycontentdesc"
         android:layout_marginTop="20dp"
+        android:textColor="@color/CodeColor"
         app:layout_constraintTop_toBottomOf="@id/keyname"
         android:text="Enter the content you want to be entered while
 pressing the key"/>

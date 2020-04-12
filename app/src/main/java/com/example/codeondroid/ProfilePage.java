@@ -13,6 +13,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -50,6 +55,13 @@ public class ProfilePage extends AppCompatActivity {
     public Uri imguri;
     DatabaseReference reff;
     ProgressBar pbar;
+    private View ambient;
+    private SensorManager sensorManager;
+    TextView lt;
+    private Sensor lightSensor;
+    private SensorEventListener lightEventListener;
+    private View root;
+    private float maxValue;
     public static final int GET_FROM_GALLERY = 3;
     TextView showUsername, showEmail , showFavLang;
     private StorageTask uploadTask;
@@ -60,6 +72,15 @@ public class ProfilePage extends AppCompatActivity {
         setContentView(R.layout.activity_profile_page);
         this.overridePendingTransition(R.anim.zoomin,
                 R.anim.zoomout);
+        ambient = (View)findViewById(R.id.ambient);
+        lt = (TextView)findViewById(R.id.lumnsty);
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        if (lightSensor == null) {
+            Toast.makeText(this, "The device has no light sensor !", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        maxValue = lightSensor.getMaximumRange()/10;
         reff = FirebaseDatabase.getInstance().getReference().child("Users");
         img = (ImageView) findViewById(R.id.icon);
         but1 = (Button) findViewById(R.id.butProfile);
@@ -87,6 +108,25 @@ public class ProfilePage extends AppCompatActivity {
         refstore = FirebaseStorage.getInstance().getReference("Images");
         final String uid = fAuth.getCurrentUser().getUid();
         final File file;
+        lightEventListener = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+//                Toast.makeText(getApplicationContext(),"onSensorChanged",Toast.LENGTH_SHORT).show();
+                float value = event.values[0];
+                float finvalue=value;
+                if(finvalue>650.0){
+                    finvalue= (float) 650.0;
+                }
+                lt.setText("Luminosity : " + value + " lx");
+                int newValue = (int) (255f * finvalue / maxValue);
+                ambient.setBackgroundColor(Color.rgb(newValue, newValue, newValue));
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+//                Toast.makeText(getApplicationContext(),"onAccuracyChanged",Toast.LENGTH_SHORT).show();
+            }
+        };
         try {
             file = File.createTempFile("image",".jpg");//
             StorageReference myProfilePhoto = FirebaseStorage.getInstance().getReferenceFromUrl("gs://codeondroid.appspot.com/Images").child(uid+".jpg");
@@ -269,7 +309,16 @@ public class ProfilePage extends AppCompatActivity {
 //        return outputStream.toByteArray();//CHANGE FOR IMAGE IN DB
 //    }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(lightEventListener, lightSensor, SensorManager.SENSOR_DELAY_FASTEST);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(lightEventListener);
+    }
 
 
 

@@ -154,6 +154,30 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ambient"
+        android:orientation="vertical"
+        android:layout_weight="0.05">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Suggested mode Light / Dark Based on Ambient Light Sensor"
+            android:gravity="center"
+            android:textColor="#14F4C0"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lumnsty"
+            android:gravity="center"
+            android:textColor="#71F467"/>
+
+
+    </LinearLayout>
+
 
 
 

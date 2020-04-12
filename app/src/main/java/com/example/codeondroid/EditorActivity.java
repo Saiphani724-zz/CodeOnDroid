@@ -244,8 +244,10 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
             String[] file_contents=sb.toString().split("my\\$cursor\\$position\\$",2);
 
             Log.d("TAG", "onCreate: " + sb.toString()  + "\n") ;
-            codebox.setText(file_contents[1]);
-            codebox.setSelection(Integer.parseInt(file_contents[0]));
+            if (file_contents.length==2) {
+                codebox.setText(file_contents[1]);
+                codebox.setSelection(Integer.parseInt(file_contents[0]));
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

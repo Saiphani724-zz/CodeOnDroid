@@ -165,12 +165,8 @@ public class ProfilePage extends AppCompatActivity {
         butmap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent i = new Intent(ProfilePage.this,AppMap.class);
-//                startActivity(i);
-                Uri uri = Uri.parse("geo:0,0?q=10.90455131 , 76.8986295 (Google+ab2)");
-                Intent in = new Intent(Intent.ACTION_VIEW, uri);
-                in.setPackage("com.google.android.apps.maps");
-                startActivity(in);
+                Intent i = new Intent(ProfilePage.this,AppMap.class);
+                startActivity(i);
             }
         });
 

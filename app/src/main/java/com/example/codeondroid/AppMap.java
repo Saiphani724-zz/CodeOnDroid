@@ -8,7 +8,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class AppMap extends FragmentActivity implements OnMapReadyCallback {
@@ -40,8 +42,12 @@ public class AppMap extends FragmentActivity implements OnMapReadyCallback {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng ourlocation = new LatLng(13.262661, 80.026516);
+        Marker myloc= mMap.addMarker(new MarkerOptions().position(ourlocation).title("Developers Location")
+                .snippet("Amrita Vishwa Vidyapeetham, Coimbatore"));
+        myloc.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+        myloc.showInfoWindow();
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(ourlocation));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(13));
     }
 }

@@ -16,6 +16,7 @@ public class ChromeTabActionBroadcastReceiver extends BroadcastReceiver {
             String toastText = getToastText(context, intent.getIntExtra(KEY_ACTION_SOURCE, -1), data);
             Intent i = new Intent(context,EditorActivity.class);
             i.putExtra("fromwebview",true);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
             //Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
         }

@@ -32,10 +32,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
@@ -279,55 +282,86 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
 
     public void compileCode() {
-//
-//        String clientId = "773eca4179a8c20e92caa73a5dacffda"; //Replace with your client ID
-//        String clientSecret = "4785377731a741f2cb107511774d643201966f8beac8ea4536db0dc751459941"; //Replace with your client Secret
-//        String script = "print('Hello mama')";
-//        String language = "python3";
-//        String versionIndex = "3";
-//
-//        try {
-//            URL url = new URL("https://api.jdoodle.com/v1/execute");
-//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//            connection.setDoOutput(true);
-//            connection.setRequestMethod("POST");
-//            connection.setRequestProperty("Content-Type", "application/json");
-//
-//            String input = "{\"clientId\": \"" + clientId + "\",\"clientSecret\":\"" + clientSecret + "\",\"script\":\"" + script +
-//                    "\",\"language\":\"" + language + "\",\"versionIndex\":\"" + versionIndex + "\"} ";
-//
-//
-//
-//            OutputStream outputStream = connection.getOutputStream();
-//            outputStream.write(input.getBytes());
-//            outputStream.flush();
-//
-//            if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-//                throw new RuntimeException("Please check your inputs : HTTP error code : "+ connection.getResponseCode());
-//            }
-//
-//            BufferedReader bufferedReader;
-//            bufferedReader = new BufferedReader(new InputStreamReader(
-//                    (connection.getInputStream())));
-//
-//            String output;
-//
-//            while ((output = bufferedReader.readLine()) != null) {
-//                Log.d("Volley", "Ouput here" + output);
-////                System.out.println(output);
-//            }
-//
-//            connection.disconnect();
-//
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+
+        try {
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            String URL = "https://api.jdoodle.com/v1/execute/";
+            JSONObject jsonBody = new JSONObject();
+            jsonBody.put("clientId" , "773eca4179a8c20e92caa73a5dacffda");
+            jsonBody.put("clientSecret" , "707335836b501dd67fceb6b4c71b08ad91d1698dd90ea769e22d8531b7e0b780");
+            jsonBody.put("language" , langs[langPos]); //langs[langPos]
+            jsonBody.put("script" , codebox.getText().toString()); //codebox.getText().toString()
+            jsonBody.put("stdin" , inputbox.getText().toString()); //codebox.getText().toString()
+            jsonBody.put("versionIndex" , "0");
+
+            final String requestBody = jsonBody.toString();
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject res = new JSONObject(response);
+                        String output = res.getString("output");
+                        outputbox.setText(output);
+                        Log.i("VOLLEY", output);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("VOLLEY", error.toString());
+                }
+            }) {
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
+                }
+
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    try {
+                        return requestBody == null ? null : requestBody.getBytes("utf-8");
+                    } catch (UnsupportedEncodingException uee) {
+                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                        return null;
+                    }
+                }
+
+                @Override
+                protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                    String responseString = "";
+                    if (response != null) {
+                        String json = "niyabba";
+                        try {
+                            json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        responseString = "" + json;
+                        // can get more details such as response.headers
+                    }
+                    return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+                }
+            };
+
+            requestQueue.add(stringRequest);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
-    public void compileCodeVolley() {
+    public void compileCode2() {
 
 //        outputbox.setText(inputbox.getText().toString() + "\n" + "in is out on error");
         final RequestQueue queue = Volley.newRequestQueue(getApplicationContext());

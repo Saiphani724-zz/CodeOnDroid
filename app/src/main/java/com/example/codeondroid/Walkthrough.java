@@ -1,6 +1,8 @@
 package com.example.codeondroid;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -13,7 +15,7 @@ import android.hardware.SensorManager;
 import android.view.View;
 import android.widget.Toast;
 
-public class Walkthrough extends AppCompatActivity {
+public class Walkthrough extends AppCompatActivity implements Recycleviewcommunicator {
 
     TextView textLIGHT_available, textLIGHT_reading;
     private SensorManager sensorManager;
@@ -21,6 +23,12 @@ public class Walkthrough extends AppCompatActivity {
     private SensorEventListener lightEventListener;
     private View root;
     private float maxValue;
+
+
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,11 +65,63 @@ public class Walkthrough extends AppCompatActivity {
 //
 //            }
 //        };
-//
+
+        String [] features = {
+                "Programming specific keyboard",
+                "Users Custom keys",
+                "Code Snipets",
+                "Easy switch between browser and editor",
+                "Undo and redo",
+                "Google maps api"
+        };
+
+
+        mRecyclerView =  findViewById(R.id.features);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new FeaturesCardViewAdapter(features , this);
+        mRecyclerView.setAdapter(mAdapter);
+
+        String [] uicomponents ={
+                "Activity transition animations",
+                "Dark/ light mode",
+                "Firebase authentication",
+                "Forgot password email reset",
+                "Persistent error display in edit text",
+                "Firebase realtime database",
+                "Custom tabs",
+                "Button disable until download progress completed",
+                "Firebase bucket storage for profile photo with realtime database mapping",
+                "Device file explorer access, Android temp file creation and upload",
+                "Intro Splash screen",
+                "Authentication key maintenance for one-time login",
+                "Top menu bug report Gmail intent",
+                "Ambient light sensor (suggest dark/light mode)"
+        };
+
+
+        mRecyclerView =  findViewById(R.id.ui);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new FeaturesCardViewAdapter(uicomponents , this);
+        mRecyclerView.setAdapter(mAdapter);
+
+
+
+
     };
 
+    @Override
+    public void load_files() {
 
+    }
 
+    @Override
+    public void share_files(String fname) {
+
+    }
 
 
 }

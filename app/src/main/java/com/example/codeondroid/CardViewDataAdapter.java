@@ -21,6 +21,7 @@ import java.sql.ClientInfoStatus;
 public class CardViewDataAdapter extends RecyclerView.Adapter<CardViewDataAdapter.ViewHolder> {
     public String[] mDataset;
     SharedPreferences sf;
+
     Context context;
     Recycleviewcommunicator comm;
 
@@ -50,8 +51,8 @@ public class CardViewDataAdapter extends RecyclerView.Adapter<CardViewDataAdapte
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
 
-        // - get data from your itemsData at this position
-        // - replace the contents of the view with that itemsData
+            // - get data from your itemsData at this position
+            // - replace the contents of the view with that itemsData
 
         viewHolder.tvtinfo_text.setText(mDataset[position].toString());
         viewHolder.tvtinfo_text.setOnClickListener(new View.OnClickListener() {

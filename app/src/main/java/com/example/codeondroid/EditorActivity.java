@@ -50,7 +50,11 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,7 +71,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     TextView outputbox;
     Spinner Lang;
     TabLayout tabs;
-    String langs[] = {"Cpp14", "C", "Java", "Python3"};
+    String langs[] = {"cpp14", "c", "java", "python3"};
     String exts[] = {"cpp" , "c" , "java" , "py"};
     String openfilename, lang , ext;
     int langPos = 1;
@@ -275,14 +279,63 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
 
     public void compileCode() {
+//
+//        String clientId = "773eca4179a8c20e92caa73a5dacffda"; //Replace with your client ID
+//        String clientSecret = "4785377731a741f2cb107511774d643201966f8beac8ea4536db0dc751459941"; //Replace with your client Secret
+//        String script = "print('Hello mama')";
+//        String language = "python3";
+//        String versionIndex = "3";
+//
+//        try {
+//            URL url = new URL("https://api.jdoodle.com/v1/execute");
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//            connection.setDoOutput(true);
+//            connection.setRequestMethod("POST");
+//            connection.setRequestProperty("Content-Type", "application/json");
+//
+//            String input = "{\"clientId\": \"" + clientId + "\",\"clientSecret\":\"" + clientSecret + "\",\"script\":\"" + script +
+//                    "\",\"language\":\"" + language + "\",\"versionIndex\":\"" + versionIndex + "\"} ";
+//
+//
+//
+//            OutputStream outputStream = connection.getOutputStream();
+//            outputStream.write(input.getBytes());
+//            outputStream.flush();
+//
+//            if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+//                throw new RuntimeException("Please check your inputs : HTTP error code : "+ connection.getResponseCode());
+//            }
+//
+//            BufferedReader bufferedReader;
+//            bufferedReader = new BufferedReader(new InputStreamReader(
+//                    (connection.getInputStream())));
+//
+//            String output;
+//
+//            while ((output = bufferedReader.readLine()) != null) {
+//                Log.d("Volley", "Ouput here" + output);
+////                System.out.println(output);
+//            }
+//
+//            connection.disconnect();
+//
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+    }
 
-        outputbox.setText(inputbox.getText().toString() + "\n" + "in is out on error");
+
+    public void compileCodeVolley() {
+
+//        outputbox.setText(inputbox.getText().toString() + "\n" + "in is out on error");
         final RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
-        StringRequest sr = new StringRequest(Request.Method.POST,"https://ide.geeksforgeeks.org/main.php/", new Response.Listener<String>() {
+        StringRequest sr = new StringRequest(Request.Method.POST,"https://api.jdoodle.com/v1/execute/", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("Volley", "onResponse: " + response);
+                Log.d("Code output from Volley", "onResponse: " + response);
                 try {
                     JSONObject res = new JSONObject(response);
                     String output = res.getString("output");
@@ -305,10 +358,13 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
                 Log.d("code", "getParams: " + code);
                 Map<String,String> params = new HashMap<String, String>();
-                params.put("lang" , langs[langPos]);
-                params.put("code" , codebox.getText().toString());
-                params.put("input" , inputbox.getText().toString());
-                params.put("save" , "false");
+
+                params.put("clientId" , "773eca4179a8c20e92caa73a5dacffda");
+                params.put("clientSecret" , "d5063dcf949ee5d46dacb34af2b4b40bbac2633507dcee8a9fad4deab5bb53c7");
+                params.put("language" , "python3"); //langs[langPos]
+                params.put("script" , "print('Hello mama')"); //codebox.getText().toString()
+                params.put("versionIndex" , "3");
+                //                params.put("stdin" , inputbox.getText().toString());
 //                Toast.makeText(getApplicationContext(),langPos + "", Toast.LENGTH_LONG).show();
 
                 return params;

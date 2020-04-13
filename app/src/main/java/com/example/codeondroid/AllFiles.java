@@ -28,6 +28,8 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -131,11 +133,6 @@ public class AllFiles extends Fragment implements AdapterView.OnItemClickListene
 
         }
 
-
-
-
-
-
     }
 
     @Override
@@ -149,7 +146,8 @@ public class AllFiles extends Fragment implements AdapterView.OnItemClickListene
         FilenameFilter fileFilter = new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return name.contains(".");
+
+                return (name.endsWith(".java") || name.endsWith(".py") || name.endsWith(".cpp")  || name.endsWith(".c") );
             }
         };
         files = f.list(fileFilter);
@@ -190,7 +188,7 @@ public class AllFiles extends Fragment implements AdapterView.OnItemClickListene
         FilenameFilter fileFilter = new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return name.contains(".");
+                return (name.endsWith(".java") || name.endsWith(".py") || name.endsWith(".cpp")  || name.endsWith(".c") );
             }
         };
         files = f.list(fileFilter);
@@ -202,6 +200,7 @@ public class AllFiles extends Fragment implements AdapterView.OnItemClickListene
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new CardViewDataAdapter(files,this);
         mRecyclerView.setAdapter(mAdapter);
+
 
     }
 }

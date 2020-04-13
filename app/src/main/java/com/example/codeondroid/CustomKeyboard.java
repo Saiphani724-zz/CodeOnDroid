@@ -381,13 +381,13 @@ public class CustomKeyboard {
         {
             SharedPreferences sf= mHostActivity.getSharedPreferences(sf_file_name, Context.MODE_PRIVATE);
             String lang = sf.getString("selLang","NA");
-            if(lang=="Java")
+            if(lang=="java")
             {
                 //mKeyboardView.setKeyboard(new Keyboard(mHostActivity,R.xml.keywordboard));
                 mKeyboardView.setKeyboard(new Keyboard(mHostActivity,R.xml.javakeyboard));
                 return;
             }
-            if(lang=="Python3"){
+            if(lang=="python3"){
                 mKeyboardView.setKeyboard(new Keyboard(mHostActivity,R.xml.pythonkeyboard));
                 return;
             }

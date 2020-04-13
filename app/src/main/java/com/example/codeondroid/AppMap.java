@@ -1,8 +1,14 @@
 package com.example.codeondroid;
 
-import androidx.fragment.app.FragmentActivity;
-
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -14,13 +20,18 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class AppMap extends FragmentActivity implements OnMapReadyCallback {
-
+    private static final long LOCATION_REFRESH_TIME = 10000;
+    private static final float LOCATION_REFRESH_DISTANCE = 10;
     private GoogleMap mMap;
+    Marker myloc =null;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private boolean mPermissionDenied = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_map);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -40,14 +51,66 @@ public class AppMap extends FragmentActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_REFRESH_TIME,
+                LOCATION_REFRESH_DISTANCE, mLocationListener);
         // Add a marker in Sydney and move the camera
-        LatLng ourlocation = new LatLng(13.262661, 80.026516);
-        Marker myloc= mMap.addMarker(new MarkerOptions().position(ourlocation).title("Developers Location")
-                .snippet("Amrita Vishwa Vidyapeetham, Coimbatore"));
-        myloc.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-        myloc.showInfoWindow();
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(ourlocation));
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(13));
+
     }
+
+    private final LocationListener mLocationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(final Location location) {
+            //your code here
+            if (myloc==null)
+            {
+                LatLng ourlocation = new LatLng(location.getLatitude(),location.getLongitude());
+                myloc= mMap.addMarker(new MarkerOptions().position(ourlocation).title("Your Location"));
+                myloc.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                myloc.showInfoWindow();
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(ourlocation));
+                mMap.moveCamera(CameraUpdateFactory.zoomTo(8));
+            }
+            else
+            {
+                LatLng ourlocation = new LatLng(location.getLatitude(),location.getLongitude());
+                myloc.setPosition(ourlocation);
+                myloc.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                myloc.showInfoWindow();
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(ourlocation));
+                mMap.moveCamera(CameraUpdateFactory.zoomTo(8));
+            }
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
+
+
+
+
+
+
 }

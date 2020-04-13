@@ -78,9 +78,11 @@ public class ProfilePage extends AppCompatActivity {
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         if (lightSensor == null) {
             Toast.makeText(this, "The device has no light sensor !", Toast.LENGTH_SHORT).show();
-            finish();
+
         }
-        maxValue = lightSensor.getMaximumRange()/10;
+        else {
+            maxValue = lightSensor.getMaximumRange() / 10;
+        }
         reff = FirebaseDatabase.getInstance().getReference().child("Users");
         img = (ImageView) findViewById(R.id.icon);
         but1 = (Button) findViewById(R.id.butProfile);

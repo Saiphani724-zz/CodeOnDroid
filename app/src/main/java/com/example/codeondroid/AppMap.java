@@ -20,8 +20,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class AppMap extends FragmentActivity implements OnMapReadyCallback {
-    private static final long LOCATION_REFRESH_TIME = 10000;
-    private static final float LOCATION_REFRESH_DISTANCE = 10;
+    private static final long LOCATION_REFRESH_TIME = 100;
+    private static final float LOCATION_REFRESH_DISTANCE = (float) 0.1;
     private GoogleMap mMap;
     Marker myloc =null;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;

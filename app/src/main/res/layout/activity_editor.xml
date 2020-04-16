@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/LightBlue"
-    tools:context=".EditorActivity"
+    tools:context="codeondroid.codeondroid.EditorActivity"
     >
 
     <androidx.constraintlayout.widget.Guideline

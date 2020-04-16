@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/all_files"
-    tools:context=".AllFiles">
+    tools:context="codeondroid.codeondroid.AllFiles">
 
     <!-- TODO: Update blank fragment layout -->
 

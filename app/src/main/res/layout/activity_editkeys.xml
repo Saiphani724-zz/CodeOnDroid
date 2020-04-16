@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/NavigationclassBackground"
     android:layout_height="match_parent"
-    tools:context=".Editkeys">
+    tools:context="codeondroid.codeondroid.Editkeys">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

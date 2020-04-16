@@ -7,7 +7,7 @@
     android:background="@color/NavigationclassBackground"
     android:layout_height="match_parent"
     android:id="@+id/ll"
-    tools:context=".Navigationclass">
+    tools:context="codeondroid.codeondroid.Navigationclass">
 
     <android.widget.Toolbar
         android:layout_width="match_parent"

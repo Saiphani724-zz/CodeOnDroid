@@ -1,15 +1,13 @@
 package customedittext;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.text.method.ScrollingMovementMethod;
 import android.util.AttributeSet;
 
-import com.example.codeondroid.R;
+import codeondroid.codeondroid.R;
 
 public class LineNumberEditText extends androidx.appcompat.widget.AppCompatEditText {
     private Rect rect;

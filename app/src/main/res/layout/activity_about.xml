@@ -7,7 +7,7 @@
     android:background="@drawable/background"
     android:layout_height="match_parent"
 
-    tools:context=".About">
+    tools:context="codeondroid.codeondroid.About">
 
 
 

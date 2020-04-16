@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.codeondroid">
+    package="codeondroid.codeondroid">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -20,15 +20,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <receiver
-            android:name=".ChromeTabActionBroadcastReceiver"
+            android:name="codeondroid.codeondroid.ChromeTabActionBroadcastReceiver"
             android:enabled="true"
             android:exported="true"></receiver>
 
-        <activity android:name=".Editkeys" />
-        <activity android:name=".CreateSnipetActivity" />
-        <activity android:name=".code_snippets" />
+        <activity android:name="codeondroid.codeondroid.Editkeys" />
+        <activity android:name="codeondroid.codeondroid.CreateSnipetActivity" />
+        <activity android:name="codeondroid.codeondroid.code_snippets" />
         <activity
-            android:name=".Welcome"
+            android:name="codeondroid.codeondroid.Welcome"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
@@ -38,7 +38,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SaveCodeInFile"
+            android:name="codeondroid.codeondroid.SaveCodeInFile"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <!--
@@ -61,43 +61,43 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".AppMap"
+            android:name="codeondroid.codeondroid.AppMap"
             android:label="@string/title_activity_app_map"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".Walkthrough"
+            android:name="codeondroid.codeondroid.Walkthrough"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ProfilePage"
+            android:name="codeondroid.codeondroid.ProfilePage"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".EditorActivity"
+            android:name="codeondroid.codeondroid.EditorActivity"
             android:label="Happy Coding"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".About"
+            android:name="codeondroid.codeondroid.About"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".webview"
+            android:name="codeondroid.codeondroid.webview"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".Navigationclass"
+            android:name="codeondroid.codeondroid.Navigationclass"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".RegistrationActivity"
+            android:name="codeondroid.codeondroid.RegistrationActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name="codeondroid.codeondroid.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity" />

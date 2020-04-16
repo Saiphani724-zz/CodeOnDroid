@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/LightBlue"
     android:orientation="vertical"
-    tools:context=".CreateSnipetActivity">
+    tools:context="codeondroid.codeondroid.CreateSnipetActivity">
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/left_guideline1"
         android:layout_width="wrap_content"

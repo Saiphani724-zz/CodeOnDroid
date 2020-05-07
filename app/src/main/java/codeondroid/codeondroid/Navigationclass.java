@@ -359,11 +359,9 @@ public class Navigationclass extends AppCompatActivity implements AllFiles.OnFra
             File file = new File(Navigationclass.this.getFilesDir(), "java_default_template.java");
             FileWriter writer = new FileWriter(file);
             writer.append("import java.util.*;\n" +
-                    "class Hello{\n" +
+                    "public class Hello{\n" +
                     "public static void main(String args[]){\n" +
-                    "Scanner sc = new Scanner(System.in);\n" +
-                    "int a = sc.nextInt();\n" +
-                    "System.out.println(a*a%3);}\n" +
+                    "System.out.println(\"Hello World\");}\n" +
                     "}");
             writer.flush();
             writer.close();

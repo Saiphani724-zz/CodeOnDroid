@@ -160,13 +160,13 @@ public class ProfilePage extends AppCompatActivity {
 //        });
 
 
-        butmap.setOnClickListener(new View.OnClickListener() {
+        /*butmap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ProfilePage.this,AppMap.class);
                 startActivity(i);
             }
-        });
+        });*/
 
 
 

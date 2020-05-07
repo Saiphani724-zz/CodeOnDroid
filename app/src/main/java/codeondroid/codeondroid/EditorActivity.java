@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -61,7 +62,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     float x1,x2;
     float y1, y2;
     final int MYREQUEST = 11;
-
+    private static ProgressDialog mProgressDialog;
     EditText codebox, inputbox;
     String code;
     TextView outputbox;
@@ -279,6 +280,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             String URL = "https://api.jdoodle.com/v1/execute/";
+            showSimpleProgressDialog(this, "Running...","Output of good code is worth waiting for!",false);
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("clientId" , "773eca4179a8c20e92caa73a5dacffda");
             jsonBody.put("clientSecret" , "707335836b501dd67fceb6b4c71b08ad91d1698dd90ea769e22d8531b7e0b780");
@@ -286,7 +288,6 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
             jsonBody.put("script" , codebox.getText().toString()); //codebox.getText().toString()
             jsonBody.put("stdin" , inputbox.getText().toString()); //codebox.getText().toString()
             jsonBody.put("versionIndex" , "0");
-
             final String requestBody = jsonBody.toString();
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
@@ -295,6 +296,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                     try {
                         JSONObject res = new JSONObject(response);
                         String output = res.getString("output");
+                        removeSimpleProgressDialog();
                         outputbox.setText(output);
                         Log.i("VOLLEY", output);
                     } catch (JSONException e) {
@@ -352,6 +354,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
 //        outputbox.setText(inputbox.getText().toString() + "\n" + "in is out on error");
         final RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        showSimpleProgressDialog(this, "Running...","Output of good code is worth waiting for!",false);
 
         StringRequest sr = new StringRequest(Request.Method.POST,"https://api.jdoodle.com/v1/execute/", new Response.Listener<String>() {
             @Override
@@ -360,6 +363,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                 try {
                     JSONObject res = new JSONObject(response);
                     String output = res.getString("output");
+                    removeSimpleProgressDialog();
                     outputbox.setText(output);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -679,5 +683,44 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
     protected void onRestart() {
         mCustomKeyboard.reload_keys();
         super.onRestart();
+    }
+    public static void removeSimpleProgressDialog() {
+        try {
+            if (mProgressDialog != null) {
+                if (mProgressDialog.isShowing()) {
+                    mProgressDialog.dismiss();
+                    mProgressDialog = null;
+                }
+            }
+        } catch (IllegalArgumentException ie) {
+            ie.printStackTrace();
+
+        } catch (RuntimeException re) {
+            re.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void showSimpleProgressDialog(Context context, String title,
+                                                String msg, boolean isCancelable) {
+        try {
+            if (mProgressDialog == null) {
+                mProgressDialog = ProgressDialog.show(context, title, msg);
+                mProgressDialog.setCancelable(isCancelable);
+            }
+
+            if (!mProgressDialog.isShowing()) {
+                mProgressDialog.show();
+            }
+
+        } catch (IllegalArgumentException ie) {
+            ie.printStackTrace();
+        } catch (RuntimeException re) {
+            re.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

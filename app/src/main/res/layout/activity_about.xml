@@ -105,7 +105,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Jeevitha Mam"
+        android:text="Jevitha K. P."
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:textSize="20dp"
@@ -115,20 +115,21 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Special thanks to Geeks for Geeks"
+        android:text="Ritwik M."
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:textSize="30dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
         android:textColor="@color/mentorcolor"
         android:ems="18"
         />
+
     <Button
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="Share feedback"
         android:layout_gravity="center"
         android:background="@drawable/button"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/ReportBug"
 
         />

@@ -280,7 +280,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             String URL = "https://api.jdoodle.com/v1/execute/";
-            showSimpleProgressDialog(this, "Running...","Output of good code is worth waiting for!",false);
+            showSimpleProgressDialog(this, "Running...","Output of good code is worth waiting for!",true);
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("clientId" , "773eca4179a8c20e92caa73a5dacffda");
             jsonBody.put("clientSecret" , "707335836b501dd67fceb6b4c71b08ad91d1698dd90ea769e22d8531b7e0b780");
@@ -307,6 +307,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.e("VOLLEY", error.toString());
+                    removeSimpleProgressDialog();
                 }
             }) {
                 @Override
@@ -354,7 +355,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
 
 //        outputbox.setText(inputbox.getText().toString() + "\n" + "in is out on error");
         final RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        showSimpleProgressDialog(this, "Running...","Output of good code is worth waiting for!",false);
+        showSimpleProgressDialog(this, "Running...","Output of good code is worth waiting for!",true);
 
         StringRequest sr = new StringRequest(Request.Method.POST,"https://api.jdoodle.com/v1/execute/", new Response.Listener<String>() {
             @Override
@@ -376,6 +377,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
             public void onErrorResponse(VolleyError error) {
 
                 Log.d("Volley", "onErrorResponse: " + error);
+                removeSimpleProgressDialog();
             }
         }){
             @Override
@@ -709,6 +711,7 @@ public class EditorActivity extends AppCompatActivity implements AdapterView.OnI
             if (mProgressDialog == null) {
                 mProgressDialog = ProgressDialog.show(context, title, msg);
                 mProgressDialog.setCancelable(isCancelable);
+                mProgressDialog.setCanceledOnTouchOutside(false);
             }
 
             if (!mProgressDialog.isShowing()) {

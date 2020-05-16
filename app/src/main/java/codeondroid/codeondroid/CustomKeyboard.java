@@ -401,7 +401,7 @@ public class CustomKeyboard {
             //Log.d("varkey", "" + keylist.toArray().length);
             View focusCurrent = mHostActivity.getWindow().getCurrentFocus();
             EditText edittext = (EditText) focusCurrent;
-            String[] varslist =  edittext.getText().toString().split(" |\n|;|\\(|\\)|\\{|\\}|\\[|\\+|-|\\*|=|/|,|]");
+            String[] varslist =  edittext.getText().toString().split(" |\n|;|\\(|\\)|\\{|\\}|\\[|\\+|-|\\*|=|/|,|]|:|<|>|%");
             int count=0;
             for(int i=0;i<varslist.length;i++)
             {
@@ -480,7 +480,7 @@ public class CustomKeyboard {
     public void load_wtype()
     {
         String keywords[] = {"for","if","while","else","int","float","char","include","do","cout","cin","struct","class","void","public",
-                "private","protected","global","static","final","using","print","input"};
+                "private","protected","global","static","final","using","print","input","import","from","new"};
         String symbols[] = {"+","-","=",";","{","}","\\","/","[","]","!","#","%","&","*","(",")",":","?","<",">","\n","\"","\'",".","_","|","\t"," ",":"};
         insert_dict(keywords,"keyword");
         insert_dict(symbols,"symbol");

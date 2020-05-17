@@ -111,10 +111,11 @@ public class code_snippets extends AppCompatActivity implements CustomAdapterCom
                 return name.contains(".");
             }
         };
-        files = f.list(fileFilter);
         if(!f.exists()){
             f.mkdir();
         }
+        files = f.list(fileFilter);
+
         assert files != null;
         for(String fname:files)
         {
